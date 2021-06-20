@@ -2,7 +2,7 @@
 tags: [Audio]
 title: Formant Estimation with LPC Coefficients
 created: '2021-06-17T02:38:21.128Z'
-modified: '2021-06-17T02:41:50.340Z'
+modified: '2021-06-20T09:18:09.470Z'
 ---
 
 # Formant Estimation with LPC Coefficients
@@ -44,7 +44,7 @@ Incease the magnitude of some (usually high) frequencies with respect to manitud
 
 [Linear prediction speech model](http://scribblethink.org/Work/lipsync91/lipsync91.pdf) models speech signal $s_t$ as a exicitation signal $\alpha x_t$ plus a weighted sum of the input and past outputs. General rule: order ${p}$ equals two times number of expected vowels plus two.
 
-${s_t = \alpha x_t + \sum_{k=1}^P} a_k s_{t-k}$
+$${s_t = \alpha x_t + \sum_{k=1}^P} a_k s_{t-k}$$
 
 The exicitation signal $x_t$ results in vowel and coefficients $a_k$ are assumed to be constant during a short interval.
 

@@ -2,19 +2,24 @@
 id: ja5HFaIxVEtbZoTklNXfZ
 title: Todos
 desc: ''
-updated: 1640166286833
+updated: 1640682492963
 created: 1640143678803
 ---
-## epipolar geometry
+## Epipolar geometry
 - [ ] Homogeneous coordinate system
 - [ ] Fundamental matrix, essential matrix
 - [ ] Pnp
+- [ ] Pnp tracking
+- [ ] Detector based tracking
 ## Rendering
-- [ ] gltf skinning
+- [x] gltf skinning
 - [ ] gl shared context
+## Linear algebra
+- [ ] Vector differentiation
+- [ ] Taylor expansion and linearization
 ## Probability theory
-- [ ] Random Variables
-- [ ] Expectation Integral
+- [x] Random Variables
+- [x] Expectation Integral
 - [ ] MLE, MAP
 - [ ] Kalman filter
 - [ ] Extended Kalman filter

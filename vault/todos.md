@@ -2,7 +2,7 @@
 id: ja5HFaIxVEtbZoTklNXfZ
 title: Todos
 desc: ''
-updated: 1640682492963
+updated: 1641298875840
 created: 1640143678803
 ---
 ## Epipolar geometry
@@ -20,6 +20,7 @@ created: 1640143678803
 ## Probability theory
 - [x] Random Variables
 - [x] Expectation Integral
+- [x] Gaussian distribution
 - [ ] MLE, MAP
 - [ ] Kalman filter
 - [ ] Extended Kalman filter

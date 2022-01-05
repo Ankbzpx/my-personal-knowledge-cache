@@ -2,7 +2,7 @@
 id: fM7XsYXKb9KeZtq5BsUB6
 title: Transform Normal Vector
 desc: ''
-updated: 1640018441161
+updated: 1641299824098
 created: 1640018359018
 ---
 
@@ -10,7 +10,7 @@ $$
 \bm{n}^{*} = \bm{M}^{-T} \bm{n}
 $$
 
-## proof
+### proof
 Assume $\bm{v}$ is a vector on surface, $\bm{n}$ is the surface normal vector, it satisfied 
 
 $$

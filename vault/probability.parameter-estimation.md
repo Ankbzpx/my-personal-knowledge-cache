@@ -1,8 +1,8 @@
 ---
 id: fHMmzepyNqegNyO1rPHZJ
-title: Bayesian Linear Regression
+title: Parameter Estimation
 desc: ''
-updated: 1641297405113
+updated: 1641299570302
 created: 1640605581119
 ---
 
@@ -19,5 +19,4 @@ $$
 y \sim \mathcal{N}(y|\pmb{x}^{T} \pmb{\theta},\sigma^2)
 $$
 
-
-
+![[Bayes' theorem|probability.basis#bayes-theorem]]

@@ -2,7 +2,7 @@
 id: VNmhNJO2t34DeIBysB4wS
 title: Skinning
 desc: ''
-updated: 1640600790684
+updated: 1641299798619
 created: 1640595277441
 ---
 
@@ -57,7 +57,7 @@ T_{Joint} = {T_{WorldMesh}}^{-1} T_{WorldJoint} T_{JointMesh}
 $$
 
 Global transformation can be computed via chain multiplication. $T_{Joint}$ computation involves the transformation of coordinate system.
-$T_{mesh}$ -> $T_{joint}$ -> $T_{mesh}$. See: [[linear-algebra.affine-transformation-matrix.multiplication.chain-multiplication]]
+$T_{mesh}$ -> $T_{joint}$ -> $T_{mesh}$. See: [[Transformation of coordinate system|linear-algebra.affine-transformation-matrix.multiplication.chain-multiplication#transformation-of-coordinate-system]]
 
 ### Skin Matrix $T_{Skin}$
 - $T_{Joint\ i}$: Joint matrix for joint i

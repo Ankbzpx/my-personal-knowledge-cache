@@ -2,7 +2,7 @@
 id: ZAYUjF6BZWBn7m6NPt8Dn
 title: Basis
 desc: ''
-updated: 1641285519219
+updated: 1641632398417
 created: 1641285249620
 ---
 ## Probability density function (pdf)
@@ -27,7 +27,7 @@ $$
 
 ## Bayes' theorem
 $$
-p(\pmb{\theta}|\pmb{x}, \pmb{y}) = \frac{p(\pmb{y}|\pmb{x}, \pmb{\theta})p(\pmb{\theta})}{p(\pmb{y}|\pmb{x})}
+p(\pmb{\theta}|\pmb{x}, y) = \frac{p(y|\pmb{x}, \pmb{\theta})p(\pmb{\theta})}{p(y|\pmb{x})}
 $$
 
 $$
@@ -36,14 +36,16 @@ $$
 
 Proof with product rule
 $$
-p(\pmb{y}|\pmb{x}, \pmb{\theta})p(\pmb{\theta}) = p(\pmb{\theta}, \pmb{y}|\pmb{x})
+p(y|\pmb{x}, \pmb{\theta})p(\pmb{\theta}) = p(\pmb{\theta}, y|\pmb{x})
 $$
 
 $$
-p(\pmb{\theta}|\pmb{x}, \pmb{y})p(\pmb{y}|\pmb{x}) = p(\pmb{\theta}, \pmb{y}|\pmb{x})
+p(\pmb{\theta}|\pmb{x}, y)p(y|\pmb{x}) = p(\pmb{\theta}, y|\pmb{x})
 $$
 
 Also with sum rule
+> Marginal likelihood is the likelihood averaged over all possible $\pmb{\theta}$
+
 $$
-p(\pmb{y}|\pmb{x}) = \int p(\pmb{y}|\pmb{x}, \pmb{\theta})p(\pmb{\theta})d\theta
+p(y|\pmb{x}) = \int p(y|\pmb{x}, \pmb{\theta})p(\pmb{\theta})d\theta
 $$

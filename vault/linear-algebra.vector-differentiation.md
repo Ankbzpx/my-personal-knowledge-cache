@@ -2,7 +2,7 @@
 id: eHYn1Q3sJsIn5EgXuqFbD
 title: Vector Differentiation
 desc: ''
-updated: 1641356226750
+updated: 1641360468441
 created: 1641300273127
 ---
 
@@ -88,7 +88,7 @@ $$
 \begin{aligned}
 &\frac{\d}{\d\X}\fX^T = (\frac{\d}{\d \X}\fX)^T \\
 &\frac{\d}{\d\X}tr(\fX) = tr(\frac{\d}{\d \X}\fX) \\
-&\frac{\d}{\d\X}det(\fX) = det(\fX)tr(\finvX\frac{\d}{\d \X} \fX) \\
+&\frac{\d}{\d\X}det(\fX) = tr(adj(\fX)\frac{\d}{\d \X} \fX) = det(\fX)tr(\finvX\frac{\d}{\d \X} \fX) \\
 &\frac{\d}{\d\X}\finvX = - \finvX \frac{\d}{\d \X} \fX \finvX \\
 &\frac{\d}{\d\X} \a^T \X \b = -(\X^{-1})^T\a\b^T(\X^{-1})^T \\
 &\frac{\d}{\d\x}\x^T \a = \a^T \\

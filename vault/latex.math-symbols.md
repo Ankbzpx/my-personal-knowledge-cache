@@ -2,7 +2,7 @@
 id: gHIwDYmSBIn4DVipnGXiB
 title: Math Symbols
 desc: ''
-updated: 1641352669704
+updated: 1641625746732
 created: 1640605725829
 ---
 
@@ -19,3 +19,4 @@ created: 1640605725829
 - Less than or equal to: $\leq$, Greater than or equal to: $\geq$
 - Derivatives: $f'(x)$, $f''(x)$, $\frac{\partial f}{\partial x}$
 - Arrow: $\larr$, $\rarr$
+- Sum: $\sum$ product: $\prod$

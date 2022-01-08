@@ -2,7 +2,7 @@
 id: S02aBkyPu6J4lH9rhcG26
 title: Gaussian Distribution
 desc: ''
-updated: 1641298859729
+updated: 1641633375122
 created: 1641285365685
 ---
 

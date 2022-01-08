@@ -2,7 +2,7 @@
 id: ja5HFaIxVEtbZoTklNXfZ
 title: Todos
 desc: ''
-updated: 1641298875840
+updated: 1641637534765
 created: 1640143678803
 ---
 ## Epipolar geometry
@@ -15,13 +15,13 @@ created: 1640143678803
 - [x] gltf skinning
 - [ ] gl shared context
 ## Linear algebra
-- [ ] Vector differentiation
-- [ ] Taylor expansion and linearization
+- [x] Vector differentiation
+- [x] Taylor expansion and linearization
 ## Probability theory
 - [x] Random Variables
 - [x] Expectation Integral
 - [x] Gaussian distribution
-- [ ] MLE, MAP
+- [x] MLE, MAP
 - [ ] Kalman filter
 - [ ] Extended Kalman filter
 - [ ] Particle filter

@@ -2,7 +2,7 @@
 id: 4Fdxoie9kYc9C9NvJuieK
 title: Shading
 desc: ''
-updated: 1640760535639
+updated: 1641881430756
 created: 1640019527539
 ---
 
@@ -14,6 +14,11 @@ Vertex Shader -> every vertex
  v
 Fragment Shader -> every pixel
 ```
+### Pass data from Vertex to Fragment shader
+> OpenGL interpolate `varying` variable
+
+Declare `varying` variable in both shaders
+
 
 ## Render order
 - Opaque: front to back

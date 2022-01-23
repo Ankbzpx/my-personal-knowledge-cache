@@ -2,7 +2,7 @@
 id: ja5HFaIxVEtbZoTklNXfZ
 title: Todos
 desc: ''
-updated: 1641637534765
+updated: 1642933090817
 created: 1640143678803
 ---
 ## Epipolar geometry
@@ -32,3 +32,17 @@ created: 1640143678803
 ## Optimization
 - [ ] IRLS
 - [ ] Gauss-Newton
+## Proxy
+- [x] git
+- [x] svn
+- [x] pip
+## Python
+- [x] Image read from pillow to numpy array
+- [x] Image read rgb/rgba from opencv to numpy array
+- [x] matplotlib equal axis
+- [ ] nparray indexing
+## Blender
+- [x] join
+- [x] modifier
+- [x] uv
+- [x] material

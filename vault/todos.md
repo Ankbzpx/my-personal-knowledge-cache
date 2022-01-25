@@ -2,7 +2,7 @@
 id: ja5HFaIxVEtbZoTklNXfZ
 title: Todos
 desc: ''
-updated: 1642933090817
+updated: 1643080762331
 created: 1640143678803
 ---
 ## Epipolar geometry
@@ -46,3 +46,7 @@ created: 1640143678803
 - [x] modifier
 - [x] uv
 - [x] material
+## Swift
+- [ ] oc/cpp callback
+## Metal
+- [ ] computing kernel

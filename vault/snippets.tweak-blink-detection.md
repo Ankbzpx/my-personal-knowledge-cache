@@ -21,7 +21,7 @@ OPEN_WAIT <--(eye open)-- CLOSE
   +-------(eye close)--------+
 ```
 
-- Apply [[others.adaptive-threshold]]
+- Apply [[snippets.adaptive-threshold]]
 - Track velocity to filter out untrustworthy data
 - Add `WAIT` states for FSM
 - Sync left/right eye by close/open both eye when all/one of them are in CLOSE_WAIT/OPEN_WAIT state (depends if ignore single blink)

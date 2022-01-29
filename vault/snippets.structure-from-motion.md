@@ -1,6 +1,6 @@
 ---
 id: 2ATONuJW0SEv6oZTrOoKv
-title: Survey
+title: Structure from Motion
 desc: ''
 updated: 1642997103974
 created: 1642991809084

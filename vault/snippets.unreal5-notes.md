@@ -1,12 +1,12 @@
 ---
 id: uu7hda0XWAH9JKvM7wDc7
-title: Unreal 5 Notes
+title: Unreal5 Notes
 desc: ''
-updated: 1640054856461
+updated: 1643192510038
 created: 1640019503650
 ---
 
-[Keynotes](/assets/documents/Karis_Nanite_SIGGRAPH_Advances_2021_final.pdf)
+[Keynotes](https://advances.realtimerendering.com/s2021/Karis_Nanite_SIGGRAPH_Advances_2021_final.pdf)
 
 ## Possible mesh alternatives
 - voxelization is a form of uniform resampling and uniform resampling means loss

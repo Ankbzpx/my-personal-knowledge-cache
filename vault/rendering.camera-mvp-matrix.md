@@ -2,7 +2,7 @@
 id: TkXfLmZJwXgvhwj8m5zgS
 title: Camera MVP Matrix
 desc: ''
-updated: 1640158698744
+updated: 1643506192080
 created: 1640157654319
 ---
 
@@ -14,6 +14,8 @@ T_W = T_{WO} T_{O}
 $$
 
 ## View Matrix
+> Inverse Camera View Matrix is its Model Matrix
+ 
 World w.r.t. Camera (W -> C)
 
 $$

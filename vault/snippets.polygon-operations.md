@@ -2,7 +2,7 @@
 id: DXryQkH15go9fC8P3uCYQ
 title: Polygon Operations
 desc: ''
-updated: 1643287582879
+updated: 1644735703836
 created: 1642932269870
 ---
 > Workflow: Simplify -> Smooth + resample -> Simplify -> Offset
@@ -11,6 +11,8 @@ created: 1642932269870
 [Ramer–Douglas–Peucker & Visvalingam-Whyatt](https://github.com/urschrei/simplification)
 
 ## Polygon offset
+> Reference: https://mcmains.me.berkeley.edu/pubs/DAC05OffsetPolygon.pdf
+
 [Clipper library](http://www.angusj.com/delphi/clipper.php)
 ([python binding](https://github.com/fonttools/pyclipper))
 

@@ -2,7 +2,7 @@
 id: ja5HFaIxVEtbZoTklNXfZ
 title: Todos
 desc: ''
-updated: 1643264717355
+updated: 1644733502602
 created: 1640143678803
 ---
 ## Epipolar geometry
@@ -49,4 +49,4 @@ created: 1640143678803
 ## Swift
 - [x] oc/cpp callback
 ## Metal
-- [ ] computing kernel
+- [x] computing kernel

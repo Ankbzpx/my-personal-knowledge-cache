@@ -2,9 +2,41 @@
 id: RF4oAlftyLgH4AE0ek9Rc
 title: Docker File Example
 desc: ''
-updated: 1643115040969
+updated: 1644575012291
 created: 1643115036292
 ---
+## No proxy
+```
+FROM nvidia/cuda:11.3.0-runtime-ubuntu20.04
+
+# Prevent stop building ubuntu at time zone selection.  
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Prepare and empty machine for building
+RUN apt-get update && \
+    apt-get install -y git \
+    build-essential \
+    cmake \
+    python3 \
+    python3-pip \
+	libegl1-mesa-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxrender1 \
+    libxext6
+
+RUN pip3 install PySide2 PyOpenGL
+
+RUN git clone https://github.com/PixarAnimationStudios/USD.git
+
+RUN python3 USD/build_scripts/build_usd.py /usr/local/USD
+
+ENV PYTHONPATH="/usr/local/USD/lib/python:${PYTHONPATH}"
+
+ENV PATH="/usr/local/USD/bin:${PATH}"
+```
+
+## With proxy
 ```
 FROM nvidia/cuda:11.3.0-devel-ubuntu20.04
 

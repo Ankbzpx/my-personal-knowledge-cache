@@ -2,7 +2,7 @@
 id: mo2IZ562fwNqQ4DyE95Ce
 title: Proxy
 desc: ''
-updated: 1643027309488
+updated: 1644571978756
 created: 1643027255604
 ---
 
@@ -10,7 +10,7 @@ created: 1643027255604
 
 Build over localHost proxy
 ```
-docker build --network=host --build-arg http_proxy=http://127.0.0.1:7890 .
+docker build -t img_name:tag --network=host --build-arg http_proxy=http://127.0.0.1:7890 .
 ```
 
 ## Run

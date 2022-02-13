@@ -2,7 +2,7 @@
 id: Vn1Ykq4aIagi0bhZowkgD
 title: Commands
 desc: ''
-updated: 1640017467506
+updated: 1644562844033
 created: 1640017378204
 ---
 
@@ -19,7 +19,40 @@ for i in *.mp4; do ffmpeg -i "$i" -vf "transpose=2,transpose=2" "out/${i%.*}.mp4
 ```
 ffmpeg -i DeskPortal_State_03_PC_1440p_Idle_SitAd_30fps_40534656.m2v -ss 00:00:11 -vframes 1 output.png
 ```
+
+## Extract all frame at given frame rate
+```
+ffmpeg -i VID_20220126_151107.mp4 -r 4 images/frame%04d.png
+```
+
+## Pad video
+```
+ffmpeg -i tom_1080.mp4 -vf "pad=width=1920:height=1080:x=(1920-1080)/2:y=0:color=white" tom_pad.mp4
+```
+
+## Loop video
+```
+ffmpeg -stream_loop 2 -i tbrender.mp4 -c copy tbrender_loop.mp4
+```
+
+## Chain
+1. `scale` video to `1080x1080`
+2. `pad` video to `1920x1080`
+```
+ffmpeg -i tom.mp4 -vf "scale=1080:1080,pad=1920:height=1080:x=(1920-iw)/2:y=(1080-ih)/2:color=white" tom_pad_chain.mp4
+```
+
 ## Complex scenario
+
+### Example 1
+1. green screen to transparent (similarity 0.1, blend 0.2)
+2. overlay
+
+```
+ffmpeg -i flower.mp4 -i women.mp4 -vcodec libx264 -filter_complex "[0]chromakey=green:0.1:0.2[ia];[1][ia]overlay" out.mp4
+```
+
+### Example 2
 1. `alphamerge` first two video
 2. create pure white video with given resolution, framerate and format
 3. overlap alphamerged video with pure white for suration equal to shortest one

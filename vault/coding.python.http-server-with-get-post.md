@@ -1,8 +1,8 @@
 ---
 id: uL98NfM0tJc74mHvKGPd2
-title: HTTP Server with POST
+title: HTTP Server with GET/POST
 desc: ''
-updated: 1644551050932
+updated: 1645176661636
 created: 1644549239324
 ---
 
@@ -28,12 +28,17 @@ app = Flask(__name__)
 def upload_photo():
     return render_template('index.html', ...)
 
+@app.route('/file', methods=["GET"])
+def get_glb():
+    # Note: The full url is f"{request.host_url}tmp/file"
+    return send_file("tmp/file")
+
 @app.route('/actionName', methods=["POST"])
 def my_action():
     files = request.files.getlist('fileName')
 
     for file in files:
-        # do something
+        # do something (i.e. file.save(f"tmp/{file.filename}"))
 
     return render_template('index.html', ...)
 
@@ -46,4 +51,6 @@ app.run(host="0.0.0.0", port=5000, debug=True)
     <form enctype="multipart/form-data" method="POST" action="/actionName">
         <input type="file" name="fileName">
     </form>
+
+    <a href="/file">Download file</a>
 ```

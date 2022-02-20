@@ -2,7 +2,7 @@
 id: DXryQkH15go9fC8P3uCYQ
 title: Polygon Operations
 desc: ''
-updated: 1645186339063
+updated: 1645341191873
 created: 1642932269870
 ---
 
@@ -22,6 +22,9 @@ def is_CCW(coutour):
 [Ramer–Douglas–Peucker & Visvalingam-Whyatt](https://github.com/urschrei/simplification)
 
 ## Polygon offset
+
+> Can it be extended to [3D winding number](https://github.com/GavinBarill/fast-winding-number-soups)?
+
 > Workflow: Simplify -> Smooth + resample -> Simplify -> Offset
 
 ### Library

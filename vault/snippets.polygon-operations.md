@@ -2,7 +2,7 @@
 id: DXryQkH15go9fC8P3uCYQ
 title: Polygon Operations
 desc: ''
-updated: 1645179450454
+updated: 1645186339063
 created: 1642932269870
 ---
 
@@ -34,51 +34,6 @@ def is_CCW(coutour):
 > GLU reference chapter: https://people.eecs.ku.edu/~jrmiller/Courses/672/InClass/PolygonTessellation/PolygonTessellation.html
 
 ```
-import numpy as np
-
-from OpenGL import GL, GLU
-
-# Reference: https://www.glprogramming.com/red/chapter11.html
-def get_positive_winding_polygon_boundary(polygon):
-    boundary_polygons = []
-    boundary_polygon = []
-
-    def glu_tess_begin_callback(type):
-        boundary_polygon = []
-
-    def glu_tess_vertex_callback(vertex_data):
-        boundary_polygon.append(vertex_data[:2])
-
-    def glu_tess_end_callback():
-        boundary_polygons.append(boundary_polygon)
-
-    def glu_tess_error_callback(errno):
-        print("glu_tess_error_callback", GLU.gluErrorString(errno))
-
-    def glu_tess_combine_callback(vertex, neighbors, neighborWeights, out=None):
-        out = vertex
-        return out
-
-    tes = GLU.gluNewTess()
-    GLU.gluTessCallback(tes, GLU.GLU_TESS_BEGIN, glu_tess_begin_callback)
-    GLU.gluTessCallback(tes, GLU.GLU_TESS_VERTEX, glu_tess_vertex_callback)
-    GLU.gluTessCallback(tes, GLU.GLU_TESS_END, glu_tess_end_callback)
-    GLU.gluTessCallback(tes, GLU.GLU_TESS_ERROR, glu_tess_error_callback)
-    GLU.gluTessCallback(tes, GLU.GLU_TESS_COMBINE, glu_tess_combine_callback)
-    GLU.gluTessProperty(tes, GLU.GLU_TESS_BOUNDARY_ONLY, GL.GL_TRUE)
-    GLU.gluTessProperty(tes, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_POSITIVE)
-    GLU.gluTessNormal(tes, 0.0, 0.0, 1.0 if is_CCW(polygon) else -1.0)
-
-    GLU.gluTessBeginPolygon(tes, None)
-    GLU.gluTessBeginContour(tes)
-    for vert in polygon:
-        GLU.gluTessVertex(tes, vert, vert)
-    GLU.gluTessEndContour(tes)
-    GLU.gluTessEndPolygon(tes)
-    GLU.gluDeleteTess(tes)
-
-    return boundary_polygons
-
 import itertools
 
 def polygon_edge_segments_offset(vertex_start, offset):
@@ -161,6 +116,59 @@ def polygon_edge_segments_offset(vertex_start, offset):
 
     return new_vertex_list, new_vertex_list_merged
 
+```
+> TODO: `get_positive_winding_polygon_boundary` needs correction
+
+```
+import numpy as np
+
+from OpenGL import GL, GLU
+
+# Reference: https://www.glprogramming.com/red/chapter11.html
+def get_positive_winding_polygon_boundary(polygon):
+    
+    # could be useful: https://stackoverflow.com/questions/38640395/pyopengl-tessellating-polygons
+    # not sure why got multiple glu_tess_begin_callback
+    boundary_polygons = []
+    boundary_polygon = []
+
+    def glu_tess_begin_callback(type):
+        boundary_polygon = []
+
+    def glu_tess_vertex_callback(vertex_data):
+        boundary_polygon.append(vertex_data[:2])
+
+    def glu_tess_end_callback():
+        boundary_polygons.append(boundary_polygon)
+
+    def glu_tess_error_callback(errno):
+        print("glu_tess_error_callback", GLU.gluErrorString(errno))
+
+    def glu_tess_combine_callback(vertex, neighbors, neighborWeights, out=None):
+        out = vertex
+        return out
+
+    tes = GLU.gluNewTess()
+    GLU.gluTessCallback(tes, GLU.GLU_TESS_BEGIN, glu_tess_begin_callback)
+    GLU.gluTessCallback(tes, GLU.GLU_TESS_VERTEX, glu_tess_vertex_callback)
+    GLU.gluTessCallback(tes, GLU.GLU_TESS_END, glu_tess_end_callback)
+    GLU.gluTessCallback(tes, GLU.GLU_TESS_ERROR, glu_tess_error_callback)
+    GLU.gluTessCallback(tes, GLU.GLU_TESS_COMBINE, glu_tess_combine_callback)
+    # should it be GL_FALSE? GLU_TESS_BOUNDARY_ONLY return linked vertices even for separated polygons
+    GLU.gluTessProperty(tes, GLU.GLU_TESS_BOUNDARY_ONLY, GL.GL_TRUE)
+    GLU.gluTessProperty(tes, GLU.GLU_TESS_WINDING_RULE, GLU.GLU_TESS_WINDING_POSITIVE)
+    # this line might be wrong
+    GLU.gluTessNormal(tes, 0.0, 0.0, 1.0 if is_CCW(polygon) else -1.0)
+
+    GLU.gluTessBeginPolygon(tes, None)
+    GLU.gluTessBeginContour(tes)
+    for vert in polygon:
+        GLU.gluTessVertex(tes, vert, vert)
+    GLU.gluTessEndContour(tes)
+    GLU.gluTessEndPolygon(tes)
+    GLU.gluDeleteTess(tes)
+
+    return boundary_polygons
 ```
 
 ## Polygon smooth

@@ -2,7 +2,7 @@
 id: DXryQkH15go9fC8P3uCYQ
 title: Polygon Operations
 desc: ''
-updated: 1645600049394
+updated: 1645601347804
 created: 1642932269870
 ---
 
@@ -132,7 +132,8 @@ def polygon_edge_segments_offset(polygon, offset):
 
     return new_vertex_list, new_vertex_list_merged
 
-
+# GLU tess doc: https://cgit.freedesktop.org/mesa/glu/tree/src/libtess/alg-outline
+# GLU tess source: https://cgit.freedesktop.org/mesa/glu/tree/src/libtess
 # Reference: https://www.glprogramming.com/red/chapter11.html
 def get_positive_winding_polygon_boundary(polygon):
 

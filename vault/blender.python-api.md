@@ -2,7 +2,7 @@
 id: njtx7H3U8oxCpuanmYcFw
 title: Python API
 desc: ''
-updated: 1645178217321
+updated: 1645692732528
 created: 1642932434975
 ---
 ## Mesh ops
@@ -31,12 +31,23 @@ if bpy.ops.object.mode_set.poll():
 ```
 
 ## Modifier
+
+### Subdivision
 ```
 if bpy.ops.object.mode_set.poll():
     bpy.ops.object.mode_set(mode="OBJECT")
     bpy.ops.object.subdivision_set()
     bpy.ops.object.modifier_apply(modifier="Subdivision")
 ```
+
+### Triangulate
+```
+if bpy.ops.object.mode_set.poll():
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.modifier_add(type="TRIANGULATE")
+    bpy.ops.object.modifier_apply(modifier="TRIANGULATE")
+```
+
 ## UV
 ```
 uvlayer = mesh.uv_layers.new()

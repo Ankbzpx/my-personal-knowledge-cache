@@ -1,41 +1,26 @@
 ---
-id: DXryQkH15go9fC8P3uCYQ
-title: Polygon Operations
+id: zbxdptxtbmmvoecg0ub5eyd
+title: Offset
 desc: ''
-updated: 1645601347804
-created: 1642932269870
+updated: 1646726698246
+created: 1646726636848
 ---
 
-## Polygon orientation
-> Reference: https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
-
-```
-import numpy as np
-
-def is_CCW(coutour):
-    start = coutour[1:]
-    end = coutour[:-1]
-    return np.sum((start[:, 0] - end[:, 0]) / (start[:, 1] + end[:, 1])) < 0
-```
-
-## Polygon simplify
-[Ramer–Douglas–Peucker & Visvalingam-Whyatt](https://github.com/urschrei/simplification)
-
-## Polygon offset
-
-> Workflow: Simplify -> Smooth + resample -> Simplify -> Offset
-
-### Library
+## Use library
 [Clipper library](http://www.angusj.com/delphi/clipper.php)
 ([python binding](https://github.com/fonttools/pyclipper))
 
-### Algorithm
+> Clipper seems to return a densely sampled polygon
+
+## Using GLU
 > Algorithm reference: https://mcmains.me.berkeley.edu/pubs/DAC05OffsetPolygon.pdf
 
 > GLU reference chapter: https://people.eecs.ku.edu/~jrmiller/Courses/672/InClass/PolygonTessellation/PolygonTessellation.html
 
 My implementation
 ```
+# Only handles single polygon offset
+# Algorithm: https://mcmains.me.berkeley.edu/pubs/DAC05OffsetPolygon.pdf
 def polygon_edge_segments_offset(polygon, offset):
     vertex_start = polygon
 
@@ -132,8 +117,7 @@ def polygon_edge_segments_offset(polygon, offset):
 
     return new_vertex_list, new_vertex_list_merged
 
-# GLU tess doc: https://cgit.freedesktop.org/mesa/glu/tree/src/libtess/alg-outline
-# GLU tess source: https://cgit.freedesktop.org/mesa/glu/tree/src/libtess
+
 # Reference: https://www.glprogramming.com/red/chapter11.html
 def get_positive_winding_polygon_boundary(polygon):
 
@@ -174,6 +158,7 @@ def get_positive_winding_polygon_boundary(polygon):
     GLU.gluTessProperty(tes, GLU.GLU_TESS_BOUNDARY_ONLY, GL.GL_TRUE)
     GLU.gluTessProperty(tes, GLU.GLU_TESS_WINDING_RULE,
                         GLU.GLU_TESS_WINDING_POSITIVE)
+    GLU.gluTessNormal(tes, 0, 0, 1)
 
     GLU.gluTessBeginPolygon(tes, None)
     GLU.gluTessBeginContour(tes)
@@ -187,82 +172,6 @@ def get_positive_winding_polygon_boundary(polygon):
 
 
 def polygon_offset(polygon, offset):
-    _, polygon_offset = polygon_edge_segments_offset(polygon, offset)
-    return get_positive_winding_polygon_boundary(polygon_offset)
-```
-
-## Polygon smooth
-[Bezier Curves Interpolation](https://web.archive.org/web/20131027060328/http://www.antigrain.com/research/bezier_interpolation/index.html#PAGE_BEZIER_INTERPOLATION)
-
-My numpy implementation:
-### Bezier fit
-```
-def bezier_fit(polygon, smooth_factor=1.0):
-    """
-    Bezier_curve_interpolation.
-    
-    Parameters
-    ----------
-    polygon : n x 2 numpy array
-    smooth_factor : the larger the value, more close the curve is to the edge
-    resample_count : number of samples for each bezier segment
-
-    Returns
-    -------
-    control_points : bezier control points in the form of n x 3 x 2 numpy array (center, left_handle, right_handle)
-    """
-
-    polygon_next = np.roll(polygon, -1, axis=0)
-    polygon_last = np.roll(polygon, 1, axis=0)
-    mid_point = (polygon + polygon_next) / 2
-
-    dist_to_last = np.linalg.norm(polygon - polygon_last, axis=1)
-    dist_to_next = np.linalg.norm(polygon - polygon_next, axis=1)
-    dist_sum = smooth_factor * (dist_to_next + dist_to_last)
-    dir = np.roll(mid_point, 1, axis=0) - mid_point
-
-    cpt_left = polygon + dir * (dist_to_last / dist_sum).reshape(-1, 1)
-    cpt_right = polygon - dir * (dist_to_next / dist_sum).reshape(-1, 1)
-
-    control_points = np.array(
-        [polygon, cpt_left, cpt_right]).transpose([1, 0, 2])
-    
-    return control_points
-```
-
-### Bezier fit and resample
-```
-def bezier_curve_interpolation(polygon, smooth_factor = 1.0, resample_count = 8):
-    """
-    Bezier_curve_interpolation.
-    
-    Parameters
-    ----------
-    polygon : n x 2 numpy array
-    smooth_factor : the larger the value, more close the curve is to the edge
-    resample_count : number of samples for each bezier segment
-    """
-
-    def bezier_curve(cpts, t):
-        tile = lambda x: np.tile(np.expand_dims(x, -1), len(t))
-        pt0 = tile(cpts[0])
-        pt1 = tile(cpts[1])
-        pt2 = tile(cpts[2])
-        pt3 = tile(cpts[3])
-        return np.power(1 - t, 3) * pt0 + 3 * np.power(1 - t, 2) * t * pt1 + 3 * (1 - t) * np.power(t, 2) * pt2 + np.power(t, 3) * pt3
-    
-    polygon_next = np.roll(polygon, -1, axis=0)
-    polygon_last = np.roll(polygon, 1, axis=0)
-    mid_point = (polygon + polygon_next) / 2
-
-    dist_to_last = np.linalg.norm(polygon - polygon_last, axis=1)
-    dist_to_next = np.linalg.norm(polygon - polygon_next, axis=1)
-    dist_sum = smooth_factor * (dist_to_next + dist_to_last)
-    dir = np.roll(mid_point, 1, axis=0) - mid_point
-
-    cpt_left = polygon + dir * (dist_to_last / dist_sum).reshape(-1, 1)
-    cpt_right = polygon - dir * (dist_to_next / dist_sum).reshape(-1, 1)
-
-    control_points = np.array([polygon, cpt_right, np.roll(cpt_left, -1, axis=0), polygon_next])
-    return bezier_curve(control_points, np.linspace(0, 1, resample_count + 1)[:-1]).transpose((0, 2, 1)).reshape(-1, 2)
+    _, edge_offset_polygon = polygon_edge_segments_offset(polygon, offset)
+    return get_positive_winding_polygon_boundary(edge_offset_polygon)
 ```

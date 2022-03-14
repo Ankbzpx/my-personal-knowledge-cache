@@ -2,7 +2,7 @@
 id: kfzM61y5Fcv6d0wygFgzS
 title: Rendering Terms
 desc: ''
-updated: 1640054294288
+updated: 1646990712604
 created: 1640019557555
 ---
 
@@ -16,7 +16,7 @@ Mirror like reflection
 The reflection of light from a surface such that a ray incident on the surface is scattered as many angles (contrast to specular reflection)
 
 ## Albedo
-1. Physics: The proportion of incident light that is reflected away from a surface. 
+1. Physics: The proportion of incident light that is reflected away from a surface
 2. PBR: base color without shadows (Diffuse in non-PBR)
 
 ## Forward shading

@@ -2,7 +2,7 @@
 id: 6xcpu4fh3at4bbmptj9c8nr
 title: Connect Polygons with Their Offset Ones
 desc: ''
-updated: 1646727539146
+updated: 1646980246694
 created: 1646726929486
 ---
 
@@ -135,6 +135,7 @@ def find_all_chordless_cycles(all_verts, adjaceny_lists, excluded_edges):
                 dir_back = np.tile(all_verts[cycle[-1]] - all_verts[vertex],
                                    [len(dir_forward), 1])
                 # angle between, clip for robustness
+                # FIXME: [use atan2 for robustness](https://stackoverflow.com/questions/10133957/signed-angle-between-two-vectors-without-a-reference-plane)
                 angle = np.arccos(
                     np.clip(
                         np.sum(dir_forward * dir_back, axis=1) /

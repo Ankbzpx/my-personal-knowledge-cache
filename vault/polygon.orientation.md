@@ -2,7 +2,7 @@
 id: cf496br27momvnp2mys3uk6
 title: Orientation
 desc: ''
-updated: 1646726567074
+updated: 1647227506230
 created: 1646726515508
 ---
 
@@ -20,7 +20,7 @@ def is_CCW(polygon):
 
 > Reference: https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order
 
-> TODO: it keeps giving wrong results, figure out why?
+> FIXME: it keeps giving wrong results, figure out why?
 
 
 ```

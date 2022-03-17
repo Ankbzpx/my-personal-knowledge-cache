@@ -2,7 +2,7 @@
 id: xi244lw2v12vzkedvax2sx6
 title: Matcap
 desc: ''
-updated: 1646988838025
+updated: 1647314115141
 created: 1646987186972
 ---
 
@@ -32,6 +32,7 @@ normal_eye = normalize(normal_eye);
 ```
 
 > Fragment shader
+
 ```
 vec2 uv = normalize(normal_eye).xy * 0.5 + 0.5;
 outColor = texture(tex, uv);

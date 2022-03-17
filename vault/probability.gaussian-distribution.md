@@ -2,7 +2,7 @@
 id: S02aBkyPu6J4lH9rhcG26
 title: Gaussian Distribution
 desc: ''
-updated: 1641633375122
+updated: 1647454148124
 created: 1641285365685
 ---
 
@@ -93,7 +93,6 @@ Proof:
 $$
 \newcommand{\a}{\pmb{a}}
 \newcommand{\b}{\pmb{b}}
-\newcommand{\c}{\pmb{c}}
 \newcommand{\x}{\pmb{x}}
 \newcommand{\A}{\pmb{A}}
 \newcommand{\B}{\pmb{B}}
@@ -107,13 +106,13 @@ $$
 \\
 
 \begin{aligned}
-\text{We know that} \ & \exp(\log \mathcal{N}(\x | \c, \C)) = \exp(-\frac{1}{2}((\x - \c)^T \C^{-1}(\x - \c) + const) \\ \propto & \exp(-\frac{1}{2}(\x^T \C^{-1} \x - 2 (\C^{-1} \c)^T \x)) \\ \propto & \exp(\log \mathcal{N}(\x|\a, \A) \mathcal{N}(\x|\b, \B)) \\ \propto & -\frac{1}{2}(\x^T (\A^{-1} + \B^{-1}) \x - 2(\A^{-1} \a + \B^{-1} \b)^T\x)
+\text{We know that} \ & \exp(\log \mathcal{N}(\x | \pmb{c}, \C)) = \exp(-\frac{1}{2}((\x - \pmb{c})^T \C^{-1}(\x - \pmb{c}) + const) \\ \propto & \exp(-\frac{1}{2}(\x^T \C^{-1} \x - 2 (\C^{-1} \pmb{c})^T \x)) \\ \propto & \exp(\log \mathcal{N}(\x|\a, \A) \mathcal{N}(\x|\b, \B)) \\ \propto & -\frac{1}{2}(\x^T (\A^{-1} + \B^{-1}) \x - 2(\A^{-1} \a + \B^{-1} \b)^T\x)
 \end{aligned}
 
 \\
 \begin{aligned}
 \text{By completing the square, we have} \ & \C = (\A^{-1} + \B^{-1})^{-1}
-\\& \c = \C(\A^{-1} \a + \B^{-1} \b)
+\\& \pmb{c} = \C(\A^{-1} \a + \B^{-1} \b)
 \end{aligned}
 $$
 

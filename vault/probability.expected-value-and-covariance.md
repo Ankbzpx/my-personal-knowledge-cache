@@ -2,7 +2,7 @@
 id: f02Y1nt8nJzX4RjchUruZ
 title: Expected Value and Covariance
 desc: ''
-updated: 1641285634005
+updated: 1647413706672
 created: 1641285469505
 ---
 >FIXME: 1. Global Marco 2. Nested Alignment

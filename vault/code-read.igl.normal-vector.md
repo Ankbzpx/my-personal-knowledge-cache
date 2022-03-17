@@ -2,7 +2,7 @@
 id: edudwmtuufpqosp7ztuwddr
 title: Normal Vector
 desc: ''
-updated: 1647227168332
+updated: 1647232313265
 created: 1646974566576
 ---
 
@@ -60,36 +60,7 @@ return normalized vn
 ### Corner
 Weighted (by double area) sum of selected (by angle between two normal) incident face normal, interpolated by vertex shader
 
-
-#### Core idea:
-With data structure like: 
-
-|Vert index|Incident Face indices|
-|:-------- |:------------------- |
-|0         | 0, 1                |
-|1         | 9, 13, 1            |
-
-We unroll and store it into array and index it by cumsum
-
-Array:
-```
-[0, 1, 9, 13, 1]
-```
-
-Index:
-```
-[0, 2, 5]
-```
-
-
-> vertex_triangle_adjacency
-
-```
-vfd(i): number of incident faces at vertex i
-NI: cumsum of vfd, prepend 0
-NI(i): number of cummulated incident faces before vertex i
-VF(NI(i) + k): kth face incident on vertex i (vertex index -> face index)
-```
+See: [[vertex_triangle_adjacency Unrolled|code-read.igl.neighbourhood-connectivity#unrolled]]
 
 > per_corner_normals
 

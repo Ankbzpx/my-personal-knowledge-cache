@@ -2,14 +2,14 @@
 id: 97gnlpow8yszfzt0g77kc9c
 title: Colormap
 desc: ''
-updated: 1647314198349
+updated: 1647583854981
 created: 1647230672465
 ---
 
 Maps value given color palette
 
 ## Implementation
-> colormap
+### colormap
 
 ```
 palette p: 256 x 3 (RGB8) array
@@ -23,7 +23,7 @@ b = ceil(f)
 c = mix(p[a], p[b], mapped_f - a)
 ```
 
-## Fragment shader
+### Fragment shader
 
 Substitude material diffuse [[Phong lighting model|rendering.rendering-terms#phong-lighting-model]]
 

@@ -2,7 +2,7 @@
 id: HSxWXFhPQxcylUjCKd4la
 title: Container
 desc: ''
-updated: 1641286596744
+updated: 1647586135159
 created: 1641262973688
 ---
 
@@ -59,3 +59,9 @@ int average(vector<int> &&iVec){
  ...
 }
 ```
+
+### Vector comparison
+> Reference: https://en.cppreference.com/w/cpp/container/vector/operator_cmp
+
+Similar to `std::lexicographical_compare. compare [lexicographically](https://en.wikipedia.org/wiki/Lexicographic_order) (generalized alphabetical order )
+

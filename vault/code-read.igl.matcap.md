@@ -2,7 +2,7 @@
 id: xi244lw2v12vzkedvax2sx6
 title: Matcap
 desc: ''
-updated: 1647314115141
+updated: 1647583824043
 created: 1646987186972
 ---
 
@@ -14,7 +14,7 @@ Complete material from image without actual compute reflection and lighting
 
 ## Implementation
 
-> Normal matrix
+### Normal matrix
 
 View matrix: W -> Camera
 
@@ -24,14 +24,14 @@ See: [[rendering.camera-mvp-matrix]] and [[linear-algebra.affine-transformation-
 norm = view.inverse().transpose();
 ```
 
-> Vertex shader
+### Vertex shader
 
 ```
 normal_eye = vec3 (normal_matrix * vec4 (normal, 0.0));
 normal_eye = normalize(normal_eye);
 ```
 
-> Fragment shader
+### Fragment shader
 
 ```
 vec2 uv = normalize(normal_eye).xy * 0.5 + 0.5;

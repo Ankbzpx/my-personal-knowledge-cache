@@ -2,21 +2,22 @@
 id: edudwmtuufpqosp7ztuwddr
 title: Normal Vector
 desc: ''
-updated: 1647232313265
+updated: 1647583831269
 created: 1646974566576
 ---
 
 
 ## Concepts
-- Normal Vector: Normal Vector at a point is the cross product of two tangent vectors at that point.
-- Tangent Vector: A vector tangents to a surface at a given point
-- Degenerated Normal Vector: two tangent vectors are linear depend
+### Normal Vector
+Normal Vector at a point is the cross product of two tangent vectors at that point.
+### Tangent Vector
+A vector tangents to a surface at a given point
+### Degenerated Normal Vector
+two tangent vectors are linear depend
 
 ## Implementations
 
-### Face
-
-> per_face_normals
+### per_face_normals
 
 ```
 V: Vertices (NV x 3)
@@ -32,10 +33,9 @@ else:
     return normalized fn
 ```
 
-### Vertex
-Weighted sum of adjacent faces' normal, interpolated by vertex shader
+### per_vertex_normals
 
-> per_vertex_normals
+> Weighted sum of adjacent faces' normal, interpolated by vertex shader
 
 ```
 Weight W: NF x 3
@@ -56,13 +56,11 @@ return normalized vn
 
 > Interpolated vertex normals -> [[Smooth shading in Blender|coding.blender.python-api#mesh-ops]]
 
+### per_corner_normals
+>Weighted (by double area) sum of selected (by angle between two normal) incident face normal, interpolated by vertex shader
+>
+>See: [[vertex_triangle_adjacency Unrolled|code-read.igl.neighbourhood-connectivity#unrolled]]
 
-### Corner
-Weighted (by double area) sum of selected (by angle between two normal) incident face normal, interpolated by vertex shader
-
-See: [[vertex_triangle_adjacency Unrolled|code-read.igl.neighbourhood-connectivity#unrolled]]
-
-> per_corner_normals
 
 ```
 FA: double face area
@@ -71,7 +69,7 @@ VF[NI[F(i, j)] + k]: (kth incident face) face index that incident to the jth ver
 FN.row(VF[NI[F(i, j)] + k]): normal of (kth incident face) face that incident to the jth vertex of face i
 ```
 
-## Vertex Shader
+### Vertex Shader
 > ViewerData
 
 Vertex

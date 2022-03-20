@@ -2,7 +2,7 @@
 id: sr51q5th4hg0mloct0f7d6r
 title: Feature Extraction
 desc: ''
-updated: 1647455443224
+updated: 1647758366517
 created: 1647411862801
 ---
 
@@ -17,6 +17,9 @@ Center data by subtracting mean
  See [[Expected value and covariance for dataset|probability.expected-value-and-covariance#for-dataset]]
  
 ### Matrix form
+
+Note we assume $\bm{X} \in \mathbb{R}^{f \times n}$
+
 #### Mean
 
 $\bm{1}$ vector can be used to sum of axis

@@ -2,7 +2,7 @@
 id: d5w6tbfyq2jp8e1lpmqi6fy
 title: Subdivision
 desc: ''
-updated: 1647514979476
+updated: 1647760572274
 created: 1647315756405
 ---
 > Reference: https://www.graphics.rwth-aachen.de/media/papers/sqrt31.pdf
@@ -35,10 +35,10 @@ Square binary matrix, exactly one entry of 1 each row and each column and 0s els
 - Smoothing: change old vertex position by computing neighbouring old vertices
 
 ### Subdivision matrix
-Subdivision matrix maps k-ring neighbour to next level. Assume n vertices for k-ring neighbour, $\bm{S} \in \mathbb{R}^{(n+1) \times (n+1)}$, as it also needs to update old vertex.
+Subdivision matrix maps k-ring neighbour to next level, useful for convergence check. Assume n vertices for k-ring neighbour, $\bm{S} \in \mathbb{R}^{(n+1) \times (n+1)}$, as it also needs to update old vertex.
 
-#### Eigen analysis
-In order to keep multiply subdivision matrix, it's easier to apply eigen analysis, convert basis to [[eigenbasis|linear-algebra.basis#eigenbasis]], apply all transformation and convert back.
+#### eigenanalysis
+In order to keep multiply subdivision matrix, it's easier to apply eigenanalysis, convert basis to [[eigenbasis|linear-algebra.basis#eigenbasis]], apply all transformation and convert back.
 
 - Converge to tangent: single largest eigenvalue of 1 with corresponding eigenvector $\bm{1}$
 

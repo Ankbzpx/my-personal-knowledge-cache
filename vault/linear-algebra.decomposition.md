@@ -2,7 +2,7 @@
 id: q4t6u51esx6mnb53i1x2nux
 title: Decomposition
 desc: ''
-updated: 1647504812418
+updated: 1647757972549
 created: 1647397739652
 ---
 
@@ -22,6 +22,9 @@ where $\bm{Q} = \begin{bmatrix}
 \end{bmatrix}$, $\bm{\Lambda} = diag \{ \lambda_1, \lambda_2,\dots, \lambda_n \}$, $tr(\bm{\Lambda}) = \sum_{i=1}^{n} \lambda_i$
 
 ### Symmetry
+
+> A.k.a eigenanalysis
+
 If $\bm{A}$ is symmetric, $\bm{q}_i$ are orthonormal, $\bm{Q}$ is orthogonal ($\bm{Q}^{-1} = \bm{Q}^{T}$, $\bm{Q}\bm{Q}^{T} = \bm{Q} \bm{Q}^{T} = \bm{I}$)
 $$
 \bm{A} = \bm{Q} \bm{\Lambda} \bm{Q}^{T} = \sum_{i=1}^{n} \lambda_i \bm{q}_i \bm{q}_i^T

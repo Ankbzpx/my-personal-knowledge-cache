@@ -2,7 +2,7 @@
 id: 0901aqnyeeuh145frdq3auv
 title: Least Square
 desc: ''
-updated: 1647623051185
+updated: 1647757136831
 created: 1647599853388
 ---
 

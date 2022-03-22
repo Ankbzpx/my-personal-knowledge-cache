@@ -2,7 +2,7 @@
 id: 0901aqnyeeuh145frdq3auv
 title: Least Square
 desc: ''
-updated: 1647940925606
+updated: 1647949654065
 created: 1647599853388
 ---
 
@@ -26,7 +26,7 @@ $$
 Set derivative to be 0
 
 $$
-\bm{\theta}^* = (\bm{X}^T \bm{X}) \bm{X}^T \bm{y} \in \mathbb{R}^d
+\bm{\theta}^* = (\bm{X}^T \bm{X})^{-1} \bm{X}^T \bm{y} \in \mathbb{R}^d
 $$
 
 More see [[Maximum Likelihood Estimation (MLE)|probability.parameter-estimation.maximum-likelihood-estimation-mle]]
@@ -52,7 +52,7 @@ $$
 Set derivative to be 0
 
 $$
-\bm{\theta}^* = (\bm{X}^T \bm{W} \bm{X}) \bm{X}^T \bm{W} \bm{y} \in \mathbb{R}^d
+\bm{\theta}^* = (\bm{X}^T \bm{W} \bm{X})^{-1} \bm{X}^T \bm{W} \bm{y} \in \mathbb{R}^d
 $$
 
 ## Iteratively reweighted least square (IRLS)

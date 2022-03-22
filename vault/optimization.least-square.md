@@ -2,9 +2,11 @@
 id: 0901aqnyeeuh145frdq3auv
 title: Least Square
 desc: ''
-updated: 1647916993476
+updated: 1647940141973
 created: 1647599853388
 ---
+
+> Reference: http://www.nealen.net/projects/mls/asapmls.pdf
 
 Under the assumption of gaussian likelihood.
 Random variable $\bm{X} \in \mathbb{R}^{n \times d}$, parameter $\bm{\theta} \in \mathbb{R}^{d}$, observation $\bm{y} \in \mathbb{R}^{n}$, the residual
@@ -16,7 +18,15 @@ $$
 $$
 y \sim \mathcal{N}(\bm{y}|\bm{X} \bm{\theta},\sigma^2 \bm{I})
 \\
-L = \bm{r}^T\bm{r} = (\bm{y} - \bm{X} \bm{\theta})^T (\bm{y} - \bm{X} \bm{\theta})
+L = \frac{1}{2} \bm{r}^T\bm{r} = \frac{1}{2} (\bm{y} - \bm{X} \bm{\theta})^T (\bm{y} - \bm{X} \bm{\theta}) \in \mathbb{R}
+\\
+\frac{\partial L}{\partial \bm{\theta}} = (\bm{y} - \bm{X} \bm{\theta})^T \bm{X} \in \mathbb{R}^{1 \times d}
+$$
+
+Set derivative to be 0
+
+$$
+\bm{\theta}^* = (\bm{X}^T \bm{X}) \bm{X}^T \bm{y} \in \mathbb{R}^d
 $$
 
 More see [[Maximum Likelihood Estimation (MLE)|probability.parameter-estimation.maximum-likelihood-estimation-mle]]
@@ -26,25 +36,31 @@ More see [[Maximum Likelihood Estimation (MLE)|probability.parameter-estimation.
 > Reference https://statweb.stanford.edu/~jtaylo/courses/stats203/notes/robust.pdf
 
 $$
-y \sim \mathcal{N}(\bm{y}|\bm{X} \bm{\theta},\sigma^2 \bm{W}^{-2})
+y \sim \mathcal{N}(\bm{y}|\bm{X} \bm{\theta},\sigma^2 \bm{W}^{-1})
 $$
 
 where diagonal weight matrix $\bm{W} \in \mathbb{R}^{n \times n}$
 
 $$
-L = (\bm{W}\bm{r})^T\bm{W}\bm{r} = \bm{r}^T \bm{W}^T\bm{W}\bm{r} = (\bm{y} - \bm{X} \bm{\theta})^T \bm{W}^T \bm{W}(\bm{y} - \bm{X} \bm{\theta})
+L = \frac{1}{2} \bm{r}^T \bm{W}\bm{r} = \frac{1}{2} (\bm{y} - \bm{X} \bm{\theta})^T \bm{W}(\bm{y} - \bm{X} \bm{\theta}) \in \mathbb{R}
 
 \\
 
-\frac{\partial L}{\partial \bm{\theta}} = 2(\bm{y} - \bm{X}\bm{\theta})^T\bm{W}^T\bm{W}\bm{X} = 2(\bm{W}(\bm{y} - \bm{X}\bm{\theta}))^T\bm{W}\bm{X} = 2(\bm{W}\bm{r})^T\bm{W}\bm{X}
+\frac{\partial L}{\partial \bm{\theta}} = (\bm{y} - \bm{X}\bm{\theta})^T\bm{W}\bm{X} \in \mathbb{R}^{1 \times d}
+$$
+
+Set derivative to be 0
+
+$$
+\bm{\theta}^* = (\bm{X}^T \bm{W} \bm{X}) \bm{X}^T \bm{W} \bm{y} \in \mathbb{R}^d
 $$
 
 ## Iteratively reweighted least square (IRLS)
 > Reference: http://sepwww.stanford.edu/data/media/public/docs/sep115/jun1/paper_html/node2.html
 
-Choose $diag(\bm{W}) = |\bm{r}|^{(p-2)/2}$, so that the loss function
+Choose $diag(\bm{W}) = |\bm{r}|^{(p-2)}$, so that the loss function
 $$
-\bm{r}^T \bm{W}^T\bm{W}\bm{r} = \bm{r}^T |\bm{r}|^{p-2} \bm{r} = \bm{r}^p
+\bm{r}^T \bm{W} \bm{r} = \bm{r}^T |\bm{r}|^{p-2} \bm{r} = \bm{r}^p
 $$
 which minimize the $l_p$ norm of the residual (usually $1 \le p \le 2$)
 
@@ -54,14 +70,21 @@ which minimize the $l_p$ norm of the residual (usually $1 \le p \le 2$)
 3. Adjust weight $diag(\bm{W}) = |\bm{r}|^{(p-2)/2}$
 4. Re-fit and repeat for few iterations
 
-## Moving least square
-Weighted least square of polynomial basis with weights depend on a set of sample points evaluted at input points
+## Moving least square (MLS)
+
+> Reference: https://www.ams.org/journals/mcom/1981-37-155/S0025-5718-1981-0616367-1/S0025-5718-1981-0616367-1.pdf
+
+Perform weighted least square at each point locally (polynomial basis, over neighbourhood points with a distance threshold, with weight as a function of distance). 
+
+**IMPORTANT** This method is different from previous method, as it needs $\bm{\theta}_{\bm{x}_i}$ for each $\bm{x}_i$, so $n$ in total.
+
+For test data, find $\bm{\theta}$ by interpolating neighbourhood $\bm{\theta}_{\bm{x}_i}$ weighted by same distance metrics.
 
 
 ### Wendland function
 > Reference: https://www.researchgate.net/publication/240320304_Geometric_transformation_of_the_RBF_implicit_surface
 
-Compactly-supported Radius basis function $\phi_k$ for $k=0,1,2$
+Compactly-supported Radius basis function $\phi_k$ for smoothness parameter $k=0,1,2$
 
 $$
 \phi(r)_0 = (1 - r)_+^2 \\

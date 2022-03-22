@@ -2,7 +2,7 @@
 id: XdjIVWbNYspG1sYd6jURu
 title: Maximum Likelihood Estimation (MLE)
 desc: ''
-updated: 1641631375942
+updated: 1647916690514
 created: 1641624854478
 ---
 > prone to overfitting
@@ -64,6 +64,26 @@ With close form solution:
 
 $$
 \pmb{\theta}^* = (\pmb{\Phi}^T\pmb{\Phi})^{-1}\pmb{\Phi}^T \pmb{y}
+$$
+
+### Polynomial basis
+For $x \in \mathbb{R}$
+
+$$
+\phi(\bm{x}) = \begin{bmatrix} 1 \\ x \\ x^2 \\ \vdots \\ x^k \end{bmatrix} \in \mathbb{R}^{k+1}
+$$
+
+For $\bm{x} \in \mathbb{R}^d$, multivariate polynomial
+
+> Reference: https://www.dbs.ifi.lmu.de/Lehre/MaschLernen/SS2017/Skript/03-BasisFunctions2017.pdf
+
+$$
+\bm{x} = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} \in \mathbb{R}^3
+$$
+Its multivariate polynomial basis of degree 2 (with all permutation of elements in $\bm{x}$)
+
+$$
+\phi(\bm{x}) = \begin{bmatrix} 1 \\ x_1 \\ x_2 \\ x_3 \\ x_1 x_2 \\ x_2 x_3 \\ x_1 x_3 \\ x_1^2 \\ x_2^2 \\ x_3^2 \end{bmatrix} \in \mathbb{R}^{10}
 $$
 
 ## Regularization

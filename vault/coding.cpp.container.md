@@ -2,7 +2,7 @@
 id: HSxWXFhPQxcylUjCKd4la
 title: Container
 desc: ''
-updated: 1647586135159
+updated: 1647839673552
 created: 1641262973688
 ---
 
@@ -64,4 +64,15 @@ int average(vector<int> &&iVec){
 > Reference: https://en.cppreference.com/w/cpp/container/vector/operator_cmp
 
 Similar to `std::lexicographical_compare. compare [lexicographically](https://en.wikipedia.org/wiki/Lexicographic_order) (generalized alphabetical order )
+### Unroll nested vector
+>Reference: https://stackoverflow.com/questions/20994321/clean-ways-to-write-multiple-for-loops
 
+```
+grid_dim = 10;
+std::vector<int> grid_3d;
+grid_3d.resize(grid_dim * grid_dim * grid_dim);
+
+auto grid_query = [&](int, i, int, j, int, k){
+  return grid_3d[(i * grid_dim + j) * grid_dim + k];
+};
+```

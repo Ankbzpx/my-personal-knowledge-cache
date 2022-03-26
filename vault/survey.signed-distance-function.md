@@ -35,6 +35,39 @@ Orient all normals consistently towards viewpoint
 See http://mediatum.ub.tum.de/doc/800632/941254.pdf
 
 
-## Function fitting
+## Function fitting with constraints
+
+### Spatial Index
+- Uniform grid
+- RTree: hierarchy of aabbs (Python example see: [[polygon.connect-polygons-with-their-offset-ones]])
+- K-d tree: binary division of whole space
+
 ### Build constraints
-Inward/outward offsets each surface points along its normals for a distance such that the closest point of the offset point is the original point
+Compute non zero-level data samples $f(\bm{x}_i) \neq 0$
+
+> May cause undesired effects when distance of evaluation point to surface is much larger than offset distance
+
+Inward / outward offsets each surface points along its normals for a distance such that the closest point of the offset point is the original point
+
+### Surface fiting
+Fit with [[Moving least square (MLS)|optimization.least-square#moving-least-square-mls]]
+
+### Inference
+- Build grid samples points
+- Perform [[Principle Component Analysis|linear-algebra.feature-extraction#principle-component-analysis]] on grid samples points' **convex hull**
+- Rotate grid samples points based on priciple axis
+- Inference (weighted sum of neighourhood fitted parameters, with weight depends on distance)
+- Apply marching cube
+
+## Function fitting with normal
+> Reference: https://people.eecs.berkeley.edu/~jrs/papers/cartons.pdf
+
+- Each point was paired with a function, which define the signed distance to this points' tangent plane
+- Fit and interpolate MLS using that function value
+
+
+## TODO
+- [x] Fir point cloud normals
+- [x] Moving least square
+- [ ] Why use polynomial basis?
+- [ ] Marching cube

@@ -64,15 +64,33 @@ int average(vector<int> &&iVec){
 > Reference: https://en.cppreference.com/w/cpp/container/vector/operator_cmp
 
 Similar to `std::lexicographical_compare. compare [lexicographically](https://en.wikipedia.org/wiki/Lexicographic_order) (generalized alphabetical order )
+
 ### Unroll nested vector
 >Reference: https://stackoverflow.com/questions/20994321/clean-ways-to-write-multiple-for-loops
 
 ```
-grid_dim = 10;
+grid_dim_X = 10;
+grid_dim_Y = 20;
+grid_dim_Z = 30;
 std::vector<int> grid_3d;
-grid_3d.resize(grid_dim * grid_dim * grid_dim);
+grid_3d.resize(grid_dim_X * grid_dim_Y * grid_dim_Z);
+
+```
+Acess with
+```
 
 auto grid_query = [&](int, i, int, j, int, k){
-  return grid_3d[(i * grid_dim + j) * grid_dim + k];
+  return grid_3d[(i * grid_dim_X + j) * grid_dim_Y + k];
 };
 ```
+or
+```
+
+auto grid_query = [&](int, i, int, j, int, k){
+  return grid_3d[i + grid_dim_X * (j + (grid_dim_Y * k))];
+};
+
+```
+depends on data storage
+
+> Note: for sparse data storage, `std::unordered_map` would be more efficient

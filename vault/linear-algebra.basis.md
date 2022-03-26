@@ -2,7 +2,7 @@
 id: y6ura4r15hz5wtojdxfttmx
 title: Basis
 desc: ''
-updated: 1647504321376
+updated: 1648041300069
 created: 1647342866314
 ---
 
@@ -28,12 +28,10 @@ Number of dimension in outputs (column space)
 ### Non-square Matrix
 Transformation between dimensions
 
-
-## Change of basis
+## Matrix vector dot product
 
 For a vector $\bm{v} = \begin{bmatrix} m \\ n \end{bmatrix} = m \bm{i} + n \bm{j}$
 
-Matrix vector dot product
 $$
 \bm{A} =
 \begin{bmatrix}
@@ -66,9 +64,32 @@ d
 \end{bmatrix}
 $$
 
-It can be viewed as transformation of basis from $<\bm{i}, \bm{j}>$ to $<\begin{bmatrix} a \\ c \end{bmatrix}, \begin{bmatrix} b \\ d \end{bmatrix}>$. The linear conbination perserved but basis changed.
+### Change of basis
 
-Matrix matrix dot product
+The transformation $\bm{A}$ of $\bm{v}$ can be viewed as transformation of basis from $<\bm{i}, \bm{j}>$ to $<\begin{bmatrix} a \\ c \end{bmatrix}, \begin{bmatrix} b \\ d \end{bmatrix}>$ with linear conbination $(m, n)$ perserved. 
+
+### Change of coordinate system
+
+> The result of $\bm{A} \bm{v}$ can also be viewed as how the $\bm{v}' = \begin{bmatrix} m \\ n \end{bmatrix}$ in the coordinate system $<\begin{bmatrix} a \\ c \end{bmatrix}, \begin{bmatrix} b \\ d \end{bmatrix}>$ seen in coordinate system $<\bm{i}, \bm{j}>$.
+
+In general, suppose matrix $\bm{A} \in C$ was formed by the basis of $C'$ in $C$ coordinate system, assume $\bm{v} \in C$ and $\bm{v}' \in C'$ represent the same vector in different coordinate system
+
+$$
+\bm{A} \bm{v}' = \bm{v}
+$$
+
+$\bm{A}$ transfrom $\bm{v}'$ to the correct interpretation in $C$
+
+$$
+\bm{A}^{-1} \bm{v} = \bm{v}'
+$$
+
+$\bm{A}^{-1}$ transfrom $\bm{v}$ to the correct interpretation in $C'$
+
+
+## Matrix matrix dot product
+
+### Change of basis
 
 $$
 \bm{B} =
@@ -112,25 +133,9 @@ d
 \end{bmatrix}
 $$
 
-### Matrix vector dot product
+> **IMPORTANT** The coordinates of new basis defined by $\bm{AB}$ is still in original coordinate system
 
-Suppose matrix $\bm{A} \in C$ was formed by the basis of $C'$ in $C$ coordinate system, then A transform the coordinate system from $C$ to $C'$
-
-Assume $\bm{v} \in C$ and $\bm{v}' \in C'$ represent the same vector
-
-$$
-\bm{A} \bm{v}' = \bm{v}
-$$
-
-$\bm{A}$ transfrom $\bm{v}'$ to the correct interpretation in $C$
-
-$$
-\bm{A}^{-1} \bm{v} = \bm{v}'
-$$
-
-$\bm{A}^{-1}$ transfrom $\bm{v}$ to the correct interpretation in $C'$
-
-### Matrix matrix dot product
+### Change of coordinate system
 
 $$
 \bm{B} = \bm{A}^{-1} \bm{M} \bm{A} \\

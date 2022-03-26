@@ -2,7 +2,7 @@
 id: 0901aqnyeeuh145frdq3auv
 title: Least Square
 desc: ''
-updated: 1647949654065
+updated: 1648002918750
 created: 1647599853388
 ---
 
@@ -74,7 +74,7 @@ which minimize the $l_p$ norm of the residual (usually $1 \le p \le 2$)
 
 > Reference: https://www.ams.org/journals/mcom/1981-37-155/S0025-5718-1981-0616367-1/S0025-5718-1981-0616367-1.pdf
 
-Perform weighted least square at each point $\bm{x} \in \bm{X}$ locally (polynomial basis, over $k$ neighbourhood points within a distance threshold, with weight as a function of distance).
+Perform weighted least square at each point $\bm{x} \in \bm{X}$ locally ([[Polynomial basis|probability.parameter-estimation.maximum-likelihood-estimation-mle#polynomial-basis]], over $k$ neighbourhood points within a distance threshold, with weight as a function of distance).
 
 $$
 \argmin_{\bm{\theta}_{\bm{x}}} \sum_{i=1}^{k} \theta(\| \bm{x}_i - \bm{x} \|_2) (\bm{y}_i - \phi(\bm{x}_i)^T \bm{\theta}_{\bm{x}})^2
@@ -82,9 +82,9 @@ $$
 
 where $\phi(.)$ is multivariate polynomial basis function, $\theta$ is weight function, $\bm{\theta}_{\bm{x}}$ is parameter to be estimated at $\bm{x}$
 
-**IMPORTANT** This method is different from previous method, as it needs $\bm{\theta}_{\bm{x}_i}$ for each $\bm{x}_i$, so $n$ in total.
+> **IMPORTANT** This method is different from previous method, as it needs $\bm{\theta}_{\bm{x}_i}$ for each $\bm{x}_i$, so $n$ in total.
 
-For test data, find $\bm{\theta}$ by interpolating neighbourhood $\bm{\theta}_{\bm{x}}$ weighted by function of same distance.
+For test data, find $\bm{\theta}$ by interpolating neighbourhood $\bm{\theta}_{\bm{x}}$ weighted by same function of distance (interpolation needs weights normalized).
 
 
 ### Wendland function

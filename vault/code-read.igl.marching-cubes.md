@@ -5,7 +5,9 @@ desc: ''
 updated: 1648528334896
 created: 1648528334896
 ---
-Construct vertices and faces from grid sampled values, based on each grid's 8 vertices values and iso-surface value
+Construct vertices and faces from grid sample points. For each cube:
+1. Determine cube type by comparing each cube's 8 corner values with iso-surface value
+2. Query its vertex and face config from predetermined $2^8$-entry table
 
 ## Implementation
 

@@ -20,7 +20,7 @@ y \sim \mathcal{N}(\bm{y}|\bm{X} \bm{\theta},\sigma^2 \bm{I})
 \\
 L = \frac{1}{2} \bm{r}^T\bm{r} = \frac{1}{2} (\bm{y} - \bm{X} \bm{\theta})^T (\bm{y} - \bm{X} \bm{\theta}) \in \mathbb{R}
 \\
-\frac{\partial L}{\partial \bm{\theta}} = (\bm{y} - \bm{X} \bm{\theta})^T \bm{X} \in \mathbb{R}^{1 \times d}
+\frac{\partial L}{\partial \bm{\theta}} = -(\bm{y} - \bm{X} \bm{\theta})^T \bm{X} \in \mathbb{R}^{1 \times d}
 $$
 
 Set derivative to be 0
@@ -46,7 +46,7 @@ L = \frac{1}{2} \bm{r}^T \bm{W}\bm{r} = \frac{1}{2} (\bm{y} - \bm{X} \bm{\theta}
 
 \\
 
-\frac{\partial L}{\partial \bm{\theta}} = (\bm{y} - \bm{X}\bm{\theta})^T\bm{W}\bm{X} \in \mathbb{R}^{1 \times d}
+\frac{\partial L}{\partial \bm{\theta}} = -(\bm{y} - \bm{X}\bm{\theta})^T\bm{W}\bm{X} \in \mathbb{R}^{1 \times d}
 $$
 
 Set derivative to be 0
@@ -86,6 +86,22 @@ where $\phi(.)$ is multivariate polynomial basis function, $\theta$ is weight fu
 
 For test data, find $\bm{\theta}$ by interpolating neighbourhood $\bm{\theta}_{\bm{x}}$ weighted by same function of distance (interpolation needs weights normalized).
 
+### Derivatives computation
+
+For each sample $\bm{x}_i \in \bm{X}$ with $k$ neighbour points $\bm{X}_i = \begin{bmatrix} \bm{x}_0 & \dots & \bm{x}_j & \dots & \bm{x}_k \end{bmatrix}^T$. Given $\bm{y}_i = \begin{bmatrix} y_0 & \dots & y_k \end{bmatrix}^T$, $\bm{\Phi}_i = \begin{bmatrix} \phi(\bm{x}_0) & \dots & \phi(\bm{x}_k) \end{bmatrix}^T$; weight $\bm{W}_i = diag(\theta(\|\bm{x}_i - \bm{x}_j\|))$
+
+The total gradient is:
+
+$$
+
+\frac{\partial L}{\bm{\partial \theta}} = \begin{bmatrix} \frac{\partial L}{\partial \bm{\theta}_0}^T & \dots & \frac{\partial L}{\partial \bm{\theta}_i}^T & \dots & \frac{\partial L}{\partial \bm{\theta}_n}^T \end{bmatrix} \in \mathbb{R}^{d \times n}
+$$
+
+where 
+
+$$
+\frac{\partial L}{\partial \bm{\theta}_i} = -(\bm{y}_i - \bm{\Phi}_i\bm{\theta}_i)^T\bm{W}_i\bm{\Phi}_i
+$$
 
 ### Wendland function
 > Reference: https://www.researchgate.net/publication/240320304_Geometric_transformation_of_the_RBF_implicit_surface

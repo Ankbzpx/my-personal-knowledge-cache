@@ -47,6 +47,7 @@ $$
 $$
 
 ### Partial derivative
+
 Let $f: \mathbb{R}^{n} \rarr \mathbb{R}$, $\pmb{x} \in \mathbb{R}^{n}$, $f(\pmb{x}) \in \mathbb{R}$:
 
 $$
@@ -71,6 +72,8 @@ $$
 $$
 
 $\nabla_{\pmb{x}}\pmb{f}$ is called the Jacobian $J$
+
+> Their corresponding total derivatives are $df = \nabla_{\pmb{x}}f \cdot d\bm{x} \in \mathbb{R}$ and $d\bm{f} = \nabla_{\pmb{x}}\pmb{f} \cdot d\bm{x} \in \mathbb{R}^{m}$
 
 ### Basic rules
 $$

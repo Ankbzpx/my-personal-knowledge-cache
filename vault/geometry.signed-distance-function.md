@@ -20,6 +20,8 @@ To assign normal vector $\bm{n}$ for point $\bm{x}$, we need
 - Find consistent global orientation
 
 ### Find local plane
+> Reference: https://www.graphics.rwth-aachen.de/media/papers/p_Pau021.pdf
+
 For each point $\bm{x}$, we pick the $n-1$ nearest neighbour points. The objective is to fit a plane for these $n$ points, such that the sum of distance for each point to the plane is minimized.  The distance of point to surface can be modeled as [[Dot product|linear-algebra.basis#dot-product]] with surface normal $\bm{n}$, given a point $\bm{c}$ the plane pass through. This problem can be solved with [[Least square (LS)|optimization.least-square#least-square-ls]]
 
 $$
@@ -34,6 +36,15 @@ Orient all normals consistently towards viewpoint
 #### Viewpoint unknown
 See http://mediatum.ub.tum.de/doc/800632/941254.pdf
 
+## Gradient of iso-surface
+
+For iso-surface $S$ defined by $f(\bm{x}) = 0$, the total derivate $df|_{\bm{p}} = 0$ for a point $\bm{p} \in S$. Given the definition of total derivative, we have
+
+$$
+df|_{\bm{p}} = \nabla f(\bm{p}) d\bm{p} = 0
+$$
+
+By definition $\nabla f(\bm{p})$ is perpendicular to tangent plane at $\bm{p}$. Thus, normal of $S$ at point $\bm{p} \in S$ is proportional to $\nabla f(\bm{p})$.
 
 ## Function fitting with constraints
 
@@ -56,8 +67,8 @@ Fit with [[Moving least square (MLS)|optimization.least-square#moving-least-squa
 - Build grid samples points
 - Perform [[Principle Component Analysis|linear-algebra.feature-extraction#principle-component-analysis]] on grid samples points' **convex hull**
 - Rotate grid samples points based on priciple axis
-- Inference (weighted sum of neighourhood fitted parameters, with weight depends on distance)
-- Apply marching cube
+- Inference (weighted sum of neighourhood fitted parameters, with weight depends on distance) for each grid samples
+- Apply [[code-read.igl.marching-cubes]]
 
 ## Function fitting with normal
 > Reference: https://people.eecs.berkeley.edu/~jrs/papers/cartons.pdf
@@ -70,4 +81,6 @@ Fit with [[Moving least square (MLS)|optimization.least-square#moving-least-squa
 - [x] Fir point cloud normals
 - [x] Moving least square
 - [ ] Why use polynomial basis?
-- [ ] Marching cube
+- [x] Marching cube
+- [ ] Screened Poisson
+- [ ] RIMLS

@@ -23,6 +23,8 @@ Steiner point: not part of input geometry, but added during solution of the prob
 
 [Optimality of the Delaunay triangulation in ℝd](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.413.7806&rep=rep1&type=pdf)
 
+[Generalized Winding Number](https://www.cs.utah.edu/~ladislav/jacobson13robust/jacobson13robust.html)
+
 ## Todos:
 - [ ] graphcut segmentation
 - [ ] constrained Delaunay 

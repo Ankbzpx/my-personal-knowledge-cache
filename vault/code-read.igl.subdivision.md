@@ -6,7 +6,7 @@ updated: 1647587102748
 created: 1647574129027
 ---
 
-More info: [[survey.subdivision]]
+More info: [[geometry.subdivision]]
 
 ## Concepts
 ### Barycenter
@@ -19,7 +19,7 @@ Every edge are either boundary or incidents two faces (oppositely oriented)
 
 ### barycenter
 
-Average of all [[Simplex|survey.winding-number#simplex]] vertex coords
+Average of all [[Simplex|geometry.winding-number#simplex]] vertex coords
 
 ### edge_topology
 

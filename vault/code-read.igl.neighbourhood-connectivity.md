@@ -13,11 +13,11 @@ created: 1647231617065
 - Each edge is incident to only one or two faces
 - Faces incident to a vertex form a closed or an open fan
 
-## vertex_triangle
+## vertex_triangle adjacency
 
-> vertex_triangle_adjacency
+### vertex_triangle_adjacency
 
-### Vector of vector
+#### Vector of vector
 
 Loop through all faces with their vertex indices, push back occurrence
 
@@ -26,7 +26,7 @@ Loop through all faces with their vertex indices, push back occurrence
 |0         | 0, 1                |
 |1         | 9, 13, 1            |
 
-### Unrolled
+#### Unrolled
 
 ```
 vfd(i): number of incident faces at vertex i
@@ -47,7 +47,7 @@ Index:
 [0, 2, 5]
 ```
 
-## vertex_vertex
+## vertex_vertex adjacency
 ### adjacency_list
 
 1. Loop through all faces with their vertex indices, for the vector of each vertex index, push back all other vertex indices
@@ -56,12 +56,14 @@ Index:
 
 > My numpy implementation: [[Implementation|polygon.connect-polygons-with-their-offset-ones#implementation]]
 
-## edge_edge
+## edge_edge adjacency
 
 ### facet_components
 
+Compute number of connected facets and assign each face an id based on its connected components
+
 1. Compute face adjacency matrix using [[facet_adjacency_matrix|code-read.igl.neighbourhood-connectivity#facet_adjacency_matrix]]
-2. Perform breadth first search on adjacency matrix row-wise, increase id when each row finished
+2. Perform **breadth first search** on adjacency matrix row-wise, increase id when each row finished
 
 ### facet_adjacency_matrix
 

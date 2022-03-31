@@ -18,7 +18,7 @@ Complete material from image without actual compute reflection and lighting
 
 View matrix: W -> Camera
 
-See: [[rendering.camera-mvp-matrix]] and [[linear-algebra.affine-transformation-matrix.multiplication.transform-normal-vector]]
+See: [[rendering.camera-mvp-matrix]] and [[linear-algebra.affine-transformation.multiplication.transform-normal-vector]]
 
 ```
 norm = view.inverse().transpose();

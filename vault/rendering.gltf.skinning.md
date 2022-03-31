@@ -57,7 +57,7 @@ T_{Joint} = {T_{WorldMesh}}^{-1} T_{WorldJoint} T_{JointMesh}
 $$
 
 Global transformation can be computed via chain multiplication. $T_{Joint}$ computation involves the transformation of coordinate system.
-$T_{mesh}$ -> $T_{joint}$ -> $T_{mesh}$. See: [[Transformation of coordinate system|linear-algebra.affine-transformation-matrix.multiplication.chain-multiplication#transformation-of-coordinate-system]]
+$T_{mesh}$ -> $T_{joint}$ -> $T_{mesh}$. See: [[Transformation of coordinate system|linear-algebra.affine-transformation.multiplication.chain-multiplication#transformation-of-coordinate-system]]
 
 ### Skin Matrix $T_{Skin}$
 - $T_{Joint\ i}$: Joint matrix for joint i

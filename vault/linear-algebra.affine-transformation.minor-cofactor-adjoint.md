@@ -1,6 +1,6 @@
 ---
 id: 1P5ajVWl59m2nCPjBynkp
-title: Minor, Cofactor, Adjoint
+title: Minor Cofactor Adjoint
 desc: ''
 updated: 1640018242224
 created: 1640018170092

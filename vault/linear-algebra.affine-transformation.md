@@ -1,6 +1,6 @@
 ---
 id: B24gWaRhhXusMzJNxWLtZ
-title: Affine Transformation Matrix
+title: Affine Transformation
 desc: ''
 updated: 1647498002088
 created: 1640017905620

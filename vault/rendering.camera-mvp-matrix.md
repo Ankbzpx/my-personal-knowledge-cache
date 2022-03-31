@@ -13,7 +13,7 @@ $$
 T_W = T_{WO} T_{O}
 $$
 
-**IMPORTANT** ([[Matrix matrix dot product|linear-algebra.basis#matrix-matrix-dot-product]])
+**IMPORTANT** ([[linear-algebra.matrix-matrix-dot-product]])
 
 - A w.r.t. B means A's basis in B's coordinate system
 - $T_O$ transforms coordinate in $O$ to standard basis $S$. Columns of $T_O$ are basis of $O$ seen in $S$. It can also be written as $T_{SO}$, $O$ w.r.t. $S$, or just a linear transformation in $S$

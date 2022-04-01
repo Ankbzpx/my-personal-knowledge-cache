@@ -61,3 +61,9 @@ $$
 $$
 
 $\bm{A}^{-1}$ transfrom $\bm{v}$ to the correct interpretation in $C'$
+
+## Symmetric matrix
+If $A$ is symmetric matrix
+$$
+(\bm{A} \cdot \bm{b})^T = \bm{b}^T \bm{A}^T = \bm{b}^T \bm{A}
+$$

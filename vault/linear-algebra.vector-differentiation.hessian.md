@@ -59,3 +59,7 @@ $$
 $$
 
 If $\bm{d}$ is eigenvector, the result is its corresponding eigenvalue.
+
+## Convexity
+
+If $H$ is [[Symmetric, Positive definite|linear-algebra.inner-product#symmetric-positive-definite]], then $f$ is strictly convex (single minuma)

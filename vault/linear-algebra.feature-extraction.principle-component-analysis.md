@@ -72,6 +72,13 @@ $$
 $$
 
 ## Kernel Trick
+Instead of explicitly define $\phi(.)$, define it implicitly using similarity function via [[linear-algebra.inner-product]]
+
+$$
+k(\bm{x}_i, \bm{x}_j) = \langle \phi(\bm{x}_i), \phi(\bm{x}_j) \rangle
+$$
+
+### PCA example
 Suppose $f$ is very large (e.g. infinity) that is intractable, but $\bm{X}^T \bm{X}$ is solvable
 $$
 \bm{X}^T \bm{X} = 

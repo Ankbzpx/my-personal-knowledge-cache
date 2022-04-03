@@ -22,3 +22,4 @@ created: 1640605725829
 - Dot $\cdot$, cross $\times$
 - Inequality: $<$, $>$, $\ll$, $\gg$, $\leq$, $\geq$, $\neq$
 - Mean $\bar{\bm{x}}$ or $\overline{\bm{X}}$
+- Forall: $\forall$ Exist: $\exist$

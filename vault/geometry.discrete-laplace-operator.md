@@ -27,17 +27,8 @@ $$
 \kappa = \frac{\frac{\partial^2 f}{\partial x^2}}{(1 + (\frac{\partial f}{\partial x})^2)^{\frac{3}{2}}}
 $$
 
-### Circumcenter
-For all edges, the line segement from circumcenter to edge midpoint is perpendicular to that edge.
-
 ### Obtuse triangle
 Triangle with one angle bigger than $\pi/2$, so its circumcenter point is outside triangle
-
-### Cotangent
-
-$$
-\cot \theta = \frac{1}{\tan \theta} = \frac{\cos \theta}{\sin \theta}
-$$
 
 ### Mass matrix
 
@@ -74,7 +65,7 @@ $$
 $$
 
 
-Relation between surface aera minimization and mean curvature flow
+Relation between surface area minimization and mean curvature flow
 
 $$
 2\kappa_H\bm{n} = \lim_{diameter(A) \to 0} \frac{\nabla A}{A}
@@ -175,7 +166,7 @@ Perform eigenanalysis on $B$ to find the two [[Principle curvatures|geometry.dis
 - [ ] Conformal space parameters
 - [x] Obtuse triangle
 - [x] Mass matrix
-- [x] Cotangent
+- [x] [[Cotangent|code-read.igl.laplacian#cotangent]]
 - [x] Curvature tensor
 - [ ] Curvature tensor fit constraints
 

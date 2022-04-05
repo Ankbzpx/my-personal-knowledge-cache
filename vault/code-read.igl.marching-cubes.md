@@ -44,7 +44,7 @@ $$
 Compute new vertex on given cube edge by linear interpolating cube edge corner values 
 
 
-## TODO:
+## TODO
 - [ ] edgeTable
 - [ ] triTable
 

@@ -42,7 +42,7 @@ Weight W: NF x 3
 case uniform: 
     all 1
 case area: 
-    compute face aeras `doublearea` (NF x 1) replicated to (NF x 3)
+    compute face areas `doublearea` (NF x 1) replicated to (NF x 3)
 case internal_angle: 
     `internal_angle` angle of each face cornors (angle between edges that share the same vertex)
 
@@ -100,7 +100,7 @@ bind_vertex_attrib_array(shader_mesh,"normal", vbo_V_normals, V_normals_vbo, dir
 in vec3 normal;
 ```
 
-## TODO:
+## TODO
 - [ ] Laplace-Beltrami operator
 - [ ] Cotangent stiffness matrix (Polygon Laplacian Made Simple)
 

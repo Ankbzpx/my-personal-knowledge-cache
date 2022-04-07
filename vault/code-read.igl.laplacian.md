@@ -66,7 +66,7 @@ $$
 1. For each face, for edges {(1, 2), (2, 0), (0, 1)} in face, compute [[cotmatrix_entries|code-read.igl.laplacian#cotmatrix_entries]] for triplets
 2. Form SparseMatrix by `setFromTriplets`. Note both orientations of same edge are appended, which will be [summed up](https://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html#a8f09e3597f37aa8861599260af6a53e0) during sparse construction.
 
-> IMPORTANT!
+**IMPORTANT!**
 
 $$
 L_{ij} = 
@@ -163,7 +163,31 @@ Same indices as above, but with voronoi triangle area computed as:
 ### repmat
 Like `np.repeat`, supporting SparseMatrix
 
+### gaussian_curvature
+
+See [[Discrete Gaussian curvature|geometry.discrete-laplace-operator#discrete-gaussian-curvature]]
+
+### principal_curvature
+
+1. For each vertex, find k-ring/sphere neighbourhood within `k * average_edge_distance` using breadth first search
+2. Verify neighbourhood vertex normal direction (dot product with target vertex normal is positive)
+3. Compute normal via averaging neighbourhood vertices normal or using [[getProjPlane|code-read.igl.laplacian#getprojplane]]
+4. If has too many neighbourhood vertices, apply Monte Carlo to uniformly sample a subset, each with $\frac{target_count}{current_vertex_count}$ chance to survive
+5. Build new basis, computed normal as z axis, projected direction from target vertex to one of its incident vertex as x axis, y is then cross product of x and z
+6. Center neighbourhood vertices w.r.t. target vertex, change to new basis and fit Quadric (height function fit, with polynoimal basis {xx, xy, yy, x, y}, z as target, solve least square with `Eigen::jacobiSvd`)
+> What's the relation between quadric fit and priciple tensor?
+
+7. Compute [[curvature tensor|geometry.discrete-laplace-operator#pre-vertex-principle-curvatures]] from quadric fit and tranform to normal coordinate system
+
+#### getProjPlane
+1. Compute sum of target vertex incident faces normal, or sum of target vertex neighbourhood vertices normals, as the original normal
+2. Right shift coordinate (a, b, c) n times so abs(c) is the biggest
+3. Normalize coordinate to $(\frac{a}{\sqrt{a^2 + b^2 + c^2}}, \frac{b}{\sqrt{a^2 + b^2 + c^2}}, \frac{\sqrt{1 - a^2 - b^2}}{\sqrt{a^2 + b^2 + c^2}})$, left shift it back as the tmp normal
+4. Loop through all $\pm$ combination of tmp normal, return one that is closest to original normal (maximum dot product)
+
 ## TODO
 - [ ] [Kahan's Heron's formula](https://people.eecs.berkeley.edu/~wkahan/Triangle.pdf)
 - [ ] Triangle edge length inequality
 - [x] Cotangent formula
+- [ ] Idea behind [[getProjPlane|code-read.igl.laplacian#getprojplane]]
+- [ ] Relation between quadric fit and curvature tensor

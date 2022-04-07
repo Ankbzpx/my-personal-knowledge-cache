@@ -34,6 +34,8 @@ $$
 \bm{A} = \bm{Q} \bm{\Lambda} \bm{Q}^{-1}  
 $$
 
+> Eigen basis $T_{ne}$ that transform eigen coordinate system into normal coordinate system
+
 See: [[linear-algebra.decomposition.eigendecomposition]]
 
 Transformation applied on eigen basis is guaranteed to be diagonal

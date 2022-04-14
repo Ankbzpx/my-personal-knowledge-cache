@@ -2,7 +2,7 @@
 id: ww8z42lj1f2cm9lj0yx3ubc
 title: Neighbourhood Connectivity
 desc: ''
-updated: 1647584184335
+updated: 1649901726287
 created: 1647231617065
 ---
 

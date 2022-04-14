@@ -2,7 +2,7 @@
 id: gae0o4cc0yvkjbxtufeqssf
 title: Inner Product
 desc: ''
-updated: 1648779392404
+updated: 1649906374929
 created: 1648779392404
 ---
 > Reference: https://mml-book.github.io/book/mml-book.pdf
@@ -52,7 +52,9 @@ $$
 \forall \bm{x} \in V \backslash \{\bm{0}\}: \bm{x}^T \bm{A} \bm{x} >0
 $$
 
-All positive eigenvalue
+All of its eigenvalue are positive
+
+Its determinant is strictly positive
 
 ### Symmetric, Positive semidefinite
 

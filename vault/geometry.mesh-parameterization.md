@@ -2,7 +2,7 @@
 id: u3q9c3eym7sildlw4znkju5
 title: Mesh Parameterization
 desc: ''
-updated: 1649911720750
+updated: 1650173956193
 created: 1649830340581
 ---
 
@@ -116,6 +116,15 @@ f\text{ is equiareal} & \det\bm{I} = 1 & \lambda_1\lambda_2 = 1 \\
 \end{cases}
 $$
 
+### Uniform / Cotangent Laplacian mapping
+See: [[Data fitting (interpolating)|geometry.laplacian#data-fitting-interpolating]]
+
+1. Find boundary vertices, map it to unit circle uv
+2. Compute Uniform / Cotanagent Laplacian weight matrix $\bm{L}$
+3. For each boundary row of $\bm{L}$, set it boundary index value to $1$ and others to 0 (Laplacian does not hold for boundary)
+3. Build target vector $\bm{b}$, with boundary row equals to computed uv (boundary condition), non-boundary rows equals to $\bm{0}$ (Laplacian)
+4. Solve $\bm{L} \bm{X} = \bm{b}$
+
 ### Conformal mapping
 [[Conformal Mapping|geometry.mesh-parameterization#conformal-mapping]] satisfied [[Cauchy-Riemann equations|geometry.mesh-parameterization#cauchy-riemann-equations]]. By taking derivative w.r.t. to $x$ and $y$, we have
 
@@ -140,7 +149,7 @@ $$
 
 It means [[Conformal Mapping|geometry.mesh-parameterization#conformal-mapping]] is also harmonic
 
-Harmonic benefits
+#### Harmonic benefits
 - Solution to linear Elliptic partial differential equation (PDE)
 - Guaranteed one-to-one for convex region
 

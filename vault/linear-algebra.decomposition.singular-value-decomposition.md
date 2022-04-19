@@ -2,7 +2,7 @@
 id: s7zclnq6d96od6imwevhpli
 title: Singular Value Decomposition (SVD)
 desc: ''
-updated: 1648697329332
+updated: 1650336482300
 created: 1648697329332
 ---
 
@@ -13,7 +13,7 @@ For matrix $\bm{A} \in \mathbb{R}^{m \times n}$
 $$
 \bm{A} = \bm{U} \bm{\Sigma} \bm{V}^T
 $$
-where $\bm{U} \in \mathbb{R}^{m \times m}$, $\bm{V} \in \mathbb{R}^{n \times n}$, $\bm{\Sigma} = diag\{\sigma_1, \sigma_2, \dots, \sigma_p\} \in \mathbb{R}^{m \times n}$, $p = \min\{m, n\}$. $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_p \geq 0$ are singular values of $\bm{A}$
+where $\bm{U} \in \mathbb{R}^{m \times m}$, $\bm{V} \in \mathbb{R}^{n \times n}$ are orthogonal basis, $\bm{\Sigma} = diag\{\sigma_1, \sigma_2, \dots, \sigma_p\} \in \mathbb{R}^{m \times n}$, $p = \min\{m, n\}$. $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_p \geq 0$ are singular values of $\bm{A}$
 
 Define r as $\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_r \geq \sigma_{r+1} = \dots = \sigma_p = 0$, $rank(\bm{A}) = r$
 
@@ -29,7 +29,7 @@ If $m \geq n$
 $$
 \bm{A} = \bm{U}_1 \bm{\Sigma}_1 \bm{V}^T
 $$
-where $\bm{U}_1 \in \mathbb{R}^{m \times n}$, $\bm{\Sigma}_1 \in \mathbb{R}^{n \times n}$. Note that $$\bm{U}_1^T \bm{U}_1 = \bm{I} \in \mathbb{R}^{n \times n}$$, $\bm{U}_1 \bm{U}_1^T \neq \bm{I} \in \mathbb{R}^{m \times m}$
+where $\bm{U}_1 \in \mathbb{R}^{m \times n}$, $\bm{\Sigma}_1 \in \mathbb{R}^{n \times n}$. Note that the basis are no longer orthogonal $$\bm{U}_1^T \bm{U}_1 = \bm{I} \in \mathbb{R}^{n \times n}$$, $\bm{U}_1 \bm{U}_1^T \neq \bm{I} \in \mathbb{R}^{m \times m}$
 
 ## Feature vector
 

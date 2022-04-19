@@ -2,7 +2,7 @@
 id: u3q9c3eym7sildlw4znkju5
 title: Mesh Parameterization
 desc: ''
-updated: 1650173956193
+updated: 1650339649054
 created: 1649830340581
 ---
 
@@ -116,15 +116,6 @@ f\text{ is equiareal} & \det\bm{I} = 1 & \lambda_1\lambda_2 = 1 \\
 \end{cases}
 $$
 
-### Uniform / Cotangent Laplacian mapping
-See: [[Data fitting (interpolating)|geometry.laplacian#data-fitting-interpolating]]
-
-1. Find boundary vertices, map it to unit circle uv
-2. Compute Uniform / Cotanagent Laplacian weight matrix $\bm{L}$
-3. For each boundary row of $\bm{L}$, set it boundary index value to $1$ and others to 0 (Laplacian does not hold for boundary)
-3. Build target vector $\bm{b}$, with boundary row equals to computed uv (boundary condition), non-boundary rows equals to $\bm{0}$ (Laplacian)
-4. Solve $\bm{L} \bm{X} = \bm{b}$
-
 ### Conformal mapping
 [[Conformal Mapping|geometry.mesh-parameterization#conformal-mapping]] satisfied [[Cauchy-Riemann equations|geometry.mesh-parameterization#cauchy-riemann-equations]]. By taking derivative w.r.t. to $x$ and $y$, we have
 
@@ -153,6 +144,18 @@ It means [[Conformal Mapping|geometry.mesh-parameterization#conformal-mapping]] 
 - Solution to linear Elliptic partial differential equation (PDE)
 - Guaranteed one-to-one for convex region
 
+## Uniform / Cotangent Laplacian mapping
+See: [[Data fitting (interpolating)|geometry.laplacian#data-fitting-interpolating]]
+
+> Local transform applied to one-ring neighbourhood
+
+1. Find boundary vertices, map it to unit circle uv
+2. Compute Uniform / Cotanagent Laplacian weight matrix $\bm{L}$
+3. For each boundary row of $\bm{L}$, set it boundary index value to $1$ and others to 0 (Laplacian does not hold for boundary)
+3. Build target vector $\bm{b}$, with boundary row equals to computed uv (boundary condition), non-boundary rows equals to $\bm{0}$ (Laplacian)
+4. Solve $\bm{L} \bm{X} = \bm{b}$
+
+
 ## Least square conformal mapping (LSCM)
 > Reference: https://members.loria.fr/Bruno.Levy/papers/LSCM_SIGGRAPH_2002.pdf
 
@@ -169,6 +172,32 @@ C(\mathcal{T}) = \sum_{T \in \mathcal{T}} C(T)
 $$
 where $\mathcal{T}$ the set of all triangles
 
+### Jacobian view
+> Reference: http://crl.ethz.ch/teaching/shape-modeling-18/lectures/05_Mappings.pdf
+
+We want the jacobian 
+$$
+\bm{J} =
+\begin{bmatrix}
+\frac{\partial u}{\partial x} & \frac{\partial u}{\partial y} \\
+\frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}
+\end{bmatrix}
+$$
+to be a similarity matrix
+$$
+\begin{bmatrix}
+\alpha & -\beta \\
+\beta & \alpha
+\end{bmatrix}
+$$
+
+Thus we have
+$$
+\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \\
+\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
+$$
+which is aligned with [[Cauchy-Riemann equations|geometry.mesh-parameterization#cauchy-riemann-equations]]
+
 ### Side notes
 
 Texture atlas generation steps
@@ -184,4 +213,3 @@ Minimize angle deformation and non-uniform scaling
 - [x] Angle deformations
 - [x] Conformal Map
 - [x] Isotropic
-- [ ] Triangle gradient

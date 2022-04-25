@@ -2,7 +2,7 @@
 id: r169pal13zevl730go7ryj7
 title: Local Global Mesh Parameterization
 desc: ''
-updated: 1650345656533
+updated: 1650467180745
 created: 1650338243331
 ---
 
@@ -12,6 +12,10 @@ created: 1650338243331
 ### Frobenius matrix norm
 $$
 \|\bm{A}\|_F = \sqrt{tr(\bm{A}^T\bm{A})}
+$$
+
+$$
+\|\bm{A}\|_F = (\sum_{i,j} |\bm{A}_{ij}|^2)^{\frac{1}{2}}
 $$
 
 ## Objective function
@@ -79,6 +83,7 @@ $$
 d = (\sigma_1 - \sigma_2)^2
 $$
 
+The trivial solution is collapses all of vertices to a single point (0 energy). It can be avoided by pinning two vertices (usually most distant away) to two pre-determined positions in plane.
 
 ### Relation to Comformal Mapping
 
@@ -108,7 +113,7 @@ which is equivalent to [[Least square conformal mapping (LSCM)|geometry.mesh-par
 > Rotation(angle and area preserving): subset of similarity
 
 $$
-d = \| \bm{J} - \bm{L}_R \|_F^2
+d = \| \bm{J} - \bm{L}_R \|_F^2github
 $$
 where $\bm{L}_R = \begin{bmatrix} \cos \theta & \sin \theta \\ -\sin \theta & \cos \theta \end{bmatrix}$ denotes the closest rotation matrix to Jacobian $\bm{J}$
 
@@ -126,4 +131,4 @@ $$
 
 ## TODO
 - [ ] Triangle Jacobian
-- [ ] Jacobian as distortion
+- [x] Jacobian as distortion

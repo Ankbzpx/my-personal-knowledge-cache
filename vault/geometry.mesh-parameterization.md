@@ -2,7 +2,7 @@
 id: u3q9c3eym7sildlw4znkju5
 title: Mesh Parameterization
 desc: ''
-updated: 1650339649054
+updated: 1650457485388
 created: 1649830340581
 ---
 
@@ -39,6 +39,7 @@ $$
 $$
 \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}
 $$
+
 
 ### Developable surface
 Smooth surface with zero [[Gaussian curvature|geometry.discrete-laplace-operator#gaussian-curvature]], a.k.a. one of the [[Principle curvatures|geometry.discrete-laplace-operator#principle-curvatures]] is 0
@@ -213,3 +214,4 @@ Minimize angle deformation and non-uniform scaling
 - [x] Angle deformations
 - [x] Conformal Map
 - [x] Isotropic
+- [ ] Matrix form of LSCM solution

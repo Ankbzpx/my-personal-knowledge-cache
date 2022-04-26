@@ -2,7 +2,7 @@
 id: 32xk45x8lisds1ti4bx4h4y
 title: Mesh Deformation
 desc: ''
-updated: 1650886822984
+updated: 1650940693333
 created: 1650869560564
 ---
 
@@ -54,7 +54,9 @@ $$
 
 where $\bm{G} \in \mathbb{R}^{3m \times n}$ as gradient operator (More see [[grad|code-read.igl.mesh-parameterization#grad]]), $\bm{D} \in \mathbb{R}^{3m \times 3m}$ is diagonal triangle-based weight matrix, $\bm{G}^T \bm{D}$ is divergence operator, $\bm{G}^T \bm{D} \bm{G}$ is divergence of gradient, a.k.a. discrete laplacian operator.
 
-### Application in mehs deformation
+> **IMPORTANT** Above equation only constraints gradient. Translational contraints are also needed when performing mesh deformation
+
+### Application in mesh deformation
 
 1. Compute $\mathcal{B}$ from $\mathcal{S}$
 2. Deform $\mathcal{B} \to \mathcal{B}'$ and compute per-triangle deformation gradient $\bm{S}_j$

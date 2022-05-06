@@ -2,16 +2,14 @@
 id: o3PkEany5FTDLokev2jkJ
 title: Root
 desc: ''
-updated: 1651805236028
+updated: 1651805542122
 created: 1640014633146
 ---
 
 My personal knowledge cache using [Dendron](https://www.dendron.so)
 
 ## History
-It was during my first job as a Software Engineer at a start-up company called PixelShift.AI, I acquired skills that was later considered most essential, such as using linux and git, managing large repositories, reading and compiling source code. 
-
-Learning new things every few days (at least for the first year) was thriving but noting them down organized are hard. I also found it infeasible to refer back to some of them months later, as I may completely forget the context, or worse, my previous understanding was wrong to begin with.
+It was during my first job as a Software Engineer at a start-up company called PixelShift.AI, I acquired skills that was later considered most essential, such as using linux and git, managing large repositories, reading and compiling source code. Learning new things every few days (at least for the first year) was thriving but noting them down organized are hard. I also found it infeasible to refer back to some of them months later, as I may completely forget the context, or worse, my previous understanding was wrong to begin with.
 
 In desperate attempt to resolve it, I came across [Dendron](https://www.dendron.so) and found it fit surprisingly well for my personal need. With it, I gradually growed the habit of caching, linking back and extending my knowledge base.
 

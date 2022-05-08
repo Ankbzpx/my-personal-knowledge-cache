@@ -103,3 +103,5 @@ publishing:
         editBranch: main
         editViewMode: tree
     enablePrettyLinks: true
+    assetsPrefix: /my-personal-knowledge-cache
+    siteUrl: https://Ankbzpx.github.io

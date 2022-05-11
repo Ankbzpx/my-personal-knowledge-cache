@@ -2,7 +2,7 @@
 id: r169pal13zevl730go7ryj7
 title: Local Global Mesh Parameterization
 desc: ''
-updated: 1650467180745
+updated: 1652148367209
 created: 1650338243331
 ---
 
@@ -60,7 +60,7 @@ where $sign (\det J) = sign (\sigma_2)$
 ## As Similar As Possible (ASAP)
 > Reference: http://crl.ethz.ch/teaching/shape-modeling-18/lectures/05_Mappings.pdf
 
-> Similarity (angle preserving): translation, rotation, reflection, scaling
+> More see: [[Similarity|epipolar-geometry.euclidean-and-projective#similarity]]
 
 $$
 d = \| \bm{J} - \bm{L}_S \|_F^2
@@ -110,7 +110,9 @@ which is equivalent to [[Least square conformal mapping (LSCM)|geometry.mesh-par
 ## As Rigid As Possible (ARAP)
 > Reference: http://crl.ethz.ch/teaching/shape-modeling-18/lectures/05_Mappings.pdf
 
-> Rotation(angle and area preserving): subset of similarity
+> More see: [[Rigid|epipolar-geometry.euclidean-and-projective#rigid]]
+
+> We only consider Rotation(angle and area preserving) here
 
 $$
 d = \| \bm{J} - \bm{L}_R \|_F^2github

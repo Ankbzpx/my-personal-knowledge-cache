@@ -2,7 +2,7 @@
 id: 9tj97gvvzufmew51pkjv3zf
 title: Homography Formation
 desc: ''
-updated: 1652419940278
+updated: 1652486302612
 created: 1652321247487
 ---
 
@@ -50,7 +50,7 @@ Homography Matrix $\bm{H} \in \mathbb{R}^{3 \times 3}$ has 8 DoF ($H_{33} = 1$) 
 
 ### Robust fitting
 using
-[[optimization.least-square]] with Ransac, or [[optimization.least-square.iteratively-reweighted-least-square]]
+[[optimization.least-square]] with [[epipolar-geometry.ransac]], or [[optimization.least-square.iteratively-reweighted-least-square]]
 
 ## Decomposition
 Homography Matrix $\bm{H} = \bm{R} - \bm{t} \frac{\bm{n}^T}{d}$ can be decomposed into rotation $\bm{R}$, normalized translation $\frac{\bm{t}}{d}$ and plane normal $\bm{n}$

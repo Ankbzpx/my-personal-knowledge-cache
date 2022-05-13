@@ -2,7 +2,7 @@
 id: s353fwf4k5f883r590cj6bf
 title: Matrix Vector Dot Product
 desc: ''
-updated: 1648697579876
+updated: 1652418358834
 created: 1648697579876
 ---
 
@@ -46,7 +46,7 @@ The transformation $\bm{A}$ of $\bm{v}$ can be viewed as transformation of basis
 
 ## Change of coordinate system
 
-> The result of $\bm{A} \bm{v}$ can also be viewed as how the $\bm{v}' = \begin{bmatrix} m \\ n \end{bmatrix}$ in the coordinate system $<\begin{bmatrix} a \\ c \end{bmatrix}, \begin{bmatrix} b \\ d \end{bmatrix}>$ seen in coordinate system $<\bm{i}, \bm{j}>$.
+> **IMPORTANT** The result of $\bm{A} \bm{v}$ can also be viewed as how the $\bm{v}' = \begin{bmatrix} m \\ n \end{bmatrix}$ in the coordinate system $<\begin{bmatrix} a \\ c \end{bmatrix}, \begin{bmatrix} b \\ d \end{bmatrix}>$ seen in coordinate system $<\bm{i}, \bm{j}>$.
 
 In general, suppose matrix $\bm{A} \in C$ was formed by the basis of $C'$ in $C$ coordinate system, assume $\bm{v} \in C$ and $\bm{v}' \in C'$ represent the same vector in different coordinate system
 

@@ -2,7 +2,7 @@
 id: xecmhi0elpdg8uuoed7hzmo
 title: Pinhole Camera Model
 desc: ''
-updated: 1652245195551
+updated: 1652417702317
 created: 1652239328730
 ---
 
@@ -59,6 +59,8 @@ X \\ Y \\ Z \\ 1
 \end{bmatrix}
 $$
 
+Under the assumption that projection center is at origin, all points $(X, Y, Z, T)^T$ with fixed $X$, $Y$, $Z$ and varing $T$ forms a ray, which all project to image point $(fX, fY, Z)$, regardless of $T$.
+
 ## Image plane coordinate not at principal center
 
 Assume principal point offset w.r.t. image plane coordinate is $(p_x, p_y)$
@@ -92,12 +94,11 @@ $$
 
 ## Camera center not at the origin of world coordinate
 
-Assume the world origin transformation w.r.t. camera center is $\begin{bmatrix}
-\bm{R} & \bm{t} \\ \bm{0} & 1 \end{bmatrix}$
+Assume the world transformation w.r.t. camera ($\bm{T}_{CW}$) is $[\bm{R}|\bm{t}]$
 
 ![Camera in world coordinate](/assets/images/2022-05-11-11-24-54.png){width: 150px}
 
-We can then transform $\bm{X}$ from world coordinate system to camera coordinate system (with camera center at origin) then apply the projection
+We can then transform $\bm{X}$ from world coordinate system to camera coordinate system (with camera center/projection center at origin) then apply the projective transformation
 $$
 \bm{x} = \bm{K}[\bm{R}|\bm{t}]\bm{X}
 $$
@@ -163,4 +164,4 @@ f_x / a & 0 & p_x / a \\
 0 & 0 & 1
 \end{bmatrix}$
 
-In general, find $3 \times 3$ transformation matrix that transforms the image coordinate, then right multiply it with $\bm{K}$, a.k.a. apply the transformation
+In general, find a $3 \times 3$ transformation matrix that transforms the image coordinate, then right multiply it with $\bm{K}$, a.k.a. apply the transformation

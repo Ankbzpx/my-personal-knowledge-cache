@@ -2,12 +2,14 @@
 id: a59xydkffuj5tfxd0qlseha
 title: RANSAC
 desc: ''
-updated: 1652486257631
+updated: 1652487666425
 created: 1652427620385
 ---
 > Reference: https://rpg.ifi.uzh.ch/docs/teaching/2021/09_multiple_view_geometry_3.pdf
 
 Random Sample Consensus (RANSAC) is used for robust estimation (with large potion of outliers)
+
+> RANSAC is **non-deterministic**
 
 ## Steps
 1. Sample minimum data samples required to fit the model and fit it

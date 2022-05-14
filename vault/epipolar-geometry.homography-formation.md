@@ -2,11 +2,13 @@
 id: 9tj97gvvzufmew51pkjv3zf
 title: Homography Formation
 desc: ''
-updated: 1652486302612
+updated: 1652486624708
 created: 1652321247487
 ---
 
 > Reference: https://www.robots.ox.ac.uk/~vgg/hzbook/
+
+Homography decomposition ise used for pose estimation given 2D-2D correspondence
 
 ## Derivation
 Given tbe diagram of reference frame (left) and current frame (right)

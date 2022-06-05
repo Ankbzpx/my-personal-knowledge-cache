@@ -2,7 +2,7 @@
 id: 2IowUFHgbNrRp6MQpgB1o
 title: Fetch Content
 desc: ''
-updated: 1653962691964
+updated: 1654396304437
 created: 1645514705563
 ---
 
@@ -33,6 +33,8 @@ list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 include(gflags)
 target_link_libraries(${PROJECT_NAME} PUBLIC gflags::gflags)
 ```
+
+> **IMPORTANT** The module name can be arbitrary but the library name in `target_link_libraries` depends on the namespace of the library
 
 ## Non-CMake project
 > cmake/imgui.cmake

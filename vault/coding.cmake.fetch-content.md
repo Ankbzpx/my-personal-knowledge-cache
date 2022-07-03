@@ -2,7 +2,7 @@
 id: 2IowUFHgbNrRp6MQpgB1o
 title: Fetch Content
 desc: ''
-updated: 1654396304437
+updated: 1654583384145
 created: 1645514705563
 ---
 
@@ -80,21 +80,18 @@ target_link_libraries(${PROJECT_NAME} PUBLIC imgui)
 ```
 
 ## Auxiliary
-> Reference: https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add
-
-### Pass CMake flag
+### Pass define
 ```
 FetchContent_Declare(
     depname
     ...
 )
-FetchContent_GetProperties(depname)
-if (NOT depname_POPULATED)
-    FetchContent_Populate(depname)
-    set(CMAKE_BUILD_TYPE Release)
-    add_subdirectory(${depname_SOURCE_DIR} ${depname_BINARY_DIR})
-endif()
+FetchContent_MakeAvailable(depname)
 
+target_compile_definitions(depname INTERFACE
+    DEPNAME_DEFINE
+    CMAKE_BUILD_TYPE=Release
+)
 ```
 
 ### Ignore git submodule

@@ -52,6 +52,9 @@ workspace:
             L: low
         todoIntegration: false
         createTaskSelectionType: selection2link
+        taskCompleteStatus:
+            - done
+            - x
     graph:
         zoomSpeed: 1
     enableAutoCreateOnDefinition: false
@@ -66,6 +69,8 @@ workspace:
     maxNoteLength: 204800
     dendronVersion: 0.86.1
     enableFullHierarchyNoteTitle: false
+    enableHandlebarTemplates: false
+    templateHierarchy: template
 preview:
     enableFMTitle: true
     enableNoteTitleForLink: true
@@ -105,3 +110,4 @@ publishing:
     enablePrettyLinks: true
     assetsPrefix: /my-personal-knowledge-cache
     siteUrl: https://ankbzpx.github.io
+    enableTaskNotes: true

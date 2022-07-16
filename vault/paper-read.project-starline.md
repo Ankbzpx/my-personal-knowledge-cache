@@ -2,9 +2,11 @@
 id: e9ow9c6apojiqfio5e5ceht
 title: Project Starline A high-fidelity telepresence system
 desc: ''
-updated: 1657801348491
+updated: 1657885551467
 created: 1657801332149
 ---
+
+> https://storage.googleapis.com/pub-tools-public-publication-data/pdf/3696afb4c1cccbe0876a9fedd1586f0f9c84f737.pdf
 
 ## HCI
 VR, AR: hard to capture under headset, insufficient pixel density and viewport
@@ -66,7 +68,7 @@ autostereoscopic display (65-inch 8K 33.1M pixel 60Hz, 1.25m eye-to-eye distance
 - Use shadow map to weighted color blend output depth map
 
 #### Traditional Surface fusion
-- Fuse depth view into TSDF as volumetric grid, weighting depth pixel based on depth gradient
+- Fuse depth view into [[epipolar-geometry.tsdf]] as volumetric grid, weighting depth pixel based on depth gradient
 - March along rays into precomputed voxel grid, find root (iso surface)
 
 #### Novel raycast approach
@@ -91,8 +93,9 @@ autostereoscopic display (65-inch 8K 33.1M pixel 60Hz, 1.25m eye-to-eye distance
 - [ ] NIR illumination
 - [ ] Hysteresis filter
 - [ ] NVENC & NVDEC
-- [ ] TSDF (depth gradient weighting)
+- [ ] TSDF depth gradient weighting
 - [ ] [2D min/max filter](http://www.code-spot.co.za/2011/01/24/2d-minimum-and-maximum-filters-algorithms-and-implementation-issues/)
 - [ ] Bisection search
 - [ ] Relief texture mapping
 - [ ] [Percentage closer filter](https://developer.nvidia.com/gpugems/gpugems/part-ii-lighting-and-shadows/chapter-11-shadow-map-antialiasing)
+- [ ] Squared cosine of angle between surface normal and camera vector

@@ -2,7 +2,7 @@
 id: ItcRFwyzBzay5dNU8Y7Bl
 title: Proxy
 desc: ''
-updated: 1643530147967
+updated: 1658112061031
 created: 1642930600402
 ---
 In general, most application respect `HTTP_PROXY` or `ALL_PROXY` environment variable
@@ -66,4 +66,11 @@ sudo snap set system proxy.https="http://127.0.0.1:7890"
 
 snap unset system proxy.http
 snap unset system proxy.https
+```
+
+## Conda
+
+```
+conda config --set proxy_servers.http http://127.0.0.1:7890/
+conda config --set proxy_servers.https http://127.0.0.1:7890/
 ```

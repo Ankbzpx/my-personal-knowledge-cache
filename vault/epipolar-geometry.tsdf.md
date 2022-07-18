@@ -2,7 +2,7 @@
 id: r8y2bovxrlx6vkhn7my8e0m
 title: TSDF
 desc: ''
-updated: 1657877880179
+updated: 1657949316590
 created: 1657877868745
 ---
 
@@ -14,7 +14,7 @@ created: 1657877868745
 - Weight incorporates uncertainty in measurement (i.e. cosine of angle between vertex normal and viewing angle)
 - Weight needs to fall off at the max uncertainty interval in front of / behind the surface (restrict at the vicinity of the surface)
 
-Combine rule:
+## Combine rule
 $$
 D(\bm{x}) = \frac{\sum w_i(\bm{x}) d_i(\bm{x})}{\sum w_i(\bm{x})}
 $$
@@ -22,7 +22,7 @@ $$
 W(\bm{x}) = \sum w_i (\bm{x})
 $$
 
-Incremental calculation (combine depth image one by one):
+### Incremental calculation (combine depth image one by one)
 $$
 D_{i+1}(\bm{x}) = \frac{W_i(\bm{x})D_i(\bm{x}) + w_{i+1}(\bm{x})d_{i+1}(\bm{x})}{W_i(\bm{x}) + w_{i+1}(\bm{x})}
 $$

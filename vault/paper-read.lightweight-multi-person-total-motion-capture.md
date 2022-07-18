@@ -1,8 +1,8 @@
 ---
 id: kgvbki8is4iikr9ex4f0ire
-title: Lightweight Multi-person  Total Motion Capture Using Sparse Multi-view Cameras
+title: Lightweight Multi Person Total Motion Capture
 desc: ''
-updated: 1657251207147
+updated: 1657330219638
 created: 1657097338013
 ---
 
@@ -57,6 +57,7 @@ avg(\max(0,1 - \frac{\|\text{body skeleton wrist position} - \text{local wrist p
 - [ ] Body ground truth 3D?
 - [ ] Hand association score for different views balancing (the parameter to refine?)
 - [ ] Distance transformations for smoothing
+- [ ] Human body parameterization
 
 ## TODO
 - [ ] *SMPLify-X (regularization term)

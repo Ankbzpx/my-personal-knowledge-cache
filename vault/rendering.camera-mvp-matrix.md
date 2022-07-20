@@ -2,7 +2,7 @@
 id: TkXfLmZJwXgvhwj8m5zgS
 title: Camera MVP Matrix
 desc: ''
-updated: 1652242593990
+updated: 1658280169237
 created: 1640157654319
 ---
 
@@ -28,8 +28,10 @@ T_C = T_{CW} T_{W}
 $$
 
 ## Projection Matrix
-Camera w.r.t. Image (C -> I)
+> **IMPORTANT** OpenGL(rendering) camera is different from epipolar geometry camera in computer vision, More see: https://amytabb.com/tips/tutorials/2019/06/28/OpenCV-to-OpenGL-tutorial-essentials/
+
+Camera w.r.t. Normalized Device coordinate (C -> NDC)
 
 $$
-T_I = T_{IC} T_{C}
+T_{NDC} = T_{NDC,C} T_{C}
 $$

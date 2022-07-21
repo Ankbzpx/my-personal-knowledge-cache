@@ -1,0 +1,36 @@
+<h1 id="ray-isosurface-intersection"><a aria-hidden="true" class="anchor-heading" href="#ray-isosurface-intersection"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ray Isosurface Intersection</h1>
+<blockquote>
+<p>Reference: <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.118.8397&#x26;rep=rep1&#x26;type=pdf">https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.118.8397&#x26;rep=rep1&#x26;type=pdf</a></p>
+</blockquote>
+<ul>
+<li>Traverse cells in volume checking bounds for isovalue, can be solved in close form as root of cubic polynomial</li>
+<li>Speed up traversal using spatial index (like R-tree)</li>
+</ul>
+<h2 id="fast-voxel-traversal-algorithm"><a aria-hidden="true" class="anchor-heading" href="#fast-voxel-traversal-algorithm"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Fast Voxel Traversal Algorithm</h2>
+<blockquote>
+<p><a href="https://www.flipcode.com/archives/A%20faster%20voxel%20traversal%20algorithm%20for%20ray%20tracing.pdf">https://www.flipcode.com/archives/A%20faster%20voxel%20traversal%20algorithm%20for%20ray%20tracing.pdf</a></p>
+</blockquote>
+<h3 id="intersection-culling"><a aria-hidden="true" class="anchor-heading" href="#intersection-culling"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Intersection culling</h3>
+<ul>
+<li>Hierarchical bounding volumes</li>
+<li>Space partitioning (octree/gird)</li>
+</ul>
+<h3 id="algorithm"><a aria-hidden="true" class="anchor-heading" href="#algorithm"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Algorithm</h3>
+<p>Break ray down into intervals of size <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span> spanning one voxel</p>
+<div class="math math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="bold-italic">u</mi><mo>+</mo><mi>t</mi><mi mathvariant="bold-italic">v</mi></mrow><annotation encoding="application/x-tex">\bm{u} + t \bm{v}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">u</span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right:0.03704em;">v</span></span></span></span></span></span></span></div>
+<h4 id="initialization"><a aria-hidden="true" class="anchor-heading" href="#initialization"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Initialization:</h4>
+<ul>
+<li>Find voxel the ray originated, or entry voxel if origin is outside voxel</li>
+<li>Compute minimum of voxel boundary intersect, as maximum distance of traversal that still inside the grid</li>
+<li>Compute delta <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em;"></span><span class="mord mathnormal">t</span></span></span></span></span> along all axis that equals to unit voxel size</li>
+</ul>
+<h4 id="incremental-traversal"><a aria-hidden="true" class="anchor-heading" href="#incremental-traversal"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Incremental traversal</h4>
+<ul>
+<li>Find axis with minimum boundary intersect</li>
+<li>Increment by the delta along that axis</li>
+<li>Move to next grid and repeat</li>
+</ul>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> DDA (Digital Differential Analyzer) algorithm</li>
+</ul>

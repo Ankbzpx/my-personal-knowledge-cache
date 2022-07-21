@@ -1,0 +1,15 @@
+<h1 id="override-defines"><a aria-hidden="true" class="anchor-heading" href="#override-defines"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Override Defines</h1>
+<blockquote>
+<p>Reference: <a href="https://stackoverflow.com/questions/32947974/file-path-with-cmake-add-definitions">https://stackoverflow.com/questions/32947974/file-path-with-cmake-add-definitions</a></p>
+</blockquote>
+<blockquote>
+<p>CMakeList.txt</p>
+</blockquote>
+<pre><code>target_compile_definitions(target PRIVATE DATA_DIR="${DATA_DIR}/${DATA_DIR}")
+</code></pre>
+<blockquote>
+<p>main.cpp</p>
+</blockquote>
+<pre><code>// Use Macro as string literals (https://stackoverflow.com/questions/798221/c-macros-to-create-strings)
+std::string path = DATA_DIR "/data.txt"
+</code></pre>

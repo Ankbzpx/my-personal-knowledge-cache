@@ -1,0 +1,14 @@
+<h1 id="distance-to-line-segment"><a aria-hidden="true" class="anchor-heading" href="#distance-to-line-segment"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Distance to Line Segment</h1>
+<blockquote>
+<p>Reference: <a href="https://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment">https://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment</a></p>
+</blockquote>
+<p>Compute distance from point p to line segment defined by w, w.</p>
+<pre><code>// compute projected distance by dot product
+var t = p.sub(v).dot(w.sub(v).normalize());
+// the crucial step, as we are dealing with segment here
+t = Math.min(Math.max(t, 0), 1.0));
+// compute the projected point
+const proj = v.add(w.sub(v).normalize().mul(t);
+// compute distance to projected point
+const d = p.sub(proj).norm();
+</code></pre>

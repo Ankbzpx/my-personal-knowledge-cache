@@ -1,0 +1,24 @@
+<h1 id="pyenv"><a aria-hidden="true" class="anchor-heading" href="#pyenv"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pyenv</h1>
+<h2 id="install"><a aria-hidden="true" class="anchor-heading" href="#install"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install</h2>
+<pre><code>git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+</code></pre>
+<h2 id="setup"><a aria-hidden="true" class="anchor-heading" href="#setup"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setup</h2>
+<blockquote>
+<p>.zprofile</p>
+</blockquote>
+<pre><code>export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - )"  or eval "$(pyenv init --path)"
+</code></pre>
+<p>WARNING: <a href="https://github.com/pyenv/pyenv">instruction</a> states <code>eval "$(pyenv init --path)"</code> but doesn't always work on ArchLinux</p>
+<blockquote>
+<p>.zshrc</p>
+</blockquote>
+<pre><code>eval "$(pyenv init -)"
+</code></pre>
+<h2 id="build-shared-library"><a aria-hidden="true" class="anchor-heading" href="#build-shared-library"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Build shared library</h2>
+<pre><code>CONFIGURE_OPTS=--enable-shared
+</code></pre>
+<h2 id="install-36-on-archlinux"><a aria-hidden="true" class="anchor-heading" href="#install-36-on-archlinux"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install 3.6 on ArchLinux</h2>
+<pre><code>CFLAGS="-O2"
+</code></pre>

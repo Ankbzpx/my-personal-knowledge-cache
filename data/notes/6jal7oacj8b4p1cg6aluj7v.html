@@ -1,0 +1,107 @@
+<h1 id="mesh-parameterization"><a aria-hidden="true" class="anchor-heading" href="#mesh-parameterization"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Mesh Parameterization</h1>
+<h3 id="boundary_loop"><a aria-hidden="true" class="anchor-heading" href="#boundary_loop"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>boundary_loop</h3>
+<ol>
+<li>Compute <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#vertex_triangle_adjacency">vertex_triangle_adjacency</a></li>
+<li>Compute <a href="/my-personal-knowledge-cache/notes/6jal7oacj8b4p1cg6aluj7v#triangle_triangle_adjacency">triangle_triangle_adjacency</a></li>
+<li>Compute <a href="/my-personal-knowledge-cache/notes/6jal7oacj8b4p1cg6aluj7v#is_border_vertex">is_border_vertex</a>, create a set for all border vertices</li>
+<li>Perform breadth-first-search to traverse border vertice till the edge loop is found. </li>
+</ol>
+<pre><code>enqueue one border vertex
+while not finished:
+    dequeue latest border vertex
+    for all its incident triangles:
+        if the triangle contains boundary edge:
+            enqueue the other vertex of the border edge
+</code></pre>
+<h3 id="triangle_triangle_adjacency"><a aria-hidden="true" class="anchor-heading" href="#triangle_triangle_adjacency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>triangle_triangle_adjacency</h3>
+<ol>
+<li>Compute <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#vertex_triangle_adjacency">vertex_triangle_adjacency</a></li>
+<li>Compute adjacency matrix <code>TT</code> (face index -> index of adjacent face)</li>
+</ol>
+<pre><code>for each face for each corner vertex in face:
+    vi: current vertex
+    vin: next vertex in current face
+    for all incident faces of vi:
+        if incident face index does not equal to current face index:
+            if that incident face contains vin:
+                that face is adjacent to current face w.r.t. edge [vi vin] (share same edge)             
+</code></pre>
+<ol start="3">
+<li>Compute adjacency matrix <code>TTi</code> (face index -> incident edge index in incident triangle)</li>
+</ol>
+<pre><code>for each face for each corner vertex in face:
+    vi: current vertex
+    vj: next vertex in current face
+    fn: face adjacent to current face w.r.t. edge [vi vj]
+    if fn exists:
+        for each corner vertex of fn:
+            vin: current vertex in fn
+            vjn: next vertex in fn
+            if edge [vjn, vin] is [vi vj]:
+                record corner vertex index
+</code></pre>
+<h3 id="is_border_vertex"><a aria-hidden="true" class="anchor-heading" href="#is_border_vertex"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>is_border_vertex</h3>
+<ol>
+<li>Compute <a href="/my-personal-knowledge-cache/notes/6jal7oacj8b4p1cg6aluj7v#triangle_triangle_adjacency">triangle_triangle_adjacency</a></li>
+<li>Find edge of triangle that has not incident triangle, the two vertices of that edge are border vertices</li>
+</ol>
+<h3 id="map_vertices_to_circle"><a aria-hidden="true" class="anchor-heading" href="#map_vertices_to_circle"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>map_vertices_to_circle</h3>
+<ol>
+<li>Compute cumulated length for each boundary edges</li>
+<li>Treat total length as circumference of a unit circle</li>
+<li>Boundary uv coordinates are then <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>c</mi><mi>o</mi><mi>s</mi><mo separator="true">,</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(cos, sin)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">cos</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">in</span><span class="mclose">)</span></span></span></span></span> of their portion w.r.t. circumference</li>
+</ol>
+<h3 id="local_basis"><a aria-hidden="true" class="anchor-heading" href="#local_basis"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>local_basis</h3>
+<pre><code>x = (v_1 - v_0).normalized()
+z = x.cross(v_2 - v_0).normalized()
+y = -x.cross(z).normalized()
+</code></pre>
+<h3 id="grad"><a aria-hidden="true" class="anchor-heading" href="#grad"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>grad</h3>
+<ol>
+<li>Compute edge vector <code>v32</code>, <code>v13</code>, <code>v21</code></li>
+<li>Compute normal with cross product and double area with cross product magnitutude. See: <a href="/my-personal-knowledge-cache/notes/3h03fva3wzi3haeygd07ylp#properties">Properties</a></li>
+<li>Normalize normal by double area, or by building a equilateral triangle with double area and recompute normal
+<blockquote>
+<p>Not sure why use equilateral triangle</p>
+</blockquote>
+</li>
+<li>Rotate edge vectors <code>v21</code> and <code>v13</code> 90 degree by performing cross product with normal (So the direction is pointing from vertex to it opposite edge and is also perpendicular to it). Then scale it by double area.</li>
+<li>Build sparse gradient operator matrix <code>3NF x NV</code></li>
+</ol>
+<p>Vector for each vertex in face</p>
+<pre><code>v1: -v13 - v21
+v2: v13
+v3: v21
+</code></pre>
+<p>Stored in data structure like</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th align="center">NV</th></tr></thead><tbody><tr><td>NF</td><td align="center">x</td></tr><tr><td>NF</td><td align="center">y</td></tr><tr><td>NF</td><td align="center">y</td></tr></tbody></table>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Abstract equilateral triangle for normal computation</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/my-personal-knowledge-cache/notes/32xk45x8lisds1ti4bx4h4y">Mesh Deformation</a></li>
+</ul>

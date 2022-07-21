@@ -1,0 +1,29 @@
+<h1 id="external-packages"><a aria-hidden="true" class="anchor-heading" href="#external-packages"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>External Packages</h1>
+<h2 id="rules"><a aria-hidden="true" class="anchor-heading" href="#rules"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Rules</h2>
+<h3 id="http_archive"><a aria-hidden="true" class="anchor-heading" href="#http_archive"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>http_archive</code></h3>
+<p><code>BUILD</code>, patch</p>
+<pre><code>load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+</code></pre>
+<h3 id="git_repository"><a aria-hidden="true" class="anchor-heading" href="#git_repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>git_repository</code></h3>
+<p>commit, patch</p>
+<pre><code>load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+</code></pre>
+<h3 id="new_git_repository"><a aria-hidden="true" class="anchor-heading" href="#new_git_repository"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a><code>new_git_repository</code></h3>
+<p>commit, <code>BUILD</code> or patch</p>
+<pre><code>load("@bazel_tools//tools/build_defs/repo:git.bzl", "new_git_repository")
+</code></pre>
+<h2 id="native-bazel-support"><a aria-hidden="true" class="anchor-heading" href="#native-bazel-support"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Native Bazel Support</h2>
+<pre><code>http_archive(
+    name = "com_github_gflags_gflags",
+    sha256 = "34af2f15cf7367513b352bdcd2493ab14ce43692d2dcd9dfc499492966c64dcf",
+    strip_prefix = "gflags-2.2.2",
+    urls = ["https://github.com/gflags/gflags/archive/v2.2.2.tar.gz"],
+)
+</code></pre>
+<p><code>strip_prefix</code> is the name of the root folder of the archive</p>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/my-personal-knowledge-cache/notes/j0YVBI92LvZhfl6C2NGeC">External Package Denpendencies</a></li>
+<li><a href="/my-personal-knowledge-cache/notes/z54exj0dwkf9zxbyspvva5q">No Native Bazel Support</a></li>
+</ol>

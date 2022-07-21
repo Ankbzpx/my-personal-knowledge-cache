@@ -1,0 +1,18 @@
+<h1 id="jupyter-notebook"><a aria-hidden="true" class="anchor-heading" href="#jupyter-notebook"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Jupyter Notebook</h1>
+<p>Run docker container with port forwarding and start jupyter server</p>
+<pre><code>docker run -it --gpus all --env HTTP_PROXY="http://127.0.0.1:7890" --network host image:version
+jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+</code></pre>
+<h2 id="web-browser"><a aria-hidden="true" class="anchor-heading" href="#web-browser"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Web browser</h2>
+<p>Open link shown in terminal in web browser</p>
+<h2 id="vscode"><a aria-hidden="true" class="anchor-heading" href="#vscode"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>VSCode</h2>
+<blockquote>
+<p>Jupyer notebook needs to be in the same folder as in VSCode remote container</p>
+</blockquote>
+<ol>
+<li>Copy link, open vscode</li>
+<li><code>Ctrl+Shift+P</code> choose <code>Remote-Container:Attach to runningcontainer</code>, select <code>image:version</code></li>
+<li><code>Ctrl+Shift+P</code> choose <code>Jupyter: Specify local or remote Jupyter server for connections</code></li>
+<li>choose <code>Existing</code> then paste link</li>
+<li>open the notebook</li>
+</ol>

@@ -1,0 +1,101 @@
+<h1 id="fetch-content"><a aria-hidden="true" class="anchor-heading" href="#fetch-content"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Fetch Content</h1>
+<blockquote>
+<p>Reference: <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html">https://cmake.org/cmake/help/latest/module/FetchContent.html</a></p>
+</blockquote>
+<h2 id="cmake-project"><a aria-hidden="true" class="anchor-heading" href="#cmake-project"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>CMake project</h2>
+<blockquote>
+<p>cmake/gflags.cmake</p>
+</blockquote>
+<pre><code>if(TARGET gflags::gflags)
+    return()
+endif()
+
+include(FetchContent)
+FetchContent_Declare(
+    gflags
+    GIT_REPOSITORY https://github.com/gflags/gflags.git
+    GIT_TAG v2.2.2
+)
+FetchContent_MakeAvailable(gflags)
+</code></pre>
+<blockquote>
+<p>CMakeLists.txt</p>
+</blockquote>
+<pre><code>list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(gflags)
+target_link_libraries(${PROJECT_NAME} PUBLIC gflags::gflags)
+</code></pre>
+<blockquote>
+<p><strong>IMPORTANT</strong> The module name can be arbitrary but the library name in <code>target_link_libraries</code> depends on the namespace of the library</p>
+</blockquote>
+<h2 id="non-cmake-project"><a aria-hidden="true" class="anchor-heading" href="#non-cmake-project"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Non-CMake project</h2>
+<blockquote>
+<p>cmake/imgui.cmake</p>
+</blockquote>
+<pre><code>if(TARGET imgui::imgui)
+    return()
+endif()
+
+include(FetchContent)
+FetchContent_Declare(
+    imgui
+    GIT_REPOSITORY https://github.com/ocornut/imgui.git
+    GIT_TAG v1.87
+)
+FetchContent_MakeAvailable(imgui)
+
+set(IMGUI_HDRS
+    ${imgui_SOURCE_DIR}/imconfig.h
+    ${imgui_SOURCE_DIR}/imgui.h
+)
+
+set(IMGUI_SRCS
+    ${imgui_SOURCE_DIR}/imgui.cpp
+    ${imgui_SOURCE_DIR}/imgui_demo.cpp
+    ${imgui_SOURCE_DIR}/imgui_draw.cpp
+    ${imgui_SOURCE_DIR}/imgui_tables.cpp
+    ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+)
+
+add_library(imgui STATIC ${IMGUI_HDRS} ${IMGUI_SRCS})
+target_include_directories(imgui PUBLIC ${imgui_SOURCE_DIR})
+target_compile_definitions(imgui PUBLIC
+    IMGUI_IMPL_OPENGL_LOADER_GLAD
+)
+</code></pre>
+<blockquote>
+<p>CMakeLists.txt</p>
+</blockquote>
+<pre><code>list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+include(imgui)
+target_link_libraries(${PROJECT_NAME} PUBLIC imgui)
+</code></pre>
+<h2 id="auxiliary"><a aria-hidden="true" class="anchor-heading" href="#auxiliary"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Auxiliary</h2>
+<h3 id="pass-define"><a aria-hidden="true" class="anchor-heading" href="#pass-define"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass define</h3>
+<pre><code>FetchContent_Declare(
+    depname
+    ...
+)
+FetchContent_MakeAvailable(depname)
+
+target_compile_definitions(depname INTERFACE
+    DEPNAME_DEFINE
+    CMAKE_BUILD_TYPE=Release
+)
+</code></pre>
+<h3 id="ignore-git-submodule"><a aria-hidden="true" class="anchor-heading" href="#ignore-git-submodule"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ignore git submodule</h3>
+<pre><code>FetchContent_Declare(
+    ...
+    GIT_SUBMODULES ""
+)
+</code></pre>
+<h3 id="apply-patch"><a aria-hidden="true" class="anchor-heading" href="#apply-patch"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Apply patch</h3>
+<pre><code>FetchContent_Declare(
+    ...
+    PATCH_COMMAND patch -p1 ${CMAKE_CURRENT_SOURCE_DIR}/fix.patch
+)
+</code></pre>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Library namespace</li>
+</ul>

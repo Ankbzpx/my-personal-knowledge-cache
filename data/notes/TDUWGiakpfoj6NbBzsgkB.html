@@ -1,0 +1,29 @@
+<h1 id="systemd"><a aria-hidden="true" class="anchor-heading" href="#systemd"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Systemd</h1>
+<h2 id="basic"><a aria-hidden="true" class="anchor-heading" href="#basic"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Basic</h2>
+<ul>
+<li>Enable a unit to start automatically at boot: <code>systemctl enable unit</code></li>
+<li>Enable a unit to start automatically at boot and start it immediately: <code>systemctl enable --now unit</code></li>
+<li>Disable a unit to no longer start at boot: <code>systemctl disable unit</code></li>
+</ul>
+<ul>
+<li>Start a unit immediately: <code>systemctl start unit</code></li>
+<li>Stop a unit immediately: <code>systemctl stop unit</code></li>
+<li>Restart a unit: <code>systemctl restart unit</code></li>
+<li>Reload a unit and its configuration: <code>systemctl reload unit</code></li>
+</ul>
+<h2 id="custom-unit"><a aria-hidden="true" class="anchor-heading" href="#custom-unit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Custom unit</h2>
+<blockquote>
+<p>/etc/systemd/system/clash.service</p>
+</blockquote>
+<pre><code>[Unit]
+Description=Clash daemon, A rule-based proxy in Go.
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/clash -f /etc/clash/config.yaml
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>

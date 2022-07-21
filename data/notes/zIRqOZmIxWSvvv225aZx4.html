@@ -1,0 +1,12 @@
+<h1 id="unity"><a aria-hidden="true" class="anchor-heading" href="#unity"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Unity</h1>
+<h2 id="gnome-dpi-scaling"><a aria-hidden="true" class="anchor-heading" href="#gnome-dpi-scaling"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Gnome DPI Scaling</h2>
+<blockquote>
+<p>References: <a href="https://wiki.archlinux.org/title/HiDPI">https://wiki.archlinux.org/title/HiDPI</a>
+<a href="https://forum.unity.com/threads/unity-hub-and-hidpi.604378/">https://forum.unity.com/threads/unity-hub-and-hidpi.604378/</a></p>
+</blockquote>
+<ul>
+<li>scale UI elements by an integer factor: <code>GDK_SCALE=2.0</code></li>
+<li>undo scaling of text, fractional scale can be used: <code>GDK_DPI_SCALE=0.5</code></li>
+</ul>
+<pre><code>GDK_SCALE=2.0 GDK_DPI_SCALE=0.5 path/to/unity/binary -projectpath path/to/unity/project/folder
+</code></pre>

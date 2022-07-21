@@ -1,0 +1,63 @@
+<h1 id="function-arguments"><a aria-hidden="true" class="anchor-heading" href="#function-arguments"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Function Arguments</h1>
+<h2 id="pass-by-value"><a aria-hidden="true" class="anchor-heading" href="#pass-by-value"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass by Value</h2>
+<p>Values of arguments are firstly copied, with copied values passed to the function, which doesn't change arguments' values</p>
+<pre><code>void add(int x1, int x2){
+  x1 += x2;
+  x2 = 0;
+}
+int a = 1;
+int b = 2;
+add(a, b); // a is still 1, b is still 2
+</code></pre>
+<h2 id="pass-by-pointer"><a aria-hidden="true" class="anchor-heading" href="#pass-by-pointer"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass by Pointer</h2>
+<p>Pass pointer holds memory address of variable, will affect argument's value</p>
+<pre><code>void add(int *x1, int *x2){
+  *x1 += *x2; // dereferenced to change value being pointed to
+  *x1 = 0; // dereferenced to change value being pointed to
+}
+int a = 1;
+int b = 2;
+int *aPtr, *bPtr;
+aPtr = &#x26;a;
+bPtr = &#x26;b;
+add(aPtr, bPtr); // a is 3, b is 0
+</code></pre>
+<h2 id="pass-by-reference"><a aria-hidden="true" class="anchor-heading" href="#pass-by-reference"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass by Reference</h2>
+<p>Pass reference of variable, will affect the argument's value</p>
+<pre><code>void add(int &#x26;x1, int &#x26;x2){
+  x1 += x2;
+  x1 = 0;
+}
+int a = 1;
+int b = 2;
+add(a, b); // a is 3, b is 0
+</code></pre>
+<p>Google c++ style do <strong>NOT</strong> use pass by reference to modify arguments (use const reference)</p>
+<pre><code>void access(const int x){
+  ...
+}
+
+int a = 1;
+access(a); // a is 1
+</code></pre>
+<h2 id="pass-by-address"><a aria-hidden="true" class="anchor-heading" href="#pass-by-address"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass by Address</h2>
+<p>Pass address of argument, affect its value</p>
+<pre><code>void add(int *x1, int *x2){
+  *x1 += *x2; // dereferenced to change value being pointed to
+  *x1 = 0; // dereferenced to change value being pointed to
+}
+int a = 1;
+int b = 2;
+add(&#x26;a, &#x26;b); // a is 3, b is 0
+</code></pre>
+<h2 id="pass-address-by-reference"><a aria-hidden="true" class="anchor-heading" href="#pass-address-by-reference"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass Address by Reference</h2>
+<p>Change address of argument within the function</p>
+<pre><code>void SetToNull(int *&#x26;ptr){ // reference to pointer
+  ptr = nullptr;
+}
+int five = 5;
+int *ptr = &#x26;five; // pointer holds address of five
+std::cout &#x3C;&#x3C; *ptr; // dereference, print 5, the value at address of five
+SetToNull(ptr); // pointer changed to null pointer
+</code></pre>
+<p>In Google c++ style, use ** to dereference twice</p>

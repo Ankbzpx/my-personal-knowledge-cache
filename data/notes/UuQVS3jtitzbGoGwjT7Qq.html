@@ -1,0 +1,18 @@
+<h1 id="install-dependency"><a aria-hidden="true" class="anchor-heading" href="#install-dependency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Install Dependency</h1>
+<h2 id="command-line"><a aria-hidden="true" class="anchor-heading" href="#command-line"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Command line</h2>
+<pre><code>pip install numpy, opencv-python
+</code></pre>
+<h2 id="python-script"><a aria-hidden="true" class="anchor-heading" href="#python-script"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Python Script</h2>
+<p>Create <code>install dependency.py</code></p>
+<pre><code>import subprocess
+import sys
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+for pkg in ['numpy', 'opencv-python']:
+    install(pkg)
+</code></pre>
+<p>Then</p>
+<pre><code>python dependency.py
+</code></pre>

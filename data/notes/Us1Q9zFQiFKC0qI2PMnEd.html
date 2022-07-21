@@ -1,0 +1,34 @@
+<h1 id="ocpp-cpp-callback"><a aria-hidden="true" class="anchor-heading" href="#ocpp-cpp-callback"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>OCpp Cpp Callback</h1>
+<blockquote>
+<p>MyClass.swift</p>
+</blockquote>
+<pre><code>let callbackTarget = UnsafeMutableRawPointer(Unmanaged.passUnretained(self).toOpaque())
+oc_wrapper.myFunc(callback: {
+    let coordinator = Unmanaged&#x3C;MyClass>.fromOpaque(observer!).takeUnretainedValue()
+    ...
+}, callbackTarget)
+</code></pre>
+<blockquote>
+<p>oc_wrapper.h</p>
+</blockquote>
+<pre><code>- (void)myFunc:(void(*)(int, void*))callback callbackTarget:(void*)callbackTarget;
+</code></pre>
+<blockquote>
+<p>oc_wrapper.mm</p>
+</blockquote>
+<pre><code>- (void)myFunc:(void(*)(int, void*))callback callbackTarget:(void*)callbackTarget {
+    _cpp->myFunc(callback, callbackTarget);
+}
+</code></pre>
+<blockquote>
+<p>CppClass.h</p>
+</blockquote>
+<pre><code>void myFunc(void(*callback)(int param, void*), void* callbackTarget);
+</code></pre>
+<blockquote>
+<p>CppClass.cpp</p>
+</blockquote>
+<pre><code>void CppClass::myFunc(void(*callback)(int param, void*), void* callbackTarget) {
+    callback(static_cast&#x3C;int>(param), callbackTarget);
+}
+</code></pre>

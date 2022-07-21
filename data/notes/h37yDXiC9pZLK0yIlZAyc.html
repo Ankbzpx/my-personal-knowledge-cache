@@ -1,0 +1,9 @@
+<h1 id="async-await"><a aria-hidden="true" class="anchor-heading" href="#async-await"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Async Await</h1>
+<pre><code>function f(): Promise&#x3C;T>{
+    return new Promise&#x3C;T>(resolve -> {resolve(readfile...)}).then(()=>{return bar})
+}
+async function af(): Promise&#x3C;T>{
+    let bar = await f();
+    ...
+}
+</code></pre>

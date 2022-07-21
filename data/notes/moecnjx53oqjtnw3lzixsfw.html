@@ -1,0 +1,49 @@
+<h1 id="basics"><a aria-hidden="true" class="anchor-heading" href="#basics"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Basics</h1>
+<blockquote>
+<p>Reference: <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-model</a></p>
+</blockquote>
+<h2 id="concepts"><a aria-hidden="true" class="anchor-heading" href="#concepts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Concepts</h2>
+<p><strong>Kernel</strong>: C++ function executed N times in parallel by N different CUDA threads. </p>
+<p><strong>Grid of Thread Blocks</strong> (Global memory): <code>umBlocks</code> x <code>threadPerBlock</code>, both <code>numBlocks</code> and <code>threadPerBlock</code> can be <code>int</code> or <code>dim3</code>.</p>
+<p><strong>Thread block</strong> (Per-block shared memory): 1-3D block of threads, indexed by <code>threadIdx</code>. Num of threads per block is limited up to 1024. It is required to be executed independently.</p>
+<pre><code>dim3 threadPerBlock(N) -> N x 1 x 1
+dim3 threadPerBlock(N, N) -> N x N x 1
+dim3 threadPerBlock(N, N, N) -> N x N x N
+</code></pre>
+<p><strong>Threads within block</strong> (Per-thread local memory): can have shared memory access, can be synced by <code>__syncthreads()</code> (like <a href="https://chromium.googlesource.com/chromium/src/+/HEAD/docs/design/gpu_synchronization.md">Fence</a>)</p>
+<p><strong>Host</strong>: CPU and its memory</p>
+<p><strong>Device</strong>: GPU and its memory</p>
+<h2 id="function-execution-space-specifier"><a aria-hidden="true" class="anchor-heading" href="#function-execution-space-specifier"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Function Execution Space Specifier</h2>
+<blockquote>
+<p><a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#function-declaration-specifiers">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#function-declaration-specifiers</a></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="center">Specifier</th><th align="center">Executed</th><th align="center">Callable</th></tr></thead><tbody><tr><td align="center"><code>__global__</code></td><td align="center">Device</td><td align="center">Host &#x26; Device</td></tr><tr><td align="center"><code>__device__</code></td><td align="center">Device</td><td align="center">Device only</td></tr><tr><td align="center"><code>__host__</code></td><td align="center">Host</td><td align="center">Host only</td></tr></tbody></table>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#function-declaration-specifiers">function-declaration</a></li>
+</ul>

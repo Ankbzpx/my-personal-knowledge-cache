@@ -1,0 +1,22 @@
+<h1 id="subdivision"><a aria-hidden="true" class="anchor-heading" href="#subdivision"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Subdivision</h1>
+<p>More info: <a href="/my-personal-knowledge-cache/notes/d5w6tbfyq2jp8e1lpmqi6fy">Subdivision</a></p>
+<h2 id="concepts"><a aria-hidden="true" class="anchor-heading" href="#concepts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Concepts</h2>
+<h3 id="barycenter"><a aria-hidden="true" class="anchor-heading" href="#barycenter"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Barycenter</h3>
+<p>Center of mass</p>
+<h3 id="edge-manifold"><a aria-hidden="true" class="anchor-heading" href="#edge-manifold"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Edge-manifold</h3>
+<p>Every edge are either boundary or incidents two faces (oppositely oriented)</p>
+<h2 id="implementations"><a aria-hidden="true" class="anchor-heading" href="#implementations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Implementations</h2>
+<h3 id="barycenter-1"><a aria-hidden="true" class="anchor-heading" href="#barycenter-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>barycenter</h3>
+<p>Average of all <a href="/my-personal-knowledge-cache/notes/OFL2OlFFxGtiYQtwisNFE#simplex">Simplex</a> vertex coords</p>
+<h3 id="edge_topology"><a aria-hidden="true" class="anchor-heading" href="#edge_topology"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>edge_topology</h3>
+<ol>
+<li>Verify <a href="/my-personal-knowledge-cache/notes/rofvgoy9bqzswabd2hlhmj0#is_edge_manifold">is_edge_manifold</a></li>
+<li>Collect [smaller_vert_idx, larger_vert_idx, face_idx, edge_idx_in_face] for all edges, then sort it <a href="/my-personal-knowledge-cache/notes/HSxWXFhPQxcylUjCKd4la#vector-comparison">lexicographically</a></li>
+<li>After sorting, each two consecutive edge are equal (boundary) or not (incident two faces), keep track of edge_vert (NE x 2), edge_face (NE x 2), face_edge (NF x 3) relations</li>
+<li>For edge_face relations, make sure first face on the left of edge, by checking if this oriented edge appears on the first face</li>
+</ol>
+<h3 id="is_edge_manifold"><a aria-hidden="true" class="anchor-heading" href="#is_edge_manifold"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>is_edge_manifold</h3>
+<ol>
+<li>Compute <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unique_edge_map">unique_edge_map</a></li>
+<li>Count occurence of each unique unoriented edges, check if all are less or euqal to 2</li>
+</ol>

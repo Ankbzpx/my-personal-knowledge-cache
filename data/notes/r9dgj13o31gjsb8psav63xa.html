@@ -1,0 +1,35 @@
+<h1 id="parallelism"><a aria-hidden="true" class="anchor-heading" href="#parallelism"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Parallelism</h1>
+<blockquote>
+<p><code>thread</code> alone won't guarantee parallelism due to <a href="https://wiki.python.org/moin/GlobalInterpreterLock">GIL</a></p>
+</blockquote>
+<h2 id="multiprocessing"><a aria-hidden="true" class="anchor-heading" href="#multiprocessing"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Multiprocessing</h2>
+<blockquote>
+<p>unwrap for nested for loop</p>
+</blockquote>
+<pre><code>import multiprocessing
+
+
+with multiprocessing.Pool(multiprocessing.cpu_count()) as p:
+    # func has single argument
+    p.map(func, args1)
+    # func has multiple arguments
+    p.starmap(func, zip(args1, args2))
+</code></pre>
+<h2 id="joblib"><a aria-hidden="true" class="anchor-heading" href="#joblib"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Joblib</h2>
+<pre><code>pip install joblib
+</code></pre>
+<pre><code>from joblib import Parallel, delayed
+import multiprocessing
+
+Parallel(n_jobs=multiprocessing.cpu_count())(
+    delayed(func)(arg1, arg2) for (arg1, arg2) in zip(args1, args2)
+</code></pre>
+<blockquote>
+<p>Support nested case</p>
+</blockquote>
+<pre><code>from joblib import Parallel, delayed
+import multiprocessing
+
+Parallel(n_jobs=multiprocessing.cpu_count())(
+    delayed(func)(arg1, arg2) for arg1 in args1 for arg2 in args2)
+</code></pre>

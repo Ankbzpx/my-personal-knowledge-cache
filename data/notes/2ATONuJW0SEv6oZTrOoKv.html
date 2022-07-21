@@ -1,0 +1,34 @@
+<h1 id="structure-from-motion"><a aria-hidden="true" class="anchor-heading" href="#structure-from-motion"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Structure from Motion</h1>
+<p><a href="https://arxiv.org/pdf/1809.01019.pdf">Leveraging Deep Visual Descriptors for Hierarchical Efficient Localization</a></p>
+<ol>
+<li>keyframes -> distilled VLAD -> global descriptors (prior frames)</li>
+<li>group prior frames by covisibility, as cluster of places</li>
+<li>for each places, for query frame, match 3d-2d correspondency</li>
+</ol>
+<p>Further reading</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> VLAD, image retrieval</li>
+<li class="task-list-item"><input type="checkbox" disabled> distillation</li>
+</ul>
+<p><a href="https://arxiv.org/pdf/1812.03506.pdf">From Coarse to Fine</a></p>
+<ol>
+<li>global, coarse search followed by a fine pose estimation</li>
+<li>hierarchical features(HF) net, compute local and global feature in one shot</li>
+</ol>
+<p>Further reading</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> <a href="https://rpg.ifi.uzh.ch/docs/CVPR11_kneip.pdf">P3p</a></li>
+<li class="task-list-item"><input type="checkbox" disabled> <a href="https://arxiv.org/pdf/1712.07629.pdf">SuperPoint</a> more sparser, faster than transposed convolution</li>
+<li class="task-list-item"><input type="checkbox" disabled> <a href="https://arxiv.org/pdf/1805.09662.pdf">LF-Net</a></li>
+<li class="task-list-item"><input type="checkbox" disabled> multitask <a href="https://arxiv.org/pdf/1503.02531.pdf">distillation</a></li>
+</ul>
+<p><a href="https://arxiv.org/pdf/1911.11763.pdf">SuperGlue</a></p>
+<p>Graph neural network for feature matching</p>
+<p>Further reading</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> GNN</li>
+<li class="task-list-item"><input type="checkbox" disabled> Attention</li>
+<li class="task-list-item"><input type="checkbox" disabled> dustbin matching</li>
+<li class="task-list-item"><input type="checkbox" disabled> <a href="https://proceedings.neurips.cc/paper/2013/file/af21d0c97db2e27e13572cbf59eb343d-Paper.pdf">Sinkhorn Distances</a></li>
+</ul>
+<p><a href="https://arxiv.org/pdf/2108.08291.pdf">Pixel-Perfect Structure-from-Motion with Featuremetric Refinement</a></p>

@@ -1,0 +1,10 @@
+<h1 id="classification-override"><a aria-hidden="true" class="anchor-heading" href="#classification-override"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Classification Override</h1>
+<p>Allow infrequent to override frequent class for more diverse results</p>
+<pre><code>// Row: query_key
+// Cols: current_key
+// visemeOverride[query_key][current_key] is query_key allowed to override current key
+const visemeOverride: Boolean[][] = [[true, true, true, true, false], [false, true, true, true, false], [false, false, true, true, false], [false, false, false, true, false], [true, true, true, true, true]];
+
+const visemeDuration: Viseme = { A: 4, E: 3, I: 2, O: 1, U: 5 }; // number of ticks each key is expected to last
+
+</code></pre>

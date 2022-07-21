@@ -1,0 +1,47 @@
+<h1 id="shading"><a aria-hidden="true" class="anchor-heading" href="#shading"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Shading</h1>
+<h2 id="vertex--fragment-shader"><a aria-hidden="true" class="anchor-heading" href="#vertex--fragment-shader"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Vertex &#x26; Fragment shader</h2>
+<pre><code>Vertex Shader -> every vertex
+ |
+ | Coordinate interpolation
+ v
+Fragment Shader -> every pixel
+</code></pre>
+<h2 id="data-types"><a aria-hidden="true" class="anchor-heading" href="#data-types"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Data types</h2>
+<ul>
+<li><code>const</code>: compile time constant</li>
+<li><code>uniform</code> (per-primitive): constant during entire draw call</li>
+</ul>
+<h3 id="before-42"><a aria-hidden="true" class="anchor-heading" href="#before-42"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Before 4.2</h3>
+<ul>
+<li><code>attribute</code> (per-vertex): position, normal, uv, etc.</li>
+<li><code>varying</code> (per-fragment): Interpolated between vertex and fragment shader</li>
+</ul>
+<h3 id="42"><a aria-hidden="true" class="anchor-heading" href="#42"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>4.2+</h3>
+<blockquote>
+<p>Both <code>attribute</code> and <code>varying</code> are deprecated</p>
+</blockquote>
+<ul>
+<li><code>in</code>: linkage in from previous stage</li>
+<li><code>out</code>: linkage out to next stage</li>
+</ul>
+<blockquote>
+<p>Reference: <a href="https://gamedev.stackexchange.com/questions/29672/in-out-keywords-in-glsl">https://gamedev.stackexchange.com/questions/29672/in-out-keywords-in-glsl</a></p>
+</blockquote>
+<h2 id="pass-data-from-vertex-to-fragment-shader"><a aria-hidden="true" class="anchor-heading" href="#pass-data-from-vertex-to-fragment-shader"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass data from Vertex to Fragment shader</h2>
+<h3 id="before-42-1"><a aria-hidden="true" class="anchor-heading" href="#before-42-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Before 4.2</h3>
+<p>Declare <code>varying</code> variable in both shaders</p>
+<h3 id="42-1"><a aria-hidden="true" class="anchor-heading" href="#42-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>4.2+</h3>
+<p>Declare <code>out</code> for vertex shader, <code>in</code> for fragement shader</p>
+<h2 id="render-order"><a aria-hidden="true" class="anchor-heading" href="#render-order"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Render order</h2>
+<ul>
+<li>Opaque: front to back</li>
+<li>Transparent: back to front</li>
+</ul>
+<blockquote>
+<p>Portal effect: Render occlusion object first (write depth but no color), then render the rest. Fragment further than occlusion depth will be discarded.</p>
+</blockquote>
+<hr>
+<strong>Children</strong>
+<ol>
+<li><a href="/my-personal-knowledge-cache/notes/WnrcsJvmh9XONqTwPNfz5">Tips</a></li>
+</ol>

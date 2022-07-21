@@ -1,0 +1,136 @@
+<h1 id="neighbourhood-connectivity"><a aria-hidden="true" class="anchor-heading" href="#neighbourhood-connectivity"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Neighbourhood Connectivity</h1>
+<h2 id="concepts"><a aria-hidden="true" class="anchor-heading" href="#concepts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Concepts</h2>
+<h3 id="manifold-mesh"><a aria-hidden="true" class="anchor-heading" href="#manifold-mesh"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Manifold mesh</h3>
+<blockquote>
+<p>Reference: <a href="https://pages.mtu.edu/~shene/COURSES/cs3621/SLIDES/Mesh.pdf">https://pages.mtu.edu/~shene/COURSES/cs3621/SLIDES/Mesh.pdf</a></p>
+</blockquote>
+<ul>
+<li>Each edge is incident to only one or two faces</li>
+<li>Faces incident to a vertex form a closed or an open fan</li>
+</ul>
+<h2 id="vertex_triangle-adjacency"><a aria-hidden="true" class="anchor-heading" href="#vertex_triangle-adjacency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>vertex_triangle adjacency</h2>
+<h3 id="vertex_triangle_adjacency"><a aria-hidden="true" class="anchor-heading" href="#vertex_triangle_adjacency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>vertex_triangle_adjacency</h3>
+<h4 id="vector-of-vector"><a aria-hidden="true" class="anchor-heading" href="#vector-of-vector"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Vector of vector</h4>
+<p>Loop through all faces with their vertex indices, push back occurrence</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Vert index</th><th align="left">Incident Face indices</th></tr></thead><tbody><tr><td align="left">0</td><td align="left">0, 1</td></tr><tr><td align="left">1</td><td align="left">9, 13, 1</td></tr></tbody></table>
+<h4 id="unrolled"><a aria-hidden="true" class="anchor-heading" href="#unrolled"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Unrolled</h4>
+<pre><code>vfd(i): number of incident faces at vertex i
+NI: cumsum of vfd, prepend 0
+NI(i): number of cummulated incident faces before vertex i
+VF(NI(i) + k): kth face incident on vertex i (vertex index -> face index)
+</code></pre>
+<p>We unroll and store it into array and index it by cumsum</p>
+<p>Array:</p>
+<pre><code>[0, 1, 9, 13, 1]
+</code></pre>
+<p>Index:</p>
+<pre><code>[0, 2, 5]
+</code></pre>
+<h2 id="vertex_vertex-adjacency"><a aria-hidden="true" class="anchor-heading" href="#vertex_vertex-adjacency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>vertex_vertex adjacency</h2>
+<h3 id="adjacency_list"><a aria-hidden="true" class="anchor-heading" href="#adjacency_list"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>adjacency_list</h3>
+<ol>
+<li>Loop through all faces with their vertex indices, for the vector of each vertex index, push back all other vertex indices</li>
+<li>sort and remove duplicates</li>
+</ol>
+<blockquote>
+<p>My numpy implementation: <a href="/my-personal-knowledge-cache/notes/6xcpu4fh3at4bbmptj9c8nr#implementation">Implementation</a></p>
+</blockquote>
+<h2 id="edge_edge-adjacency"><a aria-hidden="true" class="anchor-heading" href="#edge_edge-adjacency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>edge_edge adjacency</h2>
+<h3 id="facet_components"><a aria-hidden="true" class="anchor-heading" href="#facet_components"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>facet_components</h3>
+<p>Compute number of connected facets and assign each face an id based on its connected components</p>
+<ol>
+<li>Compute face adjacency matrix using <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#facet_adjacency_matrix">facet_adjacency_matrix</a></li>
+<li>Perform <strong>breadth first search</strong> on adjacency matrix row-wise, increase id when each row finished</li>
+</ol>
+<h3 id="facet_adjacency_matrix"><a aria-hidden="true" class="anchor-heading" href="#facet_adjacency_matrix"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>facet_adjacency_matrix</h3>
+<ol>
+<li>Call <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unique_edge_map">unique_edge_map</a>, we get a list of oriented edges indices that share the same unique unoriented occurence</li>
+<li>From <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#oriented_facets">oriented_facets</a>, by modding oriented facets index over NF, we can get its face index</li>
+<li>Combine 1 and 2, we know which faces share the same edge, thus a NF x NF sparse adjacency matrix can be constructed</li>
+</ol>
+<h3 id="unique_edge_map"><a aria-hidden="true" class="anchor-heading" href="#unique_edge_map"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>unique_edge_map</h3>
+<ol>
+<li>
+<p>Find all oriented edges using <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#oriented_facets">oriented_facets</a> then filter using <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unique_simplices">unique_simplices</a>. (faster than directly finding unoriented edges) (<code>EMAP</code> is <code>IC</code> in <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unique_rows">unique_rows</a>, used to construct all oriented edges from unique unoriented edges, 3NF)</p>
+</li>
+<li>
+<p>Same idea as <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unrolled">Unrolled</a>, unroll a list of oriented edges indice (3NF) grouped by unique unoriented occurance, as well as a array of index, with each element be the number of oriented edges before the first of unique unoriented occurrence, NUE(number of unique unoriented edges) + 1</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">Unique edge index</th><th align="left">edge indice in edge list</th></tr></thead><tbody><tr><td align="left">0</td><td align="left">0, 10</td></tr><tr><td align="left">1</td><td align="left">9, 13, 1</td></tr></tbody></table>
+<pre><code>VectorXI uEK;
+igl::accumarray(EMAP,1,uEK);
+</code></pre>
+<p>computes occurance for each unique edges</p>
+<pre><code>uEC: cumsum of uEK as index
+uEO: array used for counting
+e: the e'th edge in oriented edge lists
+ue = EMAP(e): index of unique unoriented edge corresponding to e'th edge in oriented edge lists
+uEE(uEC(ue)+ uEO(ue)) = e: record oriented edge index
+</code></pre>
+<h3 id="oriented_facets"><a aria-hidden="true" class="anchor-heading" href="#oriented_facets"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>oriented_facets</h3>
+<p>For manifold triangle mesh</p>
+<p>Given <span class="math math-inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>∈</mo><msup><mi mathvariant="double-struck">Z</mi><mrow><mi>n</mi><mo>×</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">F \in \mathbb{Z}^{n \times 3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathbb">Z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span></span>, so that</p>
+<div class="math math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>E</mi><mo>=</mo><mrow><mo fence="true">[</mo><mtable rowspacing="0.16em" columnalign="center center" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>F</mi><mo stretchy="false">[</mo><mo>:</mo><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>F</mi><mo stretchy="false">[</mo><mo>:</mo><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>F</mi><mo stretchy="false">[</mo><mo>:</mo><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>F</mi><mo stretchy="false">[</mo><mo>:</mo><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>F</mi><mo stretchy="false">[</mo><mo>:</mo><mo separator="true">,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>F</mi><mo stretchy="false">[</mo><mo>:</mo><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd></mtr></mtable><mo fence="true">]</mo></mrow><mo>∈</mo><msup><mi mathvariant="double-struck">Z</mi><mrow><mn>3</mn><mi>n</mi><mo>×</mo><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">E = \begin{bmatrix} F[:, 1] &#x26; F[:, 2] \\ F[:, 2] &#x26; F[:, 0] \\ F[:, 0] &#x26; F[:, 1] \\ \end{bmatrix} \in \mathbb{Z}^{3n \times 2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3.6em;vertical-align:-1.55em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-2.25em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎣</span></span></span><span style="top:-3.397em;"><span class="pstrut" style="height:3.155em;"></span><span style="height:0.016em;width:0.6667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.6667em" height="0.016em" style="width:0.6667em" viewBox="0 0 666.67 16" preserveAspectRatio="xMinYMin"><path d="M319 0 H403 V16 H319z M319 0 H403 V16 H319z"></path></svg></span></span><span style="top:-4.05em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎡</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mord"><span class="mtable"><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mrel">:</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mrel">:</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">]</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mrel">:</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.21em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mrel">:</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">]</span></span></span><span style="top:-3.01em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mrel">:</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mclose">]</span></span></span><span style="top:-1.81em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mopen">[</span><span class="mrel">:</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-2.25em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎦</span></span></span><span style="top:-3.397em;"><span class="pstrut" style="height:3.155em;"></span><span style="height:0.016em;width:0.6667em;"><svg xmlns="http://www.w3.org/2000/svg" width="0.6667em" height="0.016em" style="width:0.6667em" viewBox="0 0 666.67 16" preserveAspectRatio="xMinYMin"><path d="M263 0 H347 V16 H263z M263 0 H347 V16 H263z"></path></svg></span></span><span style="top:-4.05em;"><span class="pstrut" style="height:3.155em;"></span><span class="delimsizinginner delim-size4"><span>⎤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathbb">Z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span></div>
+<h3 id="unique_simplices"><a aria-hidden="true" class="anchor-heading" href="#unique_simplices"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>unique_simplices</h3>
+<p>Given N x D simplices matrix (D is the dimension of simplex)</p>
+<ol>
+<li>Sort row-wise</li>
+<li>Keep unique ones by calling <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unique_rows">unique_rows</a></li>
+</ol>
+<h3 id="unique_rows"><a aria-hidden="true" class="anchor-heading" href="#unique_rows"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>unique_rows</h3>
+<pre><code>A: input
+C: unique rows
+IA: index to construct C from A
+IC: index to construct A from C
+</code></pre>
+<p>Similary to <code>np.unique</code>, see <a href="/my-personal-knowledge-cache/notes/di7r0ovvs9w8kd81ajn1mrh">Remove_duplicate_vertices</a></p>
+<ul>
+<li><code>IA</code> -> <code>unique_indices</code></li>
+<li><code>IC</code> -> <code>unique_indices</code></li>
+</ul>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" checked disabled> Manifold mesh</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/my-personal-knowledge-cache/notes/6jal7oacj8b4p1cg6aluj7v">Mesh Parameterization</a></li>
+<li><a href="/my-personal-knowledge-cache/notes/edudwmtuufpqosp7ztuwddr">Normal Vector</a></li>
+<li><a href="/my-personal-knowledge-cache/notes/rofvgoy9bqzswabd2hlhmj0">Subdivision</a></li>
+</ul>

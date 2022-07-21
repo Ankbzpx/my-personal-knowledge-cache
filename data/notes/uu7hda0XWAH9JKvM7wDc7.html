@@ -1,0 +1,22 @@
+<h1 id="nanite"><a aria-hidden="true" class="anchor-heading" href="#nanite"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Nanite</h1>
+<p><a href="https://advances.realtimerendering.com/s2021/Karis_Nanite_SIGGRAPH_Advances_2021_final.pdf">Keynotes</a></p>
+<h2 id="possible-mesh-alternatives"><a aria-hidden="true" class="anchor-heading" href="#possible-mesh-alternatives"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Possible mesh alternatives</h2>
+<ul>
+<li>voxelization is a form of uniform resampling and uniform resampling means loss</li>
+<li>subdivision by definition is amplification only</li>
+<li>displacement can’t increase the genus of a surface</li>
+<li>projecting to normal or displacement maps is a form of uniform resampling</li>
+<li>points require hole filling, but it's impossible to know the difference between a small gap that should be there and a hole that should be filled for certain without extra connectivity data</li>
+</ul>
+<h2 id="nanite-mesh-virtualization"><a aria-hidden="true" class="anchor-heading" href="#nanite-mesh-virtualization"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Nanite mesh virtualization</h2>
+<ul>
+<li>group triangles into clusters and build a bounding box for each cluster then cull the clusters based on their bounds</li>
+<li>"What was visible last frame is very likely to be what is visible this frame." 1. Draw what was visible in the previous frame 2. Build hierarchical Z-buffer (HZB) from that 3. Test the HZB to determine what is visible now but wasn’t in the last frame and draw anything that’s new</li>
+<li>decouple visibility from materials, use pixel level visibility buffer (deferred renderer)</li>
+<li>In general the cost of rendering geometry should scale with screen resolution, not scene complexity. That means constant time in terms of scene complexity and constant time means
+level of detail</li>
+<li>do level of detail with clusters, find a cut of the tree that matches the desired LOD, in a view dependent way based on the screen space projected error of the cluster</li>
+<li>group clusters and force them to make the same LOD decision for a level, request data based on demand</li>
+<li>lock the shared boundary edges between clusters during simplification, alternate group boundaries from level to level by grouping different clusters</li>
+<li>edge collapsing decimation, optimize for minimal error in new positions and attributes, projected on screen to a number of pixels of error to determine which LOD to select so is foundational to both quality and efficiency</li>
+</ul>

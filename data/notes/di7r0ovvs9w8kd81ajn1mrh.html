@@ -1,0 +1,14 @@
+<h1 id="remove_duplicate_vertices"><a aria-hidden="true" class="anchor-heading" href="#remove_duplicate_vertices"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Remove_duplicate_vertices</h1>
+<pre><code>_, unique_indices, unique_inverse = np.unique(points, return_inverse=True, return_index=True, axis=0)
+faceVertexIndices = Vt.IntArray((unique_indices[unique_inverse])[faceVertexIndices].tolist())
+</code></pre>
+<ul>
+<li><code>unique_indices</code> The indices of the first occurrences of the - unique values in the original array.</li>
+<li><code>unique_inverse</code> The indices to reconstruct the original array from the unique array.</li>
+<li><code>unique_indices[unique_inverse]</code>: same shape as original array, but with each element be the index of the first occurrences of the unique value</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc">Neighbourhood Connectivity</a></li>
+</ul>

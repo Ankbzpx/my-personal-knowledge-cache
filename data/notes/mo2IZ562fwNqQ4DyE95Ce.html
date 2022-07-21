@@ -1,0 +1,8 @@
+<h1 id="proxy"><a aria-hidden="true" class="anchor-heading" href="#proxy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Proxy</h1>
+<h2 id="build"><a aria-hidden="true" class="anchor-heading" href="#build"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Build</h2>
+<p>Build over localHost proxy</p>
+<pre><code>docker build -t img_name:tag --network=host --build-arg http_proxy=http://127.0.0.1:7890 .
+</code></pre>
+<h2 id="run"><a aria-hidden="true" class="anchor-heading" href="#run"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Run</h2>
+<pre><code>docker run --env HTTP_PROXY="http://127.0.0.1:7890" --gpus all nvidia/cuda:10.2-base nvidia-smi
+</code></pre>

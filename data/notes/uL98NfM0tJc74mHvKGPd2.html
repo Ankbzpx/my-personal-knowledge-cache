@@ -1,0 +1,47 @@
+<h1 id="http-server-with-getpost"><a aria-hidden="true" class="anchor-heading" href="#http-server-with-getpost"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>HTTP Server with GET/POST</h1>
+<h2 id="dependency"><a aria-hidden="true" class="anchor-heading" href="#dependency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Dependency</h2>
+<ul>
+<li><a href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a></li>
+</ul>
+<h2 id="project-hierarchy"><a aria-hidden="true" class="anchor-heading" href="#project-hierarchy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Project hierarchy</h2>
+<pre><code>templates/
+    index.html
+app.py
+</code></pre>
+<h2 id="implementation"><a aria-hidden="true" class="anchor-heading" href="#implementation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Implementation</h2>
+<blockquote>
+<p>app.py</p>
+</blockquote>
+<pre><code>from flask import Flask, request, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def upload_photo():
+    return render_template('index.html', ...)
+
+@app.route('/file', methods=["GET"])
+def get_glb():
+    # Note: The full url is f"{request.host_url}tmp/file"
+    return send_file("tmp/file")
+
+@app.route('/actionName', methods=["POST"])
+def my_action():
+    files = request.files.getlist('fileName')
+
+    for file in files:
+        # do something (i.e. file.save(f"tmp/{file.filename}"))
+
+    return render_template('index.html', ...)
+
+app.run(host="0.0.0.0", port=5000, debug=True)
+</code></pre>
+<blockquote>
+<p>index.html</p>
+</blockquote>
+<pre><code>    &#x3C;form enctype="multipart/form-data" method="POST" action="/actionName">
+        &#x3C;input type="file" name="fileName">
+    &#x3C;/form>
+
+    &#x3C;a href="/file">Download file&#x3C;/a>
+</code></pre>

@@ -1,0 +1,22 @@
+<h1 id="orientation"><a aria-hidden="true" class="anchor-heading" href="#orientation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Orientation</h1>
+<h2 id="use-pyclipper"><a aria-hidden="true" class="anchor-heading" href="#use-pyclipper"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Use pyclipper</h2>
+<pre><code>from pyclipper import Orientation, scale_to_clipper
+
+def is_CCW(polygon):
+    return Orientation(scale_to_clipper(polygon))
+
+</code></pre>
+<h2 id="numpy"><a aria-hidden="true" class="anchor-heading" href="#numpy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Numpy</h2>
+<blockquote>
+<p>Reference: <a href="https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order">https://stackoverflow.com/questions/1165647/how-to-determine-if-a-list-of-polygon-points-are-in-clockwise-order</a></p>
+</blockquote>
+<blockquote>
+<p>FIXME: it keeps giving wrong results, figure out why?</p>
+</blockquote>
+<pre><code>import numpy as np
+
+def is_CCW(coutour):
+    start = coutour[1:]
+    end = coutour[:-1]
+    return np.sum((start[:, 0] - end[:, 0]) / (start[:, 1] + end[:, 1])) &#x3C; 0
+</code></pre>

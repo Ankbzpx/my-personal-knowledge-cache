@@ -1,0 +1,34 @@
+<h1 id="exif-metadata-edit"><a aria-hidden="true" class="anchor-heading" href="#exif-metadata-edit"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Exif Metadata Edit</h1>
+<h2 id="dependency"><a aria-hidden="true" class="anchor-heading" href="#dependency"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Dependency</h2>
+<ul>
+<li><a href="https://pillow.readthedocs.io/en/stable/">pillow</a></li>
+<li><a href="https://piexif.readthedocs.io/en/latest/">piexif</a></li>
+</ul>
+<h2 id="implementation"><a aria-hidden="true" class="anchor-heading" href="#implementation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Implementation</h2>
+<blockquote>
+<p><a href="https://exiv2.org/tags.html">Tag reference</a> (Rational => Fraction)</p>
+</blockquote>
+<pre><code>img = Image.open(image_path)
+if 'exif' in img.info:
+    exif_dict = piexif.load(img.info['exif'])
+    if '0th' not in exif_dict:
+        exif_dict['0th'] = {}
+    if 'Exif' not in exif_dict:
+        exif_dict['Exif'] = {}
+else:
+    exif_dict = {'0th': {}, 'Exif': {}}
+
+if args.make:
+    exif_dict['0th'][piexif.ImageIFD.Make] = args.make
+
+if args.model:
+    exif_dict['0th'][piexif.ImageIFD.Model] = args.model
+
+if args.focal_length:
+    focal_length = Fraction(args.focal_length)
+    exif_dict['Exif'][piexif.ExifIFD.FocalLength] = (
+        focal_length.numerator, focal_length.denominator)
+
+exif_bytes = piexif.dump(exif_dict)
+img.save(image_path, exif=exif_bytes)
+</code></pre>

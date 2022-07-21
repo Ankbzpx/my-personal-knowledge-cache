@@ -1,0 +1,8 @@
+<h1 id="grub"><a aria-hidden="true" class="anchor-heading" href="#grub"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Grub</h1>
+<h2 id="kernel-parameters"><a aria-hidden="true" class="anchor-heading" href="#kernel-parameters"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Kernel parameters</h2>
+<p><code>sudo nano /etc/default/grub</code></p>
+<p>Then append on</p>
+<p><code>GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"</code> line</p>
+<h2 id="regenerate-boot-menu"><a aria-hidden="true" class="anchor-heading" href="#regenerate-boot-menu"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Regenerate boot menu</h2>
+<pre><code>sudo grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>

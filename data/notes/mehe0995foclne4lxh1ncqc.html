@@ -1,0 +1,52 @@
+<h1 id="parallelism"><a aria-hidden="true" class="anchor-heading" href="#parallelism"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Parallelism</h1>
+<blockquote>
+<p>Reference: <a href="https://blender.stackexchange.com/questions/28304/using-multiprocessing-to-speed-up-multiple-sound-bakings">https://blender.stackexchange.com/questions/28304/using-multiprocessing-to-speed-up-multiple-sound-bakings</a></p>
+</blockquote>
+<p>Python <code>multiprocessing</code> alone won't work as Blender's python is merely wrapper for C api. Instead, one could run multiple blender C thread as subprocesses to achieve parallelism.</p>
+<blockquote>
+<p>blender_main.py</p>
+</blockquote>
+<pre><code>import bpy
+import multiprocessing
+import subprocess
+
+def call_subprocess(folder, name):
+    ...
+    subprocess.run([
+        "blender", "-b", "-P", "blender_subprocess.py", "--", "{folder}", f"{name}"
+    ])
+
+
+if __name__ == "__main__":
+    ...
+    with multiprocessing.Pool(multiprocessing.cpu_count()) as p:
+        # call subprocesses in parallel
+        p.starmap(call_subprocess, zip(folders, names))
+        # append result to current blender project
+        for obj_name in names:
+            bpy.ops.wm.append(
+                filepath=f"tmp/{obj_name}.blend\\Object\\{obj_name}",
+                filename=f"{obj_name}",
+                directory=f"tmp/{obj_name}.blend\\Object\\")
+            obj = bpy.data.objects[obj_name]
+            obj.select_set(False)
+</code></pre>
+<blockquote>
+<p>blender_subprocess.py</p>
+</blockquote>
+<pre><code>import bpy
+import os
+
+if __name__ == "__main__":
+
+    argv = sys.argv
+    argv = argv[argv.index("--") + 1:]
+
+    folder = argv[0]
+    name = argv[1]
+
+    ...
+
+    bpy.ops.wm.save_as_mainfile(filepath=os.path.join(folder, f"{name}.blend"),
+                                check_existing=False)
+</code></pre>

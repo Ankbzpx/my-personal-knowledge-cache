@@ -1,0 +1,13 @@
+<h1 id="commandline-arguments"><a aria-hidden="true" class="anchor-heading" href="#commandline-arguments"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Commandline Arguments</h1>
+<h2 id="pass-json-string"><a aria-hidden="true" class="anchor-heading" href="#pass-json-string"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pass JSON string</h2>
+<p>Add single quotation mark <code>'</code> <code>'</code> so string won't be splitted.</p>
+<h2 id="blender"><a aria-hidden="true" class="anchor-heading" href="#blender"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Blender</h2>
+<p><code>blender -b -P script.py -- arg0 arg1</code></p>
+<blockquote>
+<p>script.py</p>
+</blockquote>
+<pre><code>argv = sys.argv
+argv = argv[argv.index("--") + 1:]
+arg0 = argv[0]
+arg1 = argv[1]
+</code></pre>

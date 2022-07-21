@@ -1,0 +1,24 @@
+<h1 id="create-java-class"><a aria-hidden="true" class="anchor-heading" href="#create-java-class"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Create Java Class</h1>
+<blockquote>
+<p>ApplyWeights.java</p>
+</blockquote>
+<pre><code>public class ApplyWeights {
+
+    static {
+        System.loadLibrary("applyWeights");
+    }
+    
+    public static void main(String[] args) {
+
+        float weights[] = new float[8];
+
+        weights[0] = 10f;
+        weights[4] = 6f;
+        
+        new ApplyWeights().applyWeights(weights);
+    }
+
+    // Declare a native method sayHello() that receives no arguments and returns void
+    private native void applyWeights(float[] weights);
+}
+</code></pre>

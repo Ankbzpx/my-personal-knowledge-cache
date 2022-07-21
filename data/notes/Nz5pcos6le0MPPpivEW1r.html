@@ -1,0 +1,14 @@
+<h1 id="adaptive-threshold"><a aria-hidden="true" class="anchor-heading" href="#adaptive-threshold"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Adaptive Threshold</h1>
+<blockquote>
+<p>Similar idea: <a href="https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data">https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data</a></p>
+</blockquote>
+<ul>
+<li>Apply <a href="https://en.wikipedia.org/wiki/Alpha_beta_filter">AlphaFiltering</a> to raw data</li>
+<li>Apply <a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Welford's online algorithm</a> to compute online mean and variance from filtered data (ignore first few observations until statistics stabilized)</li>
+<li>Detect using <code>mean +/- 3 * std</code> as threshold</li>
+</ul>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/my-personal-knowledge-cache/notes/ijCVN9lhTIBq3Ceo6XXTx">Tweak Blink Detection</a></li>
+</ul>

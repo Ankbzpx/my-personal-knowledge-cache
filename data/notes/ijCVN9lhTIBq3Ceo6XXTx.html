@@ -1,0 +1,20 @@
+<h1 id="tweak-blink-detection"><a aria-hidden="true" class="anchor-heading" href="#tweak-blink-detection"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tweak Blink Detection</h1>
+<pre><code>  +--------(eye open)--------+
+  |                          |
+  v                          |
+OPEN ---(eye close)---> CLOSE_WAIT
+  ^                          |
+  |                 (eye still close)
+(eye still open)             |
+  |                          v
+OPEN_WAIT &#x3C;--(eye open)-- CLOSE
+  |                          ^
+  |                          |
+  +-------(eye close)--------+
+</code></pre>
+<ul>
+<li>Apply <a href="/my-personal-knowledge-cache/notes/Nz5pcos6le0MPPpivEW1r">Adaptive Threshold</a></li>
+<li>Track velocity to filter out untrustworthy data</li>
+<li>Add <code>WAIT</code> states for FSM</li>
+<li>Sync left/right eye by close/open both eye when all/one of them are in CLOSE_WAIT/OPEN_WAIT state (depends if ignore single blink)</li>
+</ul>

@@ -1,0 +1,86 @@
+<h1 id="container"><a aria-hidden="true" class="anchor-heading" href="#container"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Container</h1>
+<h2 id="array"><a aria-hidden="true" class="anchor-heading" href="#array"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Array</h2>
+<p>Continuous memory locations, number of elements must be constant</p>
+<pre><code>double dArr[10];
+int iArr[] = {1, 2, 3, 4, 5};
+float fArr[3] = {1, 2} // omiteed element will be 0
+dArr[0] = 5;
+b = iArr[1] + 2;
+fArr[2] = fArr[0] + fArr[1];
+</code></pre>
+<p>Array name stores the memory address of the first element (can be regarded as a pointer). Modify within the function will affects its values</p>
+<pre><code>int max(int[] a, int size){
+  ...
+}
+int arr[] = {1, 2, 3};
+int *aPtr;
+aPtr = arr;
+aPtr = &#x26;arr[0];
+std::cout &#x3C;&#x3C; max(arr, sizeof(arr)/sizeof(int));
+</code></pre>
+<h2 id="vector"><a aria-hidden="true" class="anchor-heading" href="#vector"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Vector</h2>
+<p>Continuous memory locations, number of elements can change</p>
+<pre><code>vector&#x3C;int> iVec10;
+vector&#x3C;int> empty;
+vector&#x3C;int> iVec5(1, 2, 3, 4, 5);
+int iArr3[] = {1, 2, 3};
+vector&#x3C;int> iVec3(iArr3, iArr3+3)
+
+int average(vector&#x3C;int> iVec){ // pass by copy, need local copy (Do not use in Google c++ style)
+  ...
+}
+
+// do not change argument, pass by reference
+int average(const vector&#x3C;int> &#x26;iVec){
+  ...
+}
+
+// intend to change argument, pass by pointer
+int average(vector&#x3C;int> *iVec){
+  iVec->size();
+  (*iVec)[0] = 1;
+}
+
+// pass temporary variable (rvalue reference)
+int average(vector&#x3C;int> &#x26;&#x26;iVec){
+ ...
+}
+</code></pre>
+<h3 id="vector-comparison"><a aria-hidden="true" class="anchor-heading" href="#vector-comparison"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Vector comparison</h3>
+<blockquote>
+<p>Reference: <a href="https://en.cppreference.com/w/cpp/container/vector/operator_cmp">https://en.cppreference.com/w/cpp/container/vector/operator_cmp</a></p>
+</blockquote>
+<p>Similar to `std::lexicographical_compare. compare <a href="https://en.wikipedia.org/wiki/Lexicographic_order">lexicographically</a> (generalized alphabetical order )</p>
+<h3 id="unroll-nested-vector"><a aria-hidden="true" class="anchor-heading" href="#unroll-nested-vector"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Unroll nested vector</h3>
+<blockquote>
+<p>Reference: <a href="https://stackoverflow.com/questions/20994321/clean-ways-to-write-multiple-for-loops">https://stackoverflow.com/questions/20994321/clean-ways-to-write-multiple-for-loops</a></p>
+</blockquote>
+<pre><code>grid_dim_X = 10;
+grid_dim_Y = 20;
+grid_dim_Z = 30;
+std::vector&#x3C;int> grid_3d;
+grid_3d.resize(grid_dim_X * grid_dim_Y * grid_dim_Z);
+
+</code></pre>
+<p>Acess with</p>
+<pre><code>
+auto grid_query = [&#x26;](int, i, int, j, int, k){
+  return grid_3d[(i * grid_dim_X + j) * grid_dim_Y + k];
+};
+</code></pre>
+<p>or</p>
+<pre><code>
+auto grid_query = [&#x26;](int, i, int, j, int, k){
+  return grid_3d[i + grid_dim_X * (j + (grid_dim_Y * k))];
+};
+
+</code></pre>
+<p>depends on data storage</p>
+<blockquote>
+<p>Note: for sparse data storage, <code>std::unordered_map</code> would be more efficient</p>
+</blockquote>
+<hr>
+<strong>Backlinks</strong>
+<ul>
+<li><a href="/my-personal-knowledge-cache/notes/rofvgoy9bqzswabd2hlhmj0">Subdivision</a></li>
+</ul>

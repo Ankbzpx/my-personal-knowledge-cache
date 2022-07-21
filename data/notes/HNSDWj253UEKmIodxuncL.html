@@ -1,0 +1,15 @@
+<h1 id="compiling-and-linking"><a aria-hidden="true" class="anchor-heading" href="#compiling-and-linking"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Compiling and Linking</h1>
+<p>Compile with JNI headers using <code>g++</code></p>
+<pre><code>g++ -c -fPIC -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux ApplyWeights.cpp -o ApplyWeights.o
+</code></pre>
+<p>It will generate <code>ApplyWeights.o</code>. Then link it into bridge library</p>
+<pre><code>g++ -shared -fPIC -o libapplyWeights.so ApplyWeights.o -lc
+</code></pre>
+<p>It will generate <code>libapplyWeights.so</code>. The last is run the program with full path of library directory</p>
+<pre><code>java -cp . -Djava.library.path=/home/ruichenzheng/jni_test ApplyWeights
+</code></pre>
+<p>Command line output:</p>
+<pre><code>Initializing...
+Weight 0: 10
+Weight 4: 6
+</code></pre>

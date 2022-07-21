@@ -1,0 +1,13 @@
+<h1 id="parse-json"><a aria-hidden="true" class="anchor-heading" href="#parse-json"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Parse JSON</h1>
+<pre><code>import json
+json_data = json.load(open("json_file.json"))
+
+# processing as dictionary
+...
+
+# save as a file
+json.dump(json_data, open("json_file_edit.json", mode='w'))
+
+# encode as string
+json.dumps(json_data)
+</code></pre>

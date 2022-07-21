@@ -1,0 +1,26 @@
+<h1 id="function-binding"><a aria-hidden="true" class="anchor-heading" href="#function-binding"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Function Binding</h1>
+<p>Use <code>bind</code> to avoid lose <code>this</code> when pass object method as callback</p>
+<h2 id="example-1"><a aria-hidden="true" class="anchor-heading" href="#example-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example 1</h2>
+<pre><code>let object = {
+  func(){}
+}
+
+object.func(); // func undefined
+let bindfunc = object.func.bind(object);
+object.func(); // successfully called
+</code></pre>
+<h2 id="example-2"><a aria-hidden="true" class="anchor-heading" href="#example-2"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example 2</h2>
+<pre><code>Class C {
+  constructor() {
+    this.message = "Class C message";
+    // undefined
+    this.addEventListener("mousedown", this.onMouseDown, false);
+    // Class C message
+    this.addEventListener("mousedown", this.onMouseDown.bind(this), false);
+  }
+
+  onMouseDown() {
+    console.log(this.message);
+  }
+}
+</code></pre>

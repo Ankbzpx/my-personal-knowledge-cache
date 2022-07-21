@@ -1,0 +1,85 @@
+<h1 id="normal-vector"><a aria-hidden="true" class="anchor-heading" href="#normal-vector"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Normal Vector</h1>
+<h2 id="concepts"><a aria-hidden="true" class="anchor-heading" href="#concepts"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Concepts</h2>
+<h3 id="normal-vector-1"><a aria-hidden="true" class="anchor-heading" href="#normal-vector-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Normal Vector</h3>
+<p>Normal Vector at a point is the cross product of two tangent vectors at that point.</p>
+<h3 id="tangent-vector"><a aria-hidden="true" class="anchor-heading" href="#tangent-vector"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Tangent Vector</h3>
+<p>A vector tangents to a surface at a given point</p>
+<h3 id="degenerated-normal-vector"><a aria-hidden="true" class="anchor-heading" href="#degenerated-normal-vector"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Degenerated Normal Vector</h3>
+<p>two tangent vectors are linear depend</p>
+<h2 id="implementations"><a aria-hidden="true" class="anchor-heading" href="#implementations"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Implementations</h2>
+<h3 id="per_face_normals"><a aria-hidden="true" class="anchor-heading" href="#per_face_normals"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>per_face_normals</h3>
+<pre><code>V: Vertices (NV x 3)
+F: Faces (NF x 3)
+
+f = F[i] # for face i
+v1 = V[f[1]] - V[f[0]]
+v2 = V[f[2]] - V[f[0]]
+fn = cross(v1, v2)
+if fn is zero vector:
+    return degenerated normal
+else:
+    return normalized fn
+</code></pre>
+<h3 id="per_vertex_normals"><a aria-hidden="true" class="anchor-heading" href="#per_vertex_normals"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>per_vertex_normals</h3>
+<blockquote>
+<p>Weighted sum of adjacent faces' normal, interpolated by vertex shader</p>
+</blockquote>
+<pre><code>Weight W: NF x 3
+case uniform: 
+    all 1
+case area: 
+    compute face areas `doublearea` (NF x 1) replicated to (NF x 3)
+case internal_angle: 
+    `internal_angle` angle of each face cornors (angle between edges that share the same vertex)
+
+# theoritically loop through each vertex, compute its normal vn by
+vn = sum([w[i] * fn for normal of faces thats shares v])
+# implementation-wise it's more efficient to loop over faces
+
+return normalized vn
+
+</code></pre>
+<blockquote>
+<p>Interpolated vertex normals -> <a href="/my-personal-knowledge-cache/notes/njtx7H3U8oxCpuanmYcFw#mesh-ops">Smooth shading in Blender</a></p>
+</blockquote>
+<h3 id="per_corner_normals"><a aria-hidden="true" class="anchor-heading" href="#per_corner_normals"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>per_corner_normals</h3>
+<blockquote>
+<p>Weighted (by double area) sum of selected (by angle between two normal) incident face normal, interpolated by vertex shader</p>
+<p>See: <a href="/my-personal-knowledge-cache/notes/ww8z42lj1f2cm9lj0yx3ubc#unrolled">vertex_triangle_adjacency Unrolled</a></p>
+</blockquote>
+<pre><code>FA: double face area
+FN: face norm
+VF[NI[F(i, j)] + k]: (kth incident face) face index that incident to the jth vertex of face i
+FN.row(VF[NI[F(i, j)] + k]): normal of (kth incident face) face that incident to the jth vertex of face i
+</code></pre>
+<h3 id="vertex-shader"><a aria-hidden="true" class="anchor-heading" href="#vertex-shader"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Vertex Shader</h3>
+<blockquote>
+<p>ViewerData</p>
+</blockquote>
+<p>Vertex</p>
+<pre><code>meshgl.V_normals_vbo = data.V_normals.cast&#x3C;float>();
+</code></pre>
+<p>Face or corner</p>
+<pre><code>meshgl.V_normals_vbo.resize(data.F.rows()*3,3);
+for (unsigned i=0; i&#x3C;data.F.rows();++i)
+    for (unsigned j=0;j&#x3C;3;++j)
+        meshgl.V_normals_vbo.row(i*3+j) =
+            per_corner_normals ?
+            data.F_normals.row(i*3+j).cast&#x3C;float>() :
+            data.F_normals.row(i).cast&#x3C;float>();
+</code></pre>
+<blockquote>
+<p>MeshGL</p>
+</blockquote>
+<pre><code>bind_vertex_attrib_array(shader_mesh,"normal", vbo_V_normals, V_normals_vbo, dirty &#x26; MeshGL::DIRTY_NORMAL);
+</code></pre>
+<blockquote>
+<p>MeshGL:: mesh_vertex_shader</p>
+</blockquote>
+<pre><code>in vec3 normal;
+</code></pre>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Laplace-Beltrami operator</li>
+<li class="task-list-item"><input type="checkbox" disabled> Cotangent stiffness matrix (Polygon Laplacian Made Simple)</li>
+</ul>

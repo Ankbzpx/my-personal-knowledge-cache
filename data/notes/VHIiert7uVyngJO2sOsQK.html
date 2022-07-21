@@ -1,0 +1,13 @@
+<h1 id="subdirectory"><a aria-hidden="true" class="anchor-heading" href="#subdirectory"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Subdirectory</h1>
+<p>folder
+|
+|---CMakeLists.txt
+|
+|---subfolder
+|
+|---CMakeLists.txt</p>
+<p>Add</p>
+<pre><code>include_directories(subfolder)
+add_subdirectory(subfolder)
+</code></pre>
+<p>to <code>folder/CMakeLists.txt</code>, don't forget to <code>target_link_libraries</code></p>

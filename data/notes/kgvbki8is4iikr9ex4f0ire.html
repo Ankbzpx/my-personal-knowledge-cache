@@ -1,0 +1,70 @@
+<h1 id="lightweight-multi-person-total-motion-capture"><a aria-hidden="true" class="anchor-heading" href="#lightweight-multi-person-total-motion-capture"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Lightweight Multi Person Total Motion Capture</h1>
+<blockquote>
+<p><a href="https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Lightweight_Multi-Person_Total_Motion_Capture_Using_Sparse_Multi-View_Cameras_ICCV_2021_paper.pdf">https://openaccess.thecvf.com/content/ICCV2021/papers/Zhang_Lightweight_Multi-Person_Total_Motion_Capture_Using_Sparse_Multi-View_Cameras_ICCV_2021_paper.pdf</a></p>
+</blockquote>
+<h2 id="single-image--video"><a aria-hidden="true" class="anchor-heading" href="#single-image--video"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Single image / video</h2>
+<h3 id="pose-regression"><a aria-hidden="true" class="anchor-heading" href="#pose-regression"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pose regression</h3>
+<blockquote>
+<p>SMPL-X &#x26; Adam</p>
+</blockquote>
+<ul>
+<li>Direct regression from image to parameters</li>
+<li>Real time but not suitable for occlusion or multi-person</li>
+<li>No geometric correspondence with 2D joints</li>
+</ul>
+<h3 id="key-point-detection"><a aria-hidden="true" class="anchor-heading" href="#key-point-detection"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Key-point detection</h3>
+<ul>
+<li>Guarantee geometric alignment</li>
+<li>Need heavy post-processing</li>
+<li>Susceptible to self-occlusion</li>
+</ul>
+<h2 id="sparse-multi-view"><a aria-hidden="true" class="anchor-heading" href="#sparse-multi-view"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Sparse Multi-view</h2>
+<h3 id="4d-body-association"><a aria-hidden="true" class="anchor-heading" href="#4d-body-association"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>4D Body Association</h3>
+<p>Sparse multi-view</p>
+<ul>
+<li>2D keypoints -> triangulate 3D keypoints</li>
+<li>Tracked 3D point -> match 2D detection (Pnp?)</li>
+</ul>
+<h3 id="hand-and-face-bootstrapping"><a aria-hidden="true" class="anchor-heading" href="#hand-and-face-bootstrapping"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Hand and Face Bootstrapping</h3>
+<ul>
+<li>body skeleton -> 3D bounding sphere with constant radius (commensurate with physical size) -> project 2D bbox -> further refinement with hand detector -> refined 2D bbox</li>
+<li>For each refined 2D bbox (associated with body wrist), apply NMS using hand association score (crossmodality consistency score and cross-scale consistency score)
+<blockquote>
+<p><strong>crossmodality consistency score</strong> (pose-regression chirality ambiguity): </p>
+<div class="math math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>v</mi><mi>g</mi><mo stretchy="false">(</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mi mathvariant="normal">∥</mi><mtext>pose-regression position</mtext><mo>−</mo><mtext>keypoint-detection position</mtext><msubsup><mi mathvariant="normal">∥</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mrow><mi>d</mi><mi>i</mi><mi>a</mi><mi>g</mi><mo stretchy="false">(</mo><mi>R</mi><mi>o</mi><mi>I</mi><mo stretchy="false">)</mo></mrow></mfrac><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">avg(\max(0, 1 - \frac{\|\text{pose-regression position} - \text{keypoint-detection position}\|_2^2}{diag(RoI)}))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">vg</span><span class="mopen">(</span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.4271em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">ia</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∥</span><span class="mord text"><span class="mord">pose-regression position</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">keypoint-detection position</span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">))</span></span></span></span></span></div>
+<p><strong>cross-scale consistency score</strong> (wrist misalignment):</p>
+<div class="math math-display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>a</mi><mi>v</mi><mi>g</mi><mo stretchy="false">(</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>−</mo><mfrac><mrow><mi mathvariant="normal">∥</mi><mtext>body skeleton wrist position</mtext><mo>−</mo><mtext>local wrist position</mtext><msubsup><mi mathvariant="normal">∥</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mrow><mi>d</mi><mi>i</mi><mi>a</mi><mi>g</mi><mo stretchy="false">(</mo><mi>R</mi><mi>o</mi><mi>I</mi><mo stretchy="false">)</mo></mrow></mfrac><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">avg(\max(0,1 - \frac{\|\text{body skeleton wrist position} - \text{local wrist position}\|_2^2}{diag(RoI)}))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">vg</span><span class="mopen">(</span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:2.4271em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4911em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">ia</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">∥</span><span class="mord text"><span class="mord">body skeleton wrist position</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord text"><span class="mord">local wrist position</span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">))</span></span></span></span></span></div>
+</blockquote>
+</li>
+</ul>
+<h3 id="two-stage-parametric-fitting"><a aria-hidden="true" class="anchor-heading" href="#two-stage-parametric-fitting"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Two-stage Parametric Fitting</h3>
+<ul>
+<li>local intialization: 
+<ul>
+<li>hand - hand association score</li>
+<li>body/head - SMPLify-X</li>
+</ul>
+</li>
+<li>total optimization: l2 body 3D position distance + 2d projected keypoints distance + gesture range regularization</li>
+</ul>
+<h3 id="feedback"><a aria-hidden="true" class="anchor-heading" href="#feedback"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Feedback</h3>
+<ul>
+<li>limb detector</li>
+<li>re-render human model for visibility -> binary occupancy mask -> smoothed continuous occupancy mask -> occupancy probability of the person</li>
+</ul>
+<h2 id="questions"><a aria-hidden="true" class="anchor-heading" href="#questions"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Questions</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> 3D -> 2D projection (projection matrix with hnormalize? gradient backprop?)</li>
+<li class="task-list-item"><input type="checkbox" disabled> Body ground truth 3D?</li>
+<li class="task-list-item"><input type="checkbox" disabled> Hand association score for different views balancing (the parameter to refine?)</li>
+<li class="task-list-item"><input type="checkbox" disabled> Distance transformations for smoothing</li>
+<li class="task-list-item"><input type="checkbox" disabled> Human body parameterization</li>
+</ul>
+<h2 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> *SMPLify-X (regularization term)</li>
+<li class="task-list-item"><input type="checkbox" disabled> Adam</li>
+<li class="task-list-item"><input type="checkbox" disabled> 4D body association</li>
+<li class="task-list-item"><input type="checkbox" disabled> Mean Per Joint Position Error</li>
+<li class="task-list-item"><input type="checkbox" disabled> Heatmap-based detector</li>
+</ul>

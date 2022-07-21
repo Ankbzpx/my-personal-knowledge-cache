@@ -1,0 +1,50 @@
+<h1 id="proxy"><a aria-hidden="true" class="anchor-heading" href="#proxy"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Proxy</h1>
+<p>In general, most application respect <code>HTTP_PROXY</code> or <code>ALL_PROXY</code> environment variable</p>
+<pre><code>export HTTP_PROXY=http://127.0.0.1:7890
+export ALL_PROXY=http://127.0.0.1:7890
+</code></pre>
+<h2 id="git"><a aria-hidden="true" class="anchor-heading" href="#git"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Git</h2>
+<h3 id="http-https"><a aria-hidden="true" class="anchor-heading" href="#http-https"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>HTTP/ HTTPS</h3>
+<pre><code>git config --global http.proxy http://127.0.0.1:7890
+...
+git config --global --unset http.proxy
+</code></pre>
+<h3 id="ssh"><a aria-hidden="true" class="anchor-heading" href="#ssh"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>SSH</h3>
+<p>Install <code>openbsd-netcat</code> then <code>nano .ssh/config</code></p>
+<pre><code>Host github.com bitbucket.org
+    ProxyCommand            nc -X 5 -x 127.0.0.1:7891 %h %p
+</code></pre>
+<h2 id="pacman"><a aria-hidden="true" class="anchor-heading" href="#pacman"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pacman</h2>
+<pre><code>export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
+sudo -E pacman -Syu
+</code></pre>
+<h2 id="pip"><a aria-hidden="true" class="anchor-heading" href="#pip"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pip</h2>
+<pre><code>pip install --proxy=http://127.0.0.1:7890 numpy
+</code></pre>
+<h2 id="svn"><a aria-hidden="true" class="anchor-heading" href="#svn"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Svn</h2>
+<p>Add</p>
+<pre><code>[global]
+http-proxy-host = 127.0.0.1
+http-proxy-port = 7890
+http-proxy-compression = no
+</code></pre>
+<p>to <code>~/.subversion/servers</code></p>
+<h2 id="wget"><a aria-hidden="true" class="anchor-heading" href="#wget"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Wget</h2>
+<p>Add</p>
+<pre><code>use_proxy = on
+http_proxy = http://127.0.0.1:7890/
+https_proxy = http://127.0.0.1:7890/
+</code></pre>
+<p>to <code>/etc/wgetrc</code> or <code>~/.wgetrc</code></p>
+<h2 id="snap"><a aria-hidden="true" class="anchor-heading" href="#snap"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Snap</h2>
+<pre><code>sudo snap set system proxy.http="http://127.0.0.1:7890"
+sudo snap set system proxy.https="http://127.0.0.1:7890"
+
+snap unset system proxy.http
+snap unset system proxy.https
+</code></pre>
+<h2 id="conda"><a aria-hidden="true" class="anchor-heading" href="#conda"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Conda</h2>
+<pre><code>conda config --set proxy_servers.http http://127.0.0.1:7890/
+conda config --set proxy_servers.https http://127.0.0.1:7890/
+</code></pre>

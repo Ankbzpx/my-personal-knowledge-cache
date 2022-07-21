@@ -1,0 +1,45 @@
+<h1 id="ffmpeg"><a aria-hidden="true" class="anchor-heading" href="#ffmpeg"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Ffmpeg</h1>
+<h2 id="scale-video-such-that-its-width-equal-to-720"><a aria-hidden="true" class="anchor-heading" href="#scale-video-such-that-its-width-equal-to-720"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Scale video such that its width equal to 720</h2>
+<pre><code>for i in *.mp4; do ffmpeg -i "$i" -vf scale=720:-1 "${i%.*}_720p.mp4";done
+</code></pre>
+<h2 id="flip-video-upside-down"><a aria-hidden="true" class="anchor-heading" href="#flip-video-upside-down"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Flip video upside down</h2>
+<pre><code>for i in *.mp4; do ffmpeg -i "$i" -vf "transpose=2,transpose=2" "out/${i%.*}.mp4";done
+</code></pre>
+<h2 id="extract-single-frame-as-an-image-at-given-timestamp"><a aria-hidden="true" class="anchor-heading" href="#extract-single-frame-as-an-image-at-given-timestamp"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Extract single frame as an image at given timestamp</h2>
+<pre><code>ffmpeg -i DeskPortal_State_03_PC_1440p_Idle_SitAd_30fps_40534656.m2v -ss 00:00:11 -vframes 1 output.png
+</code></pre>
+<h2 id="extract-all-frame-at-given-frame-rate"><a aria-hidden="true" class="anchor-heading" href="#extract-all-frame-at-given-frame-rate"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Extract all frame at given frame rate</h2>
+<pre><code>ffmpeg -i VID_20220126_151107.mp4 -r 4 images/frame%04d.png
+</code></pre>
+<h2 id="pad-video"><a aria-hidden="true" class="anchor-heading" href="#pad-video"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Pad video</h2>
+<pre><code>ffmpeg -i tom_1080.mp4 -vf "pad=width=1920:height=1080:x=(1920-1080)/2:y=0:color=white" tom_pad.mp4
+</code></pre>
+<h2 id="loop-video"><a aria-hidden="true" class="anchor-heading" href="#loop-video"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Loop video</h2>
+<pre><code>ffmpeg -stream_loop 2 -i tbrender.mp4 -c copy tbrender_loop.mp4
+</code></pre>
+<h2 id="chain"><a aria-hidden="true" class="anchor-heading" href="#chain"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Chain</h2>
+<ol>
+<li><code>scale</code> video to <code>1080x1080</code></li>
+<li><code>pad</code> video to <code>1920x1080</code></li>
+</ol>
+<pre><code>ffmpeg -i tom.mp4 -vf "scale=1080:1080,pad=1920:height=1080:x=(1920-iw)/2:y=(1080-ih)/2:color=white" tom_pad_chain.mp4
+</code></pre>
+<h2 id="complex-scenario"><a aria-hidden="true" class="anchor-heading" href="#complex-scenario"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Complex scenario</h2>
+<h3 id="example-1"><a aria-hidden="true" class="anchor-heading" href="#example-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example 1</h3>
+<ol>
+<li>green screen to transparent (similarity 0.1, blend 0.2)</li>
+<li>overlay</li>
+</ol>
+<pre><code>ffmpeg -i flower.mp4 -i women.mp4 -vcodec libx264 -filter_complex "[0]chromakey=green:0.1:0.2[ia];[1][ia]overlay" out.mp4
+</code></pre>
+<h3 id="example-2"><a aria-hidden="true" class="anchor-heading" href="#example-2"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Example 2</h3>
+<ol>
+<li><code>alphamerge</code> first two video</li>
+<li>create pure white video with given resolution, framerate and format</li>
+<li>overlap alphamerged video with pure white for suration equal to shortest one</li>
+<li>crop video to <code>2240x1260</code> with upper left corner at <code>(160, 0)</code></li>
+</ol>
+<pre><code>for i in *_1.mpg; do
+  ffmpeg -i "$i" -i "${i%_*}_2.mpg" -vcodec libx264 -filter_complex "[0][1]alphamerge[ia];color=white:s=2560x1440:rate=30[bg];[bg][ia]overlay=shortest=1,format=yuv420p[v];[v]crop=2240:1260:160:0" "${i%.usm_1.mpg}.mp4"
+done
+</code></pre>

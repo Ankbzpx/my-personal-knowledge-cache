@@ -1,0 +1,106 @@
+<h1 id="project-starline-a-high-fidelity-telepresence-system"><a aria-hidden="true" class="anchor-heading" href="#project-starline-a-high-fidelity-telepresence-system"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Project Starline A high-fidelity telepresence system</h1>
+<blockquote>
+<p><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/3696afb4c1cccbe0876a9fedd1586f0f9c84f737.pdf">https://storage.googleapis.com/pub-tools-public-publication-data/pdf/3696afb4c1cccbe0876a9fedd1586f0f9c84f737.pdf</a></p>
+</blockquote>
+<h2 id="hci"><a aria-hidden="true" class="anchor-heading" href="#hci"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>HCI</h2>
+<p>VR, AR: hard to capture under headset, insufficient pixel density and viewport</p>
+<p>autostereoscopic display (65-inch 8K 33.1M pixel 60Hz, 1.25m eye-to-eye distance, 45 pixel per degree)</p>
+<ul>
+<li>Face near display panel (reduce disparity)</li>
+<li>Place middle wall to block bottom of display (reduce depth conflicts)</li>
+<li>Matching remote to local transform for both sides (ensure mutual eye contact)</li>
+</ul>
+<h3 id="todo"><a aria-hidden="true" class="anchor-heading" href="#todo"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> crosstalk</li>
+<li class="task-list-item"><input type="checkbox" disabled> vergence-accommodation conflict</li>
+<li class="task-list-item"><input type="checkbox" disabled> disparity</li>
+<li class="task-list-item"><input type="checkbox" disabled> depth conflicts</li>
+<li class="task-list-item"><input type="checkbox" disabled> mutual eye contact</li>
+</ul>
+<h2 id="setup"><a aria-hidden="true" class="anchor-heading" href="#setup"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Setup</h2>
+<ul>
+<li>4 tracking cameras (2 above, 2 side): localized eyes, ears, mouth, 120Hz</li>
+<li>3 depth (stereo) camera: depth stream, 180Hz -> image-based depth fusion</li>
+<li>4 color camera: color stream, 60Hz -> Normal based texture blending</li>
+</ul>
+<h3 id="todo-1"><a aria-hidden="true" class="anchor-heading" href="#todo-1"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> HRTF (head-related transfer function)</li>
+<li class="task-list-item"><input type="checkbox" disabled> Normal based texture blending</li>
+</ul>
+<h2 id="implementation"><a aria-hidden="true" class="anchor-heading" href="#implementation"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Implementation</h2>
+<h3 id="lighting"><a aria-hidden="true" class="anchor-heading" href="#lighting"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Lighting</h3>
+<ul>
+<li>IBL (Image-based rendering), no illumination or reflectance</li>
+<li>Interpolates textures from 4 color cameras</li>
+<li>Non-Lambertian reflectance rander incorrectly under non-diffuse lighting (mitigated using soft lighting)</li>
+<li>illumination nonuniformity (stronger intensities for display unit near wall)</li>
+</ul>
+<h3 id="calibration"><a aria-hidden="true" class="anchor-heading" href="#calibration"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Calibration</h3>
+<ul>
+<li>Minimizing reprojection error over planar targets</li>
+<li>Color calibration to Illuminant D65 (gain, color correction matrix, gamma)</li>
+</ul>
+<h3 id="capture"><a aria-hidden="true" class="anchor-heading" href="#capture"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Capture</h3>
+<ul>
+<li>Capture sensor placed at periphery of the display, large parallax</li>
+<li>Near-infrared (NIR) global shutter image sensors</li>
+<li>Customized depth sensor with near depth continuities</li>
+<li>3 types of NIR illumination (NIR bounce light, NIR spot light, illuminate back wall)</li>
+</ul>
+<h3 id="3d-face-tracking"><a aria-hidden="true" class="anchor-heading" href="#3d-face-tracking"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>3D Face Tracking</h3>
+<ul>
+<li>Eye location -> stereo rendering</li>
+<li>Mouth &#x26; ear location -> spatial audio rendering + crosstalk cancellation</li>
+<li>34 facial landmarks, determine 5 2D features (eyes, mouth, ears) and triangulated into 3D</li>
+<li>Latency causes crosstalk, mitigated by extrapolation + double exponential smoothing + hysteresis filter</li>
+</ul>
+<h3 id="compression-and-transmission"><a aria-hidden="true" class="anchor-heading" href="#compression-and-transmission"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Compression and transmission</h3>
+<ul>
+<li>Transmit color (8 bit) and depth (10 bit) images via video compression (NVENC/NVDEC unit, H.256 codec, YUV420 chroma subsampling)</li>
+<li>Clamp depth to reduce quantization artifacts</li>
+<li>Transmit via WebRTC</li>
+</ul>
+<h3 id="rendering"><a aria-hidden="true" class="anchor-heading" href="#rendering"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Rendering</h3>
+<ul>
+<li>Compute shadow map from color cameras by raycasting on input depth map</li>
+<li>Compute user view output depth maps by raycasting on input depth map</li>
+<li>Use shadow map to weighted color blend output depth map</li>
+</ul>
+<h4 id="traditional-surface-fusion"><a aria-hidden="true" class="anchor-heading" href="#traditional-surface-fusion"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Traditional Surface fusion</h4>
+<ul>
+<li>Fuse depth view into <a href="/my-personal-knowledge-cache/notes/r8y2bovxrlx6vkhn7my8e0m">TSDF</a> as volumetric grid, weighting depth pixel based on depth gradient</li>
+<li>March along rays into precomputed voxel grid, find root (iso surface)</li>
+</ul>
+<h4 id="novel-raycast-approach"><a aria-hidden="true" class="anchor-heading" href="#novel-raycast-approach"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Novel raycast approach</h4>
+<ul>
+<li>Rasterizing input depth view to low-res output view, find lower/upper bound of distance along the ray using 2D min/max filter, dilate it with small margin</li>
+<li>For any point on user view ray, for each depth images, transform point to depth camera view coordinate, sample depth and fusion weight</li>
+<li>Fusion weight is inverse proportional to depth standard deviation over 7x7 pixel neighbourhood (0 if point is outside viewport)</li>
+</ul>
+<h4 id="weighted-color-blending"><a aria-hidden="true" class="anchor-heading" href="#weighted-color-blending"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Weighted color blending</h4>
+<ul>
+<li>Compute partial visibility using percentage close filter on shadow map</li>
+<li>Modulate blend weight by squared cosine of angle between surface normal and camera vector (?)</li>
+<li>Adaptively blur composite image along depth discontinuities (Edge blending)</li>
+</ul>
+<h3 id="audio"><a aria-hidden="true" class="anchor-heading" href="#audio"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>Audio</h3>
+<p>[skip for now]</p>
+<h3 id="todo-2"><a aria-hidden="true" class="anchor-heading" href="#todo-2"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>TODO</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled> Non-Lambertian reflectance</li>
+<li class="task-list-item"><input type="checkbox" disabled> Non-diffuse lighting</li>
+<li class="task-list-item"><input type="checkbox" disabled> Lighting ratio</li>
+<li class="task-list-item"><input type="checkbox" disabled> Non-planar warp</li>
+<li class="task-list-item"><input type="checkbox" disabled> ESPReSSo</li>
+<li class="task-list-item"><input type="checkbox" disabled> NIR illumination</li>
+<li class="task-list-item"><input type="checkbox" disabled> Hysteresis filter</li>
+<li class="task-list-item"><input type="checkbox" disabled> NVENC &#x26; NVDEC</li>
+<li class="task-list-item"><input type="checkbox" disabled> TSDF depth gradient weighting</li>
+<li class="task-list-item"><input type="checkbox" disabled> <a href="http://www.code-spot.co.za/2011/01/24/2d-minimum-and-maximum-filters-algorithms-and-implementation-issues/">2D min/max filter</a></li>
+<li class="task-list-item"><input type="checkbox" disabled> Bisection search</li>
+<li class="task-list-item"><input type="checkbox" disabled> Relief texture mapping</li>
+<li class="task-list-item"><input type="checkbox" disabled> <a href="https://developer.nvidia.com/gpugems/gpugems/part-ii-lighting-and-shadows/chapter-11-shadow-map-antialiasing">Percentage closer filter</a></li>
+<li class="task-list-item"><input type="checkbox" disabled> Squared cosine of angle between surface normal and camera vector</li>
+</ul>

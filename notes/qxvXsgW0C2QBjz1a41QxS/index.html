@@ -1,0 +1,118 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><link rel="icon" href="/favicon.ico"/><title>GLES Draw Bitmap</title><meta name="robots" content="index,follow"/><meta name="googlebot" content="index,follow"/><meta name="description" content="Personal knowledge space"/><meta property="og:title" content="GLES Draw Bitmap"/><meta property="og:description" content="Personal knowledge space"/><meta property="og:url" content="https://ankbzpx.github.io/my-personal-knowledge-cache/notes/qxvXsgW0C2QBjz1a41QxS/"/><meta property="og:type" content="article"/><meta property="article:published_time" content="12/20/2021"/><meta property="article:modified_time" content="12/20/2021"/><link rel="canonical" href="https://ankbzpx.github.io/my-personal-knowledge-cache/notes/qxvXsgW0C2QBjz1a41QxS/"/><meta name="next-head-count" content="14"/><link rel="preload" href="/my-personal-knowledge-cache/_next/static/css/6db750d8aae1efab.css" as="style"/><link rel="stylesheet" href="/my-personal-knowledge-cache/_next/static/css/6db750d8aae1efab.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/my-personal-knowledge-cache/_next/static/chunks/polyfills-5cd94c89d3acac5f.js"></script><script src="/my-personal-knowledge-cache/_next/static/chunks/webpack-14fc00b0a180680f.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/chunks/framework-bb5c596eafb42b22.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/chunks/main-ced06fae44febf7d.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/chunks/pages/_app-7f0c0a28af6ee1f5.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/chunks/155-3a6c02d7e042edb7.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/chunks/373-9c38fabb487d5920.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/chunks/pages/notes/%5Bid%5D-b20175c77adb354a.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/ihOclfcI71GY0CxNfF2GS/_buildManifest.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/ihOclfcI71GY0CxNfF2GS/_ssgManifest.js" defer=""></script><script src="/my-personal-knowledge-cache/_next/static/ihOclfcI71GY0CxNfF2GS/_middlewareManifest.js" defer=""></script></head><body><div id="__next" data-reactroot=""><section class="ant-layout" style="width:100%;min-height:100%"><header class="ant-layout-header" style="position:fixed;isolation:isolate;z-index:1;width:100%;border-bottom:1px solid #d4dadf;height:64px;padding:0 24px 0 2px"><div class="ant-row ant-row-center" style="max-width:992px;justify-content:space-between;margin:0 auto"><div style="display:flex" class="ant-col ant-col-xs-20 ant-col-sm-4"></div><div class="ant-col gutter-row ant-col-xs-0 ant-col-sm-20 ant-col-md-20 ant-col-lg-19"><div class="ant-select ant-select-lg ant-select-auto-complete ant-select-single ant-select-allow-clear ant-select-show-search" style="width:100%"><div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" autoComplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="undefined_list" aria-autocomplete="list" aria-controls="undefined_list" aria-activedescendant="undefined_list_0" value=""/></span><span class="ant-select-selection-placeholder">For full text search please use the &#x27;?&#x27; prefix. e.g. ? Onboarding</span></div></div></div><div style="display:none;align-items:center;justify-content:center" class="ant-col ant-col-xs-4 ant-col-sm-4 ant-col-md-0 ant-col-lg-0"><span role="img" aria-label="menu" style="font-size:24px" tabindex="-1" class="anticon anticon-menu"><svg viewBox="64 64 896 896" focusable="false" data-icon="menu" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 624H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0-312H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path></svg></span></div></div></header><section class="ant-layout site-layout" style="margin-top:64px"><section class="ant-layout site-layout" style="flex-direction:row"><section class="ant-layout site-layout-sidebar" style="flex:0 0 auto;width:calc(max((100% - 992px) / 2, 0px) + 200px);min-width:200px;padding-left:calc((100% - 992px) / 2)"><aside class="ant-layout-sider ant-layout-sider-dark" style="position:fixed;overflow:auto;height:calc(100vh - 64px);flex:0 0 200px;max-width:200px;min-width:200px;width:200px"><div class="ant-layout-sider-children"></div></aside></section><section class="ant-layout side-layout-main" style="max-width:1200px;display:initial"><main class="ant-layout-content main-content" role="main" style="padding:0 24px"><div class="ant-row"><div class="ant-col ant-col-24"><div class="ant-row" style="margin-left:-10px;margin-right:-10px"><div style="padding-left:10px;padding-right:10px" class="ant-col ant-col-xs-24 ant-col-md-18"><div><h1 id="gles-draw-bitmap"><a aria-hidden="true" class="anchor-heading" href="#gles-draw-bitmap"><svg aria-hidden="true" viewBox="0 0 16 16"><use xlink:href="#svg-link"></use></svg></a>GLES Draw Bitmap</h1>
+<pre><code>// Vertex Shader
+val vertexShaderCode =
+        "attribute vec4 vPosition;" +
+            "attribute vec4 vInputTextureCoordinate;" +
+            "varying vec2 vTextureCoordinate;" +
+            "void main() {" +
+            "    gl_Position = vPosition;" +
+            "    vTextureCoordinate = vInputTextureCoordinate.xy;" +
+            "}"
+
+// Fragment Shader
+val fragmentShaderCode =
+        "varying highp vec2 vTextureCoordinate;" +
+            "uniform sampler2D logoFrame;" +
+            "void main() {" +
+            "    gl_FragColor = texture2D(logoFrame, vTextureCoordinate);" +
+            "}"
+
+fun loadShader(type: Int, shaderCode: String): Int {
+        return GLES20.glCreateShader(type).also { shader ->
+            GLES20.glShaderSource(shader, shaderCode)
+            GLES20.glCompileShader(shader)
+        }
+    }
+
+// const
+private const val COORDS_PER_VERTEX = 3
+private const val COORDS_PER_TEXTURE = 2
+private const val DRAW_COUNT = 6
+private const val BYTES_PER_FLOAT = 4
+private const val BYTES_PER_INT = 4
+private const val BYTES_PER_COORDS = 2
+
+// bitmap to draw
+val Bitmap: Bitmap
+
+// texture for bitmap
+val textureHandle: IntBuffer.allocate(1)
+
+// OpenGL texture coordinate
+//
+// (0, 1) ---- (1, 1)
+//    |          |
+//    |          |
+//    |          |
+// (0, 0) ---- (1, 0)
+
+val squareCoords = floatArrayOf(
+        buttonLeftX, topRightY, 0.0f, // top left
+        buttonLeftX, buttonLeftY, 0.0f, // bottom left
+        topRightX, buttonLeftY, 0.0f, // bottom right
+        topRightX, topRightY, 0.0f // top right
+    )
+
+val quadVertexHandle = ByteBuffer.allocateDirect(squareCoords.size * BYTES_PER_FLOAT).run {
+        order(ByteOrder.nativeOrder())
+        asFloatBuffer().apply {
+            put(squareCoords)
+            position(0)
+        }
+    }
+
+val drawOrderHandle: ShortBuffer
+    by lazy {
+        val drawOrder = shortArrayOf(0, 1, 2, 0, 2, 3)
+        ByteBuffer.allocateDirect(drawOrder.size * BYTES_PER_COORDS).run {
+            order(ByteOrder.nativeOrder())
+            asShortBuffer().apply {
+                put(drawOrder)
+                position(0)
+            }
+        }
+    }
+
+
+// create gl program
+var program = GLES20.glCreateProgram().also {
+        GLES20.glAttachShader(it, loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode))
+        GLES20.glAttachShader(it, loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode))
+        GLES20.glLinkProgram(it)
+    }
+
+// load bitmap into texture
+GLES20.glGenTextures(1, textureHandle)
+GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0])
+GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
+GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
+GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap, 0)
+
+// draw
+GLES20.glUseProgram(program)
+val vertexPosHandle = GLES20.glGetAttribLocation(program, "vPosition")
+GLES20.glEnableVertexAttribArray(vertexPosHandle)
+GLES20.glVertexAttribPointer(vertexPosHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, COORDS_PER_VERTEX * 4, quadVertexHandle)
+
+val texturePosHandle = GLES20.glGetAttribLocation(program, "vInputTextureCoordinate")
+GLES20.glEnableVertexAttribArray(texturePosHandle)
+GLES20.glVertexAttribPointer(texturePosHandle, COORDS_PER_TEXTURE, GLES20.GL_FLOAT, false, COORDS_PER_TEXTURE * 4, textureHandle)
+
+GLES20.glEnable(GLES20.GL_BLEND)
+GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+
+val logoHandle = GLES20.glGetUniformLocation(program, "logoFrame")
+GLES20.glActiveTexture(GLES20.GL_TEXTURE0)
+GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0])
+GLES20.glUniform1i(logoHandle, 0)
+
+GLES20.glDrawElements(GLES20.GL_TRIANGLES, DRAW_COUNT, GLES20.GL_UNSIGNED_SHORT, drawOrderHandle)
+
+GLES20.glDisableVertexAttribArray(vertexPosHandle)
+GLES20.glDisableVertexAttribArray(texturePosHandle)
+GLES20.glDisablbe(GLES20.GL_BLEND)
+
+// release
+GLES20.glDeleteTextures(1, textureHandle)
+GLES20.glDeleteProgram(program)
+</code></pre></div></div><div style="padding-left:10px;padding-right:10px" class="ant-col ant-col-xs-0 ant-col-md-6"><div><div class=""><div class="ant-anchor-wrapper dendron-toc" style="max-height:calc(100vh - 64px);z-index:1"><div class="ant-anchor"><div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div></div></div></div></div></div></div></div></div></main><div class="ant-divider ant-divider-horizontal" role="separator"></div><footer class="ant-layout-footer" style="padding:0 24px 24px"></footer></section></section></section></section></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"note":{"id":"qxvXsgW0C2QBjz1a41QxS","title":"GLES Draw Bitmap","desc":"","updated":1640019074507,"created":1640019061479,"custom":{},"fname":"rendering.android.gles-draw-bitmap","type":"note","vault":{"fsPath":"vault"},"contentHash":"7683449a762d64a7634f24e172a624db","links":[],"anchors":{},"children":[],"parent":"3sncjkcgi24nezsnwzoq2np","data":{}},"body":"\u003ch1 id=\"gles-draw-bitmap\"\u003e\u003ca aria-hidden=\"true\" class=\"anchor-heading\" href=\"#gles-draw-bitmap\"\u003e\u003csvg aria-hidden=\"true\" viewBox=\"0 0 16 16\"\u003e\u003cuse xlink:href=\"#svg-link\"\u003e\u003c/use\u003e\u003c/svg\u003e\u003c/a\u003eGLES Draw Bitmap\u003c/h1\u003e\n\u003cpre\u003e\u003ccode\u003e// Vertex Shader\nval vertexShaderCode =\n        \"attribute vec4 vPosition;\" +\n            \"attribute vec4 vInputTextureCoordinate;\" +\n            \"varying vec2 vTextureCoordinate;\" +\n            \"void main() {\" +\n            \"    gl_Position = vPosition;\" +\n            \"    vTextureCoordinate = vInputTextureCoordinate.xy;\" +\n            \"}\"\n\n// Fragment Shader\nval fragmentShaderCode =\n        \"varying highp vec2 vTextureCoordinate;\" +\n            \"uniform sampler2D logoFrame;\" +\n            \"void main() {\" +\n            \"    gl_FragColor = texture2D(logoFrame, vTextureCoordinate);\" +\n            \"}\"\n\nfun loadShader(type: Int, shaderCode: String): Int {\n        return GLES20.glCreateShader(type).also { shader -\u003e\n            GLES20.glShaderSource(shader, shaderCode)\n            GLES20.glCompileShader(shader)\n        }\n    }\n\n// const\nprivate const val COORDS_PER_VERTEX = 3\nprivate const val COORDS_PER_TEXTURE = 2\nprivate const val DRAW_COUNT = 6\nprivate const val BYTES_PER_FLOAT = 4\nprivate const val BYTES_PER_INT = 4\nprivate const val BYTES_PER_COORDS = 2\n\n// bitmap to draw\nval Bitmap: Bitmap\n\n// texture for bitmap\nval textureHandle: IntBuffer.allocate(1)\n\n// OpenGL texture coordinate\n//\n// (0, 1) ---- (1, 1)\n//    |          |\n//    |          |\n//    |          |\n// (0, 0) ---- (1, 0)\n\nval squareCoords = floatArrayOf(\n        buttonLeftX, topRightY, 0.0f, // top left\n        buttonLeftX, buttonLeftY, 0.0f, // bottom left\n        topRightX, buttonLeftY, 0.0f, // bottom right\n        topRightX, topRightY, 0.0f // top right\n    )\n\nval quadVertexHandle = ByteBuffer.allocateDirect(squareCoords.size * BYTES_PER_FLOAT).run {\n        order(ByteOrder.nativeOrder())\n        asFloatBuffer().apply {\n            put(squareCoords)\n            position(0)\n        }\n    }\n\nval drawOrderHandle: ShortBuffer\n    by lazy {\n        val drawOrder = shortArrayOf(0, 1, 2, 0, 2, 3)\n        ByteBuffer.allocateDirect(drawOrder.size * BYTES_PER_COORDS).run {\n            order(ByteOrder.nativeOrder())\n            asShortBuffer().apply {\n                put(drawOrder)\n                position(0)\n            }\n        }\n    }\n\n\n// create gl program\nvar program = GLES20.glCreateProgram().also {\n        GLES20.glAttachShader(it, loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode))\n        GLES20.glAttachShader(it, loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode))\n        GLES20.glLinkProgram(it)\n    }\n\n// load bitmap into texture\nGLES20.glGenTextures(1, textureHandle)\nGLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0])\nGLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)\nGLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)\nGLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, bitmap, 0)\n\n// draw\nGLES20.glUseProgram(program)\nval vertexPosHandle = GLES20.glGetAttribLocation(program, \"vPosition\")\nGLES20.glEnableVertexAttribArray(vertexPosHandle)\nGLES20.glVertexAttribPointer(vertexPosHandle, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false, COORDS_PER_VERTEX * 4, quadVertexHandle)\n\nval texturePosHandle = GLES20.glGetAttribLocation(program, \"vInputTextureCoordinate\")\nGLES20.glEnableVertexAttribArray(texturePosHandle)\nGLES20.glVertexAttribPointer(texturePosHandle, COORDS_PER_TEXTURE, GLES20.GL_FLOAT, false, COORDS_PER_TEXTURE * 4, textureHandle)\n\nGLES20.glEnable(GLES20.GL_BLEND)\nGLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA)\n\nval logoHandle = GLES20.glGetUniformLocation(program, \"logoFrame\")\nGLES20.glActiveTexture(GLES20.GL_TEXTURE0)\nGLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0])\nGLES20.glUniform1i(logoHandle, 0)\n\nGLES20.glDrawElements(GLES20.GL_TRIANGLES, DRAW_COUNT, GLES20.GL_UNSIGNED_SHORT, drawOrderHandle)\n\nGLES20.glDisableVertexAttribArray(vertexPosHandle)\nGLES20.glDisableVertexAttribArray(texturePosHandle)\nGLES20.glDisablbe(GLES20.GL_BLEND)\n\n// release\nGLES20.glDeleteTextures(1, textureHandle)\nGLES20.glDeleteProgram(program)\n\u003c/code\u003e\u003c/pre\u003e","noteIndex":{"id":"o3PkEany5FTDLokev2jkJ","title":"Root","desc":"","updated":1656832289330,"created":1640014633146,"custom":{"nav_order":0,"permalink":"/"},"fname":"root","type":"note","vault":{"fsPath":"vault"},"contentHash":"1f4a8dbd787743b10f24422968be02a9","links":[],"anchors":{"history":{"type":"header","text":"History","value":"history","line":10,"column":0,"depth":2},"disclaimer":{"type":"header","text":"Disclaimer","value":"disclaimer","line":15,"column":0,"depth":2}},"children":["Vn1Ykq4aIagi0bhZowkgD","ja5HFaIxVEtbZoTklNXfZ","vnzxfoqb6aqbrqy247uonqo","jjlv4wd30bvf0r680o9ptbi","kok8aerdrzko8v4i6w6qtjx","hr8ruqfxd2miwldyehzz5zy","criy8usqjrguecufwb3k8z2","3x9f9wclumzxc23dzgraepy","sma2hkp8hvq9urmtk94qqwq","4bcvwahaynsox941d8dimxw","8u19znq05xj50ptse0fq8nj","hbcft05imtwxxtwk52nij1n","2vmt81onv3jf06ejwfusj30","npuhs4xvm0sa31rz2gcuff3","mwt2mrjm58oa3q2osoqwd64","yjnf5fuac95jbdmjj923hyh","17p3nbv4rvga83hhsz2idzp","8r1egy8mz3lp7ud9p8kcg8z","5gf8xb68r1y0kxumkvvmuez","d92qhaqtfbt7e4eximdnbht","r25bm5nuug9krur6ddqearm"],"parent":null,"data":{},"body":"\nMy personal knowledge cache using [Dendron](https://www.dendron.so)\n\n## History\nIt was during my first job, at the start-up company called PixelShift.AI, that I acquired most prominent skill as a software engineer-the ability to read source code. It opened up a new way of learning and my knowledge expanded rapidly ever since. Learning new things is thriving but noting them down cogently and organized is hard. I often found myself forget the context few month later, making the notes completely intelligible. Additionally, some notes need frequent update as my previous understanding could be parochial, antiquated or even erroneous.\n\nIn desperate attempt to facilitate the noting/updating experience, I came across [Dendron](https://www.dendron.so) and found it surprisingly congenial to my personal need. With it, I have gradually grown the habit of caching, linking back and extending my knowledge base.\n\n## Disclaimer\nThe notes are collections of information I found along the journey. I use backquote to denote sources, but I am likely to miss some references, so apology in advance. Also, they are my personal understandings, usually added when I first encounter the topic and will be updated only when I come across it again, so some of them could be incomplete or wrong."},"collectionChildren":null,"customHeadContent":null,"config":{"version":5,"dev":{"enablePreviewV2":true},"commands":{"lookup":{"note":{"selectionMode":"extract","confirmVaultOnCreate":false,"leaveTrace":false,"bubbleUpCreateNew":true,"fuzzThreshold":0.2,"vaultSelectionModeOnCreate":"smart"}},"randomNote":{},"insertNote":{"initialValue":"templates"},"insertNoteLink":{"aliasMode":"none","enableMultiSelect":false},"insertNoteIndex":{"enableMarker":false},"copyNoteLink":{},"templateHierarchy":"template"},"workspace":{"vaults":[{"fsPath":"vault"}],"journal":{"dailyDomain":"daily","name":"journal","dateFormat":"y.MM.dd","addBehavior":"childOfDomain"},"scratch":{"name":"scratch","dateFormat":"y.MM.dd.HHmmss","addBehavior":"asOwnDomain"},"task":{"name":"","dateFormat":"","addBehavior":"childOfCurrent","statusSymbols":{"":" ","wip":"w","done":"x","assigned":"a","moved":"m","blocked":"b","delegated":"l","dropped":"d","pending":"y"},"prioritySymbols":{"H":"high","M":"medium","L":"low"},"todoIntegration":false,"createTaskSelectionType":"selection2link","taskCompleteStatus":["done","x"]},"graph":{"zoomSpeed":1,"createStub":false},"enableAutoCreateOnDefinition":false,"enableXVaultWikiLink":false,"enableRemoteVaultInit":true,"enableUserTags":true,"enableHashTags":true,"workspaceVaultSyncMode":"noCommit","enableAutoFoldFrontmatter":false,"enableEditorDecorations":true,"maxPreviewsCached":10,"maxNoteLength":204800,"dendronVersion":"0.86.1","enableFullHierarchyNoteTitle":false,"enableHandlebarTemplates":false,"templateHierarchy":"template"},"preview":{"enableFMTitle":true,"enableNoteTitleForLink":true,"enableMermaid":true,"enablePrettyRefs":true,"enableKatex":true,"automaticallyShowPreview":false,"enableFrontmatterTags":true,"enableHashesForFMTags":false},"publishing":{"enableFMTitle":true,"enableNoteTitleForLink":true,"enableMermaid":true,"enablePrettyRefs":true,"enableKatex":true,"copyAssets":true,"siteHierarchies":["root"],"enableSiteLastModified":true,"siteRootDir":"docs","enableFrontmatterTags":true,"enableHashesForFMTags":false,"enableRandomlyColoredTags":true,"duplicateNoteBehavior":{"action":"useVault","payload":["vault"]},"writeStubs":false,"seo":{"title":"Dendron","description":"Personal knowledge space"},"github":{"enableEditLink":true,"editLinkText":"Edit this page on GitHub","editBranch":"main","editViewMode":"tree"},"enablePrettyLinks":true,"assetsPrefix":"/my-personal-knowledge-cache","siteUrl":"https://ankbzpx.github.io","enableTaskNotes":true,"siteFaviconPath":"favicon.ico","siteIndex":"root"}}},"__N_SSG":true},"page":"/notes/[id]","query":{"id":"qxvXsgW0C2QBjz1a41QxS"},"buildId":"ihOclfcI71GY0CxNfF2GS","assetPrefix":"/my-personal-knowledge-cache","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
